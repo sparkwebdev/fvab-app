@@ -1,0 +1,13 @@
+{
+  "appId": "io.ionic.starter",
+  "appName": "fvab-2021",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "build",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}
