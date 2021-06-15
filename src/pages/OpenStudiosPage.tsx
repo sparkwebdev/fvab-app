@@ -1,30 +1,15 @@
-import {
-  IonContent,
-  IonHeader,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-  IonList,
-} from "@ionic/react";
+import { IonContent, IonPage, IonList } from "@ionic/react";
 import "./OpenStudiosPage.css";
 
 import { studios } from "../data/studios";
 import ListItemStudio from "../components/ListItemStudio";
+import PageHeader from "../components/PageHeader";
 
 const OpenStudiosPage: React.FC = () => {
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Open Studios</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+      <PageHeader title="Open Studios" />
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Studios</IonTitle>
-          </IonToolbar>
-        </IonHeader>
         {studios.length > 0 && (
           <IonList>
             {studios.map((studio) => {

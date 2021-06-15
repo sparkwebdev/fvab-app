@@ -15,8 +15,11 @@ import ArtCyclePage from "./pages/ArtCyclePage";
 import MyMapPage from "./pages/MyMapPage";
 import OpenStudiosPage from "./pages/OpenStudiosPage";
 import NewsPage from "./pages/NewsPage";
+import ContactPage from "./pages/ContactPage";
 import AboutPage from "./pages/AboutPage";
 import StudioEntryPage from "./pages/StudioEntryPage";
+
+import SideMenu from "./components/SideMenu";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -43,7 +46,7 @@ const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonTabs>
-        <IonRouterOutlet>
+        <IonRouterOutlet id="main">
           <Route exact path="/home">
             <HomePage />
           </Route>
@@ -56,11 +59,14 @@ const App: React.FC = () => (
           <Route path="/open-studios">
             <OpenStudiosPage />
           </Route>
-          <Route path="/about">
-            <AboutPage />
-          </Route>
           <Route path="/news">
             <NewsPage />
+          </Route>
+          <Route path="/contact">
+            <ContactPage />
+          </Route>
+          <Route path="/about">
+            <AboutPage />
           </Route>
           {/* Dynamic pages */}
           <Route exact path="/studio/:id">
@@ -89,6 +95,7 @@ const App: React.FC = () => (
           </IonTabButton>
         </IonTabBar>
       </IonTabs>
+      <SideMenu />
     </IonReactRouter>
   </IonApp>
 );

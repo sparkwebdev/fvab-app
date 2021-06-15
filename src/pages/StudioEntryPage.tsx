@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  IonAvatar,
   IonCard,
   IonCardHeader,
   IonCardSubtitle,
@@ -9,17 +8,15 @@ import {
   IonCol,
   IonContent,
   IonGrid,
-  IonHeader,
   IonIcon,
   IonLabel,
   IonLoading,
   IonPage,
   IonRow,
-  IonTitle,
-  IonToolbar,
 } from "@ionic/react";
 import { useParams } from "react-router";
 import { location } from "ionicons/icons";
+import PageHeader from "../components/PageHeader";
 
 import { studios } from "../data/studios";
 
@@ -43,17 +40,8 @@ const StudioEntryPage: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Studio {studio?.st}</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+      <PageHeader title={`Studio ${studio?.st}`} />
       <IonContent fullscreen className="ion-padding">
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Studio {studio?.st}</IonTitle>
-          </IonToolbar>
-        </IonHeader>
         <IonCard className="ion-no-margin">
           <IonCardHeader>
             <IonChip>

@@ -1,27 +1,12 @@
-import {
-  IonContent,
-  IonHeader,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-} from "@ionic/react";
+import { IonContent, IonPage } from "@ionic/react";
 import "./ArtCyclePage.css";
+import PageHeader from "../components/PageHeader";
 
 const ArtCyclePage: React.FC = () => {
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Art Cycle</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Art Cycle</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-      </IonContent>
+      <PageHeader title="Art Cycle" />
+      <IonContent fullscreen></IonContent>
     </IonPage>
   );
 };

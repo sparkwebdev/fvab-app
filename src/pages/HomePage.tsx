@@ -1,9 +1,11 @@
 import { IonContent, IonPage, IonRouterLink } from "@ionic/react";
 import "./HomePage.css";
+import PageHeader from "../components/PageHeader";
 
 const HomePage: React.FC = () => {
   return (
     <IonPage>
+      <PageHeader />
       <IonContent fullscreen>
         <div className="home-content">
           <IonRouterLink

@@ -1,14 +1,14 @@
 import { IonContent, IonPage } from "@ionic/react";
-import "./NewsPage.css";
+import "./ContactPage.css";
 import PageHeader from "../components/PageHeader";
 
-const NewsPage: React.FC = () => {
+const ContactPage: React.FC = () => {
   return (
     <IonPage>
-      <PageHeader title="My Map" />
+      <PageHeader title="Contact" />
       <IonContent fullscreen></IonContent>
     </IonPage>
   );
 };
 
-export default NewsPage;
+export default ContactPage;

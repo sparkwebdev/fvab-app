@@ -1,27 +1,12 @@
-import {
-  IonContent,
-  IonHeader,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-} from "@ionic/react";
+import { IonContent, IonPage } from "@ionic/react";
 import "./MyMapPage.css";
+import PageHeader from "../components/PageHeader";
 
 const MyMapPage: React.FC = () => {
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>My Map</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">My Map</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-      </IonContent>
+      <PageHeader title="My Map" />
+      <IonContent fullscreen></IonContent>
     </IonPage>
   );
 };
