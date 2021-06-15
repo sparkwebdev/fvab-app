@@ -9,14 +9,13 @@ import {
   IonTabs,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { home, bicycle, heart, people, analytics } from "ionicons/icons";
+import { home, bicycle, heart, people } from "ionicons/icons";
 import HomePage from "./pages/HomePage";
+import ArtCyclePage from "./pages/ArtCyclePage";
 import MyMapPage from "./pages/MyMapPage";
-import StudiosPage from "./pages/StudiosPage";
-import ArtistsPage from "./pages/ArtistsPage";
+import OpenStudiosPage from "./pages/OpenStudiosPage";
 import NewsPage from "./pages/NewsPage";
 import AboutPage from "./pages/AboutPage";
-import ArtCyclePage from "./pages/ArtCyclePage";
 import StudioEntryPage from "./pages/StudioEntryPage";
 
 /* Core CSS required for Ionic components to work properly */
@@ -38,6 +37,7 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 import "./theme/variables.css";
 import "./theme/custom-variables.css";
+import "./theme/theme.css";
 
 const App: React.FC = () => (
   <IonApp>
@@ -47,17 +47,14 @@ const App: React.FC = () => (
           <Route exact path="/home">
             <HomePage />
           </Route>
+          <Route path="/art-cycle">
+            <ArtCyclePage />
+          </Route>
           <Route exact path="/my-map">
             <MyMapPage />
           </Route>
-          <Route exact path="/studios">
-            <StudiosPage />
-          </Route>
-          <Route path="/artists">
-            <ArtistsPage />
-          </Route>
-          <Route path="/art-cycle">
-            <ArtCyclePage />
+          <Route path="/open-studios">
+            <OpenStudiosPage />
           </Route>
           <Route path="/about">
             <AboutPage />
@@ -78,21 +75,17 @@ const App: React.FC = () => (
             <IonIcon icon={home} />
             <IonLabel>Home</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="studios" href="/studios">
-            <IonIcon icon={analytics} />
-            <IonLabel>Studios</IonLabel>
+          <IonTabButton tab="artcycle" href="/art-cycle">
+            <IonIcon icon={bicycle} />
+            <IonLabel>ArtCycle</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="artists" href="/artists">
+          <IonTabButton tab="open-studios" href="/open-studios">
             <IonIcon icon={people} />
-            <IonLabel>Artists</IonLabel>
+            <IonLabel>Open Studios</IonLabel>
           </IonTabButton>
           <IonTabButton tab="mymap" href="/my-map">
             <IonIcon icon={heart} />
             <IonLabel>My Map</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="artcycle" href="/art-cycle">
-            <IonIcon icon={bicycle} />
-            <IonLabel>ArtCycle</IonLabel>
           </IonTabButton>
         </IonTabBar>
       </IonTabs>

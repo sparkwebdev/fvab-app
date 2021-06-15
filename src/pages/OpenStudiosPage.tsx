@@ -4,21 +4,22 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
+  IonList,
 } from "@ionic/react";
-import "./ArtistsPage.css";
+import "./OpenStudiosPage.css";
 
-const ArtistsPage: React.FC = () => {
+const OpenStudiosPage: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Artists</IonTitle>
+          <IonTitle>Open Studios</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Artists</IonTitle>
+            <IonTitle size="large">Studios</IonTitle>
           </IonToolbar>
         </IonHeader>
       </IonContent>
@@ -26,4 +27,4 @@ const ArtistsPage: React.FC = () => {
   );
 };
 
-export default ArtistsPage;
+export default OpenStudiosPage;
