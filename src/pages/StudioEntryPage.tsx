@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   IonAvatar,
   IonCard,
@@ -21,7 +21,7 @@ import {
 import { useParams } from "react-router";
 import { location } from "ionicons/icons";
 
-import { artists } from "../data/artists";
+import { studios } from "../data/studios";
 
 interface RouteParams {
   id: string;
@@ -29,14 +29,17 @@ interface RouteParams {
 
 const StudioEntryPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
+  const [studio, setStudio] = useState<any>();
 
   const { id } = useParams<RouteParams>();
 
-  const studio = artists.find((studio) => {
-    return studio.st === id;
-  });
-
-  console.log(studio);
+  useEffect(() => {
+    setStudio(
+      studios.find((studio) => {
+        return studio.st === id;
+      })
+    );
+  }, [id]);
 
   return (
     <IonPage>
