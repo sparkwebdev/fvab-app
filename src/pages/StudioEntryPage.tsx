@@ -40,7 +40,7 @@ const StudioEntryPage: React.FC = () => {
 
   return (
     <IonPage>
-      <PageHeader title={`Studio ${studio?.st}`} />
+      <PageHeader title={`Studio ${studio?.st}`} back={true} />
       <IonContent fullscreen className="ion-padding">
         <IonCard className="ion-no-margin">
           <IonCardHeader>

@@ -1,36 +1,61 @@
-import { IonAvatar, IonChip, IonImg, IonItem, IonLabel } from "@ionic/react";
+import {
+  IonAvatar,
+  IonChip,
+  IonImg,
+  IonItem,
+  IonText,
+  IonLabel,
+} from "@ionic/react";
 import "./ListItemStudio.css";
 
-import { studios } from "../data/studios";
-import { useEffect, useState } from "react";
-
 interface ContainerProps {
-  studioNumber: any;
+  studioNumber: string;
+  name: string;
+  image?: string;
+  dis?: string;
+  mini?: boolean;
 }
 
-const ListItemStudio: React.FC<ContainerProps> = ({ studioNumber }) => {
-  const [studio, setStudio] = useState<any>();
-
-  useEffect(() => {
-    setStudio(
-      studios.find((studio) => {
-        return studio.st === studioNumber;
-      })
-    );
-  }, [studioNumber]);
-
+const ListItemStudio: React.FC<ContainerProps> = (props) => {
   return (
-    <IonItem detail routerLink={`/studio/${studio.st}`} key={studio.st}>
-      <IonAvatar slot="start">
-        <IonChip>{studio.st && <IonLabel>{studio.st}</IonLabel>}</IonChip>
-      </IonAvatar>
-      <IonAvatar slot="start">
-        <IonImg src="http://placehold.it/40x40" />
-      </IonAvatar>
+    <IonItem
+      routerLink={`/studio/${props.studioNumber}`}
+      key={props.studioNumber}
+      lines={props.mini ? "none" : "inset"}
+      className={props.mini ? "ion-no-padding" : ""}
+      detail={!props.mini}
+    >
+      {props.studioNumber && (
+        <IonAvatar
+          slot="start"
+          className="ion-text-center ion-justify-content-center"
+        >
+          <IonChip color="primary">
+            <IonLabel>
+              <strong>{props.studioNumber}</strong>
+            </IonLabel>
+          </IonChip>
+        </IonAvatar>
+      )}
+      {props.image ? (
+        <IonAvatar slot="start">
+          <IonImg src={`assets/img/studios_sm/${props.image}`} alt="" />
+        </IonAvatar>
+      ) : (
+        <IonAvatar slot="start">
+          <IonImg src={"assets/img/placeholder-small.png"} alt="" />
+        </IonAvatar>
+      )}
       <IonLabel>
-        <strong>{studio.name}</strong>
-        <br />
-        <small>{studio.dis}</small>
+        <IonText color="primary">
+          <strong>{props.name}</strong>
+        </IonText>
+        {props.dis && (
+          <>
+            <br />
+            <small>{props.dis}</small>
+          </>
+        )}
       </IonLabel>
     </IonItem>
   );
