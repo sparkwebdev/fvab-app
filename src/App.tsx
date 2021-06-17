@@ -17,6 +17,7 @@ import OpenStudiosPage from "./pages/OpenStudiosPage";
 import NewsPage from "./pages/NewsPage";
 import ContactPage from "./pages/ContactPage";
 import AboutPage from "./pages/AboutPage";
+import EventsPage from "./pages/EventsPage";
 import StudioEntryPage from "./pages/StudioEntryPage";
 
 import SideMenu from "./components/SideMenu";
@@ -53,11 +54,14 @@ const App: React.FC = () => (
           <Route path="/art-cycle">
             <ArtCyclePage />
           </Route>
+          <Route path="/open-studios">
+            <OpenStudiosPage />
+          </Route>
           <Route exact path="/my-map">
             <MyMapPage />
           </Route>
-          <Route path="/open-studios">
-            <OpenStudiosPage />
+          <Route path="/events">
+            <EventsPage />
           </Route>
           <Route path="/news">
             <NewsPage />
@@ -76,7 +80,7 @@ const App: React.FC = () => (
             <Redirect to="/home" />
           </Route>
         </IonRouterOutlet>
-        <IonTabBar slot="bottom">
+        <IonTabBar slot="bottom" color="primary">
           <IonTabButton tab="home" href="/home">
             <IonIcon icon={home} />
             <IonLabel>Home</IonLabel>

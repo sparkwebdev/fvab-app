@@ -42,12 +42,13 @@ const AboutPage: React.FC = () => {
         </p>
         <p>
           Read more — 
+          <br />
           <a
             href="https://forthvalleyartbeat.com/contact/"
             target="_blank"
             rel="noreferrer"
           >
-            https://forthvalleyartbeat.com/contact/
+            <small>https://forthvalleyartbeat.com/contact/</small>
           </a>
         </p>
         <p>

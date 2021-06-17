@@ -1,4 +1,5 @@
 import React, { useCallback, useState, useRef, useEffect } from "react";
+import { IonLoading, IonButton } from "@ionic/react";
 import {
   GoogleMap,
   useLoadScript,
@@ -6,7 +7,6 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import mapStyles from "../theme/mapStyles";
-import { IonLoading } from "@ionic/react";
 import ListItemStudio from "./ListItemStudio";
 
 declare const window: any;
@@ -19,6 +19,8 @@ const options = {
 
 const MapWithMarkers: React.FC<{
   studios?: any;
+  isSingle?: boolean;
+  onDismiss?: () => void;
 }> = (props) => {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: "AIzaSyB2do_Zm1jyT-IugUTa9HfLo8a6EplMMY8",
@@ -35,6 +37,8 @@ const MapWithMarkers: React.FC<{
     lng: -4,
   });
 
+  const [zoom, setZoom] = useState(9);
+
   useEffect(() => {
     if (mapRef.current && props.studios) {
       fitBounds(mapRef.current);
@@ -47,7 +51,15 @@ const MapWithMarkers: React.FC<{
   const onMapLoad = useCallback(
     (map) => {
       mapRef.current = map;
-      fitBounds(map);
+      if (props.isSingle) {
+        setCenter({
+          lat: props.studios[0]!.lat,
+          lng: props.studios[0]!.lon,
+        });
+        setZoom(16);
+      } else {
+        // fitBounds(map);
+      }
     },
     [props.studios]
   );
@@ -55,17 +67,17 @@ const MapWithMarkers: React.FC<{
   const [selected, setSelected] = useState<any>();
 
   const fitBounds = (map: any) => {
-    // const bounds = new window.google.maps.LatLngBounds();
-    // if (props.studios) {
-    //   props.studios.forEach((location: any) => {
-    //     var myLatLng = new window.google.maps.LatLng(
-    //       location!.lat,
-    //       location!.lon
-    //     );
-    //     bounds.extend(myLatLng);
-    //   });
-    // }
-    // map.fitBounds(bounds);
+    const bounds = new window.google.maps.LatLngBounds();
+    if (props.studios) {
+      props.studios.forEach((location: any) => {
+        var myLatLng = new window.google.maps.LatLng(
+          location!.lat,
+          location!.lon
+        );
+        bounds.extend(myLatLng);
+      });
+    }
+    map.fitBounds(bounds);
   };
 
   if (loadError) return <div>Error loading maps.</div>;
@@ -88,13 +100,12 @@ const MapWithMarkers: React.FC<{
     <>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
-        zoom={9}
+        zoom={zoom}
         center={center}
         options={options}
         onLoad={onMapLoad}
       >
         {props.studios.map((studio: any, index: number) => {
-          console.log(studio);
           return (
             <Marker
               key={index}
@@ -146,6 +157,7 @@ const MapWithMarkers: React.FC<{
           </InfoWindow>
         ) : null}
       </GoogleMap>
+      {props.isSingle && <IonButton onClick={props.onDismiss}>Close</IonButton>}
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { IonContent, IonPage, IonRouterLink } from "@ionic/react";
+import { IonContent, IonPage, IonRouterLink, IonText } from "@ionic/react";
 import "./HomePage.css";
 import PageHeader from "../components/PageHeader";
 
@@ -14,10 +14,15 @@ const HomePage: React.FC = () => {
           >
             <div className="home-content__block-content">
               <img
-                className="home-content__block-logo"
+                className="home-content__block-logo ion-margin-bottom"
                 src="assets/img/logo-art-cycle.png"
                 alt=""
               />
+              <IonText color="dark">
+                <strong>
+                  3<sup>rd</sup> July — 31<sup>st</sup> Aug '21
+                </strong>
+              </IonText>
             </div>
           </IonRouterLink>
           <IonRouterLink
@@ -26,21 +31,28 @@ const HomePage: React.FC = () => {
           >
             <div className="home-content__block-content">
               <img
-                className="home-content__block-logo"
+                className="home-content__block-logo ion-margin-bottom"
                 src="assets/img/logo-fvab.png"
                 alt=""
               />
+              <IonText color="dark">
+                <strong>
+                  10<sup>th</sup> &amp; 11<sup>th</sup> July '21
+                </strong>
+              </IonText>
             </div>
           </IonRouterLink>
           <IonRouterLink
             className="home-content__block home-content__block--events"
-            href="/"
+            href="/events"
           >
             <div className="home-content__block-content">
-              <h3>
-                Cycling and <br />
-                Walking Events
-              </h3>
+              <strong>
+                <IonText color="primary">
+                  Cycling and <br />
+                  Walking Events...
+                </IonText>
+              </strong>
             </div>
           </IonRouterLink>
         </div>

@@ -1,0 +1,15 @@
+.studio-images {
+  background: var(--ion-color-primary-contrast);
+  padding: 10px 10px 0 10px;
+  border: solid 1px #eee;
+}
+
+.studio-images .swiper-pagination.swiper-pagination-bullets {
+  position: relative;
+  bottom: 0;
+  margin: 10px;
+}
+
+.studio-number--large {
+  transform: scale(1.35);
+}

@@ -21,7 +21,7 @@ const SideMenu: React.FC = () => {
         className="ion-padding"
         color="light"
         style={{
-          background: "#77bae6",
+          background: "#00b0ef",
         }}
       >
         <strong>Menu</strong>

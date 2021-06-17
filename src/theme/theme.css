@@ -1,3 +1,20 @@
+/* @font-face {
+  font-family: AppFont;
+  src: url("…/assets/fonts/Oxygen-Regular.ttf");
+} */
+
+:root {
+  /* --ion-font-family: ‘AppFont’; */
+  --ion-font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic,
+    sans-serif;
+}
+ion-tab-button {
+  color: var(--ion-color-light);
+  font-weight: bold;
+}
+ion-tab-button.tab-selected ion-icon {
+  color: var(--ion-color-tertiary);
+}
 ion-toolbar ion-title {
   text-align: center;
 }
@@ -16,4 +33,31 @@ ion-avatar ion-chip {
   border-radius: 50%;
   margin: 0;
   justify-content: center;
+}
+
+.constrain {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+.constrain--tiny {
+  max-width: 8rem;
+}
+.constrain--small {
+  max-width: 16rem;
+}
+.constrain--medium {
+  max-width: 24rem;
+}
+.constrain--large {
+  max-width: 36rem;
+}
+.constrain--wide {
+  max-width: 48rem;
+}
+.constrain--xwide {
+  max-width: 64rem;
+}
+.constrain--xxwide {
+  max-width: 80rem;
 }

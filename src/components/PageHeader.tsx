@@ -20,7 +20,7 @@ const PageHeader: React.FC<ContainerProps> = ({
 }) => {
   return (
     <IonHeader>
-      <IonToolbar>
+      <IonToolbar color="secondary">
         {back && (
           <IonButtons slot="start">
             <IonBackButton defaultHref={defaultHref} text="" />
@@ -28,7 +28,7 @@ const PageHeader: React.FC<ContainerProps> = ({
         )}
         {title && <IonTitle className="ion-text-center">{title}</IonTitle>}
         <IonButtons slot="end">
-          <IonMenuButton color="primary" />
+          <IonMenuButton color="light" />
         </IonButtons>
       </IonToolbar>
     </IonHeader>
