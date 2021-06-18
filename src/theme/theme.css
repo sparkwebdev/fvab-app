@@ -35,6 +35,14 @@ ion-avatar ion-chip {
   justify-content: center;
 }
 
+.studio-number--large {
+  transform: scale(1.35);
+}
+
+.studio-number--small {
+  transform: scale(0.75);
+}
+
 .constrain {
   margin-left: auto;
   margin-right: auto;

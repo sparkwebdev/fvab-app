@@ -6,7 +6,6 @@ import {
   IonText,
   IonLabel,
 } from "@ionic/react";
-import "./ListItemStudio.css";
 
 interface ContainerProps {
   studioNumber: string;
@@ -19,13 +18,13 @@ interface ContainerProps {
 const ListItemStudio: React.FC<ContainerProps> = (props) => {
   return (
     <IonItem
-      routerLink={`/studio/${props.studioNumber}`}
+      routerLink={props.mini ? undefined : `/studio/${props.studioNumber}`}
       key={props.studioNumber}
       lines={props.mini ? "none" : "inset"}
-      className={props.mini ? "ion-no-padding" : ""}
+      className={props.mini ? "ion-no-padding ion-align-items-start" : ""}
       detail={!props.mini}
     >
-      {props.studioNumber && (
+      {props.studioNumber && !props.mini && (
         <IonAvatar
           slot="start"
           className="ion-text-center ion-justify-content-center"
@@ -37,16 +36,20 @@ const ListItemStudio: React.FC<ContainerProps> = (props) => {
           </IonChip>
         </IonAvatar>
       )}
-      {props.image ? (
+      {props.image && !props.mini ? (
         <IonAvatar slot="start">
           <IonImg src={`assets/img/studios_sm/${props.image}`} alt="" />
         </IonAvatar>
       ) : (
-        <IonAvatar slot="start">
-          <IonImg src={"assets/img/placeholder-small.png"} alt="" />
-        </IonAvatar>
+        <>
+          {!props.mini && (
+            <IonAvatar slot="start">
+              <IonImg src={"assets/img/placeholder-small.png"} alt="" />
+            </IonAvatar>
+          )}
+        </>
       )}
-      <IonLabel>
+      <IonLabel className={props.mini ? "ion-text-wrap" : ""}>
         <IonText color="primary">
           <strong>{props.name}</strong>
         </IonText>

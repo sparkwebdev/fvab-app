@@ -49,12 +49,12 @@ const OpenStudiosPage: React.FC = () => {
           <IonCard color="light" className="studios-container__intro">
             <IonCardContent>
               <p>
-                <strong>Welcome to the 2021 Artist Open Studios</strong> with a
-                newly styled event this year focussed around sustainable travel
-                and the outdoors. Visit the 46 artist studios across the Forth
-                Valley participating in this year’s event, opening up their
-                studios and gardens to the public, during 10th and 11th July,
-                all open from 10am to 5pm.
+                Welcome to the 2021 Artist Open Studios with a newly styled
+                event this year focussed around sustainable travel and the
+                outdoors. Visit the 46 artist studios across the Forth Valley
+                participating in this year’s event, opening up their studios and
+                gardens to the public, during 10th and 11th July, all open from
+                10am to 5pm.
               </p>
               {/* <IonButton
               className="ion-margin-top"
@@ -93,7 +93,7 @@ const OpenStudiosPage: React.FC = () => {
             </IonSegment>
           </IonToolbar>
 
-          {studios.length > 0 && (
+          {studios && studios.length > 0 && (
             <>
               {view === "studios" && (
                 <IonList>
