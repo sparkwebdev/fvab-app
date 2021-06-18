@@ -17,13 +17,13 @@ const ContactPage: React.FC = () => {
     <IonPage>
       <PageHeader title="Contact" />
       <IonContent fullscreen>
-        <IonCard color="light" className="ion-text-center">
+        <IonCard color="light" className="ion-text-center ion-no-margin">
           <IonCardContent>
             <p>
               <strong>Email us:</strong>
               <br />
               <strong>
-                <a href="info:avril@forthvalleyartbeat.com">
+                <a href="mailto:info:avril@forthvalleyartbeat.com">
                   info@forthvalleyartbeat.com
                 </a>
               </strong>

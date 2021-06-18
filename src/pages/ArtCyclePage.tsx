@@ -15,7 +15,7 @@ const ArtCyclePage: React.FC = () => {
     <IonPage>
       <PageHeader title="Art Cycle" />
       <IonContent fullscreen>
-        <IonCard color="light">
+        <IonCard color="light" className="ion-no-margin">
           <IonCardContent>
             <p>
               ‘ArtCycle’ is a new eco-arts project as part of FVAB 2021. Four

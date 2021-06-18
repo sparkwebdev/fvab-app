@@ -46,7 +46,10 @@ const OpenStudiosPage: React.FC = () => {
               : "studios-container"
           }
         >
-          <IonCard color="light" className="studios-container__intro">
+          <IonCard
+            color="light"
+            className="studios-container__intro ion-no-margin"
+          >
             <IonCardContent>
               <p>
                 Welcome to the 2021 Artist Open Studios with a newly styled

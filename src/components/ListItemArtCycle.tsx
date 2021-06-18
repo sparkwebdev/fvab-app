@@ -17,7 +17,7 @@ const ListItemArtCycle: React.FC<ContainerProps> = (props) => {
       detail={true}
     >
       {props.image ? (
-        <IonAvatar slot="start">
+        <IonAvatar slot="start" className="ion-avatar--large">
           <IonImg src={`assets/img/art-cycles_sm/${props.image}`} alt="" />
         </IonAvatar>
       ) : (
@@ -26,13 +26,17 @@ const ListItemArtCycle: React.FC<ContainerProps> = (props) => {
         </IonAvatar>
       )}
       <IonLabel>
-        <IonText color="primary">
-          <strong>
-            {props.artist} | {props.title}
-          </strong>
-        </IonText>
+        <strong>
+          <IonText color="primary">{props.artist}</IonText>
+          <br />
+          <IonText color="secondary">
+            <small>'{props.title}'</small>
+          </IonText>
+        </strong>
         <br />
-        <IonText color="dark">{props.location}</IonText>
+        <IonText color="dark">
+          <small>— {props.location}</small>
+        </IonText>
       </IonLabel>
     </IonItem>
   );

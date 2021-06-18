@@ -23,13 +23,13 @@
   left: 0;
 }
 .home-content__block--artcycle {
-  flex: 11 1 auto;
+  flex: 10 1 auto;
   background: url("/src/theme/img/bg-stripe-01.png") right 5vw bottom 2vh
     no-repeat;
   background-size: 200vh auto;
 }
 .home-content__block--open-studios {
-  flex: 7 1 auto;
+  flex: 8 1 auto;
 }
 .home-content__block--events {
   flex: 6 1 auto;

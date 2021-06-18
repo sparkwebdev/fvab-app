@@ -19,9 +19,9 @@ const SideMenu: React.FC = () => {
     <IonMenu contentId="main" side="end">
       <IonText
         className="ion-padding"
-        color="light"
         style={{
           background: "#00b0ef",
+          color: "#fff",
         }}
       >
         <strong>Menu</strong>

@@ -51,11 +51,11 @@ const ArtCycleEntryPage: React.FC = () => {
             {artCycle.title && (
               <h2 className="ion-no-margin">
                 <IonText color="secondary">
-                  <strong>{artCycle.title}</strong>
+                  <strong>'{artCycle.title}'</strong>
                 </IonText>
               </h2>
             )}
-            {artCycle.location && <p>{artCycle.location}</p>}
+            {artCycle.location && <p>— {artCycle.location}</p>}
             {artCycle.image && (
               <p>
                 <img

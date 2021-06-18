@@ -16,6 +16,7 @@ import {
   IonSlide,
   IonButton,
   IonModal,
+  IonText,
 } from "@ionic/react";
 import { useParams } from "react-router";
 import {
@@ -85,7 +86,7 @@ const StudioEntryPage: React.FC = () => {
   return (
     <IonPage>
       <PageHeader title={`Studio ${studio?.st}`} back={true} />
-      <IonContent fullscreen className="ion-padding">
+      <IonContent fullscreen>
         {studio && (
           <>
             <IonCard className="ion-no-margin" color="light">
@@ -108,16 +109,15 @@ const StudioEntryPage: React.FC = () => {
                     <IonCol size="3">
                       <IonGrid className="ion-no-padding ">
                         <IonRow className="ion-align-items-center">
-                          {isPlatform("mobile") && (
+                          {/* {isPlatform("mobile") && (
                             <IonCol className="ion-text-center">
                               <Share
                                 shareText={`@FVAB_ I\'ve just visited the '${studio.name}' studio...`}
                                 shareImage={studio.img ? studio.img : ""}
                                 shareUrl={`https://forthvalleyartbeat.com/routes/fvab-2021/?id=${studio.st}`}
-                                triggerShare={true}
                               />
                             </IonCol>
-                          )}
+                          )} */}
                           <IonCol className="ion-text-end">
                             <IonButton
                               className="ion-no-padding ion-no-margin"
@@ -136,11 +136,16 @@ const StudioEntryPage: React.FC = () => {
                     </IonCol>
                   </IonRow>
                 </IonGrid>
-
-                {studio.name && <IonCardTitle>{studio.name}</IonCardTitle>}
+                {studio.name && (
+                  <IonCardTitle>
+                    <IonText color="primary" style={{ fontSize: "1rem" }}>
+                      <strong>{studio.name}</strong>
+                    </IonText>
+                  </IonCardTitle>
+                )}
                 {studio.dis && (
-                  <IonCardSubtitle>
-                    <strong>{studio.dis}</strong>
+                  <IonCardSubtitle className="ion-text-capitalize">
+                    {studio.dis}
                   </IonCardSubtitle>
                 )}
                 {studio.imgs && (
@@ -157,7 +162,7 @@ const StudioEntryPage: React.FC = () => {
                           return (
                             <IonSlide key={index}>
                               <img
-                                className="intro__panel"
+                                className="studio-images__image"
                                 src={`assets/img/studios/${image}`}
                                 alt=""
                               />
@@ -168,141 +173,147 @@ const StudioEntryPage: React.FC = () => {
                   </div>
                 )}
                 {studio.add && (
-                  <IonCardSubtitle>
-                    <IonGrid>
-                      <IonRow>
-                        <IonCol size="2">
-                          <IonIcon
-                            icon={location}
-                            color="secondary"
-                            size="large"
-                          />
-                        </IonCol>
-                        <IonCol>
-                          <p
-                            style={{
-                              marginTop: 0,
-                            }}
-                          >
-                            {studio.add}
-                          </p>
-                        </IonCol>
-                      </IonRow>
-                      <IonRow>
-                        <IonCol size="6">
-                          <IonButton
-                            size="small"
-                            color="primary"
-                            fill="solid"
-                            onClick={viewMapHandler}
-                          >
-                            View on map
-                          </IonButton>
-                        </IonCol>
-                        <IonCol size="6">
-                          <IonButton
-                            size="small"
-                            color="secondary"
-                            fill="outline"
-                            onClick={getDirectionsHandler}
-                          >
-                            Get Directions
-                          </IonButton>
-                        </IonCol>
-                      </IonRow>
-                    </IonGrid>
-                  </IonCardSubtitle>
+                  <IonGrid>
+                    <IonRow>
+                      <IonCol size="2">
+                        <IonIcon
+                          icon={location}
+                          color="secondary"
+                          size="large"
+                        />
+                      </IonCol>
+                      <IonCol>
+                        <p
+                          style={{
+                            marginTop: 0,
+                          }}
+                        >
+                          {studio.add}
+                        </p>
+                      </IonCol>
+                    </IonRow>
+                    <IonRow>
+                      <IonCol size="6">
+                        <IonButton
+                          size="small"
+                          color="primary"
+                          fill="solid"
+                          onClick={viewMapHandler}
+                        >
+                          View on map
+                        </IonButton>
+                      </IonCol>
+                      <IonCol size="6">
+                        <IonButton
+                          size="small"
+                          color="secondary"
+                          fill="outline"
+                          onClick={getDirectionsHandler}
+                        >
+                          Get Directions
+                        </IonButton>
+                      </IonCol>
+                    </IonRow>
+                  </IonGrid>
                 )}
               </IonCardHeader>
             </IonCard>
-            {studio?.desc && <p>{studio?.desc}</p>}
-            {studio?.desc2 && <p>{studio?.desc2}</p>}
-            {studio?.desc2 && (
-              <>
-                <h3>Directions</h3>
-                <p>{studio?.dir}</p>
-              </>
-            )}
-            {(studio?.mb || studio?.em || studio?.wb) && (
-              <>
-                <h3>Contact Details</h3>
-                <IonGrid className="ion-no-padding">
-                  {studio?.mb && (
-                    <IonRow>
-                      <IonCol size="2">
-                        <div className="ion-margin-bottom">Mob:</div>
-                      </IonCol>
-                      <IonCol>
-                        <div className="ion-margin-bottom">{studio?.mb}</div>
-                      </IonCol>
-                    </IonRow>
-                  )}
-                  {studio?.em && (
-                    <IonRow>
-                      <IonCol size="2">
-                        <div className="ion-margin-bottom">Email:</div>
-                      </IonCol>
-                      <IonCol>
-                        <div className="ion-margin-bottom">
-                          <a
-                            href={`mailto:${studio?.tw}`}
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            {studio?.em}
-                          </a>
-                        </div>
-                      </IonCol>
-                    </IonRow>
-                  )}
-                  {studio?.wb && (
-                    <IonRow>
-                      <IonCol size="2">
-                        <div className="ion-margin-bottom">Web:</div>
-                      </IonCol>
-                      <IonCol>
-                        <div className="ion-margin-bottom">
-                          <a href={studio?.wb} target="_blank" rel="noreferrer">
-                            Visit site
-                          </a>
-                        </div>
-                      </IonCol>
-                    </IonRow>
-                  )}
-                </IonGrid>
-              </>
-            )}
-            {(studio?.fb || studio?.tw) && (
-              <>
-                <h3>Social Links</h3>
-                <IonGrid className="ion-no-padding">
-                  <IonRow className="ion-justify-content-start">
-                    {studio?.fb && (
-                      <IonCol size="2">
-                        <a href={studio?.fb} target="_blank" rel="noreferrer">
-                          <IonIcon
-                            icon={logoFacebook}
-                            color="secondary"
-                            size="large"
-                          />
-                        </a>
-                      </IonCol>
+            <div className="ion-padding">
+              {studio?.desc && <p>{studio?.desc}</p>}
+              {studio?.desc2 && <p>{studio?.desc2}</p>}
+              {studio?.desc2 && (
+                <>
+                  <h3>Directions</h3>
+                  <p>{studio?.dir}</p>
+                </>
+              )}
+              {(studio?.mb || studio?.em || studio?.wb) && (
+                <>
+                  <h3>Contact Details</h3>
+                  <IonGrid className="ion-no-padding">
+                    {studio?.mb && (
+                      <IonRow>
+                        <IonCol size="2">
+                          <div className="ion-margin-bottom">Mob:</div>
+                        </IonCol>
+                        <IonCol>
+                          <div className="ion-margin-bottom">
+                            <a href={`tel:${studio?.mb}`}>{studio?.mb}</a>
+                          </div>
+                        </IonCol>
+                      </IonRow>
                     )}
-                    {studio?.tw && (
-                      <IonCol size="2">
-                        <a href={studio?.tw} target="_blank" rel="noreferrer">
-                          <IonIcon
-                            icon={logoTwitter}
-                            color="secondary"
-                            size="large"
-                          />
-                        </a>
-                      </IonCol>
+                    {studio?.em && (
+                      <IonRow>
+                        <IonCol size="2">
+                          <div className="ion-margin-bottom">Email:</div>
+                        </IonCol>
+                        <IonCol>
+                          <div className="ion-margin-bottom">
+                            <a
+                              href={`mailto:${studio?.tw}`}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              {studio?.em}
+                            </a>
+                          </div>
+                        </IonCol>
+                      </IonRow>
                     )}
-                  </IonRow>
-                </IonGrid>
-              </>
-            )}
+                    {studio?.wb && (
+                      <IonRow>
+                        <IonCol size="2">
+                          <div className="ion-margin-bottom">Web:</div>
+                        </IonCol>
+                        <IonCol>
+                          <div className="ion-margin-bottom">
+                            <a
+                              href={studio?.wb}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              Visit site
+                            </a>
+                          </div>
+                        </IonCol>
+                      </IonRow>
+                    )}
+                  </IonGrid>
+                </>
+              )}
+              {(studio?.fb || studio?.tw) && (
+                <>
+                  <h3>Social Links</h3>
+                  <IonGrid className="ion-no-padding">
+                    <IonRow className="ion-justify-content-start">
+                      {studio?.fb && (
+                        <IonCol size="2">
+                          <a href={studio?.fb} target="_blank" rel="noreferrer">
+                            <IonIcon
+                              icon={logoFacebook}
+                              color="secondary"
+                              size="large"
+                            />
+                          </a>
+                        </IonCol>
+                      )}
+                      {studio?.tw && (
+                        <IonCol size="2">
+                          <a href={studio?.tw} target="_blank" rel="noreferrer">
+                            <IonIcon
+                              icon={logoTwitter}
+                              color="secondary"
+                              size="large"
+                            />
+                          </a>
+                        </IonCol>
+                      )}
+                    </IonRow>
+                  </IonGrid>
+                </>
+              )}
+            </div>
           </>
         )}
       </IonContent>

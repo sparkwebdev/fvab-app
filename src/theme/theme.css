@@ -9,7 +9,7 @@
     sans-serif;
 }
 ion-tab-button {
-  color: var(--ion-color-light);
+  color: #fff;
   font-weight: bold;
 }
 ion-tab-button.tab-selected ion-icon {
@@ -33,6 +33,11 @@ ion-avatar ion-chip {
   border-radius: 50%;
   margin: 0;
   justify-content: center;
+}
+
+.ion-avatar--large {
+  width: 60px;
+  height: 60px;
 }
 
 .studio-number--large {

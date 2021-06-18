@@ -28,7 +28,7 @@ const PageHeader: React.FC<ContainerProps> = ({
         )}
         {title && <IonTitle className="ion-text-center">{title}</IonTitle>}
         <IonButtons slot="end">
-          <IonMenuButton color="light" />
+          <IonMenuButton style={{ color: "#fff" }} />
         </IonButtons>
       </IonToolbar>
     </IonHeader>

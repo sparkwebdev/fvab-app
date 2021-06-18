@@ -55,7 +55,7 @@ const MyMapPage: React.FC = () => {
             </IonList>
           </>
         ) : (
-          <IonCard color="light" className="ion-text-center">
+          <IonCard color="light" className="ion-text-center ion-no-margin">
             <IonCardHeader>
               <IonCardTitle>
                 {" "}

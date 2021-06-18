@@ -23,6 +23,7 @@ const HomePage: React.FC = () => {
                   3<sup>rd</sup> July — 31<sup>st</sup> Aug '21
                 </strong>
               </IonText>
+              <hr className="ion-margin" />
             </div>
           </IonRouterLink>
           <IonRouterLink

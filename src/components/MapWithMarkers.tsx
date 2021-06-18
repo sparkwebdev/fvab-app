@@ -14,7 +14,6 @@ declare const window: any;
 const options = {
   styles: mapStyles,
   disableDefaultUI: true,
-  zoomControl: true,
 };
 
 const MapWithMarkers: React.FC<{
@@ -157,7 +156,11 @@ const MapWithMarkers: React.FC<{
           </InfoWindow>
         ) : null}
       </GoogleMap>
-      {props.isSingle && <IonButton onClick={props.onDismiss}>Close</IonButton>}
+      <div className="ion-padding">
+        {props.isSingle && (
+          <IonButton onClick={props.onDismiss}>Close</IonButton>
+        )}
+      </div>
     </>
   );
 };
