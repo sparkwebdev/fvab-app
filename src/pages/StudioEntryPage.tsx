@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   IonCard,
   IonCardHeader,
@@ -18,23 +18,31 @@ import {
   IonModal,
 } from "@ionic/react";
 import { useParams } from "react-router";
-import { location, logoFacebook, logoTwitter } from "ionicons/icons";
+import {
+  location,
+  logoFacebook,
+  logoTwitter,
+  heart,
+  heartOutline,
+} from "ionicons/icons";
 import PageHeader from "../components/PageHeader";
 import "./StudioEntryPage.css";
 import MapWithMarkers from "../components/MapWithMarkers";
 import { isPlatform } from "@ionic/react";
-
 import { studios } from "../data/studios";
 import Share from "../components/Share";
+import AppContext from "../data/app-context";
 
 interface RouteParams {
   id: string;
 }
 
 const StudioEntryPage: React.FC = () => {
+  const appCtx = useContext(AppContext);
   const [studio, setStudio] = useState<any>();
   const [showMap, setShowMap] = useState<boolean>(false);
   const [mapKey, setMapKey] = useState<number>(Math.random());
+  const [isFavourite, setIsFavourite] = useState<boolean | undefined>();
 
   const { id } = useParams<RouteParams>();
 
@@ -58,6 +66,10 @@ const StudioEntryPage: React.FC = () => {
     // }
   };
 
+  const setFavouriteHandler = () => {
+    appCtx.updateFavourites(id, !isFavourite);
+  };
+
   useEffect(() => {
     setStudio(
       studios.find((studio) => {
@@ -65,6 +77,10 @@ const StudioEntryPage: React.FC = () => {
       })
     );
   }, [id]);
+
+  useEffect(() => {
+    setIsFavourite(appCtx.favourites.includes(id));
+  }, [appCtx.favourites]);
 
   return (
     <IonPage>
@@ -76,7 +92,7 @@ const StudioEntryPage: React.FC = () => {
               <IonCardHeader>
                 <IonGrid className="ion-no-padding">
                   <IonRow>
-                    <IonCol size="10">
+                    <IonCol size="9">
                       {studio.st && (
                         <IonChip
                           color="primary"
@@ -89,16 +105,35 @@ const StudioEntryPage: React.FC = () => {
                       )}
                     </IonCol>
 
-                    {isPlatform("mobile") && (
-                      <IonCol size="2" className="ion-text-end">
-                        <Share
-                          shareText={`@FVAB_ I\'ve just visited the '${studio.name}' studio...`}
-                          shareImage={studio.img ? studio.img : ""}
-                          shareUrl={`https://forthvalleyartbeat.com/routes/fvab-2021/?id=${studio.st}`}
-                          triggerShare={true}
-                        />
-                      </IonCol>
-                    )}
+                    <IonCol size="3">
+                      <IonGrid className="ion-no-padding ">
+                        <IonRow className="ion-align-items-center">
+                          {isPlatform("mobile") && (
+                            <IonCol className="ion-text-center">
+                              <Share
+                                shareText={`@FVAB_ I\'ve just visited the '${studio.name}' studio...`}
+                                shareImage={studio.img ? studio.img : ""}
+                                shareUrl={`https://forthvalleyartbeat.com/routes/fvab-2021/?id=${studio.st}`}
+                                triggerShare={true}
+                              />
+                            </IonCol>
+                          )}
+                          <IonCol className="ion-text-end">
+                            <IonButton
+                              className="ion-no-padding ion-no-margin"
+                              fill="clear"
+                              onClick={setFavouriteHandler}
+                            >
+                              <IonIcon
+                                icon={isFavourite ? heart : heartOutline}
+                                color={isFavourite ? "danger" : "secondary"}
+                                size="large"
+                              />
+                            </IonButton>
+                          </IonCol>
+                        </IonRow>
+                      </IonGrid>
+                    </IonCol>
                   </IonRow>
                 </IonGrid>
 

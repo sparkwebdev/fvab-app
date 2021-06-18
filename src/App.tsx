@@ -19,6 +19,8 @@ import ContactPage from "./pages/ContactPage";
 import AboutPage from "./pages/AboutPage";
 import EventsPage from "./pages/EventsPage";
 import StudioEntryPage from "./pages/StudioEntryPage";
+import ArtCycleEntryPage from "./pages/ArtCycleEntryPage";
+import AppContextProvider from "./data/AppContextProvider";
 
 import SideMenu from "./components/SideMenu";
 
@@ -42,66 +44,75 @@ import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 import "./theme/custom-variables.css";
 import "./theme/theme.css";
+import FavouritesCount from "./components/FavouritesCount";
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet id="main">
-          <Route exact path="/home">
-            <HomePage />
-          </Route>
-          <Route path="/art-cycle">
-            <ArtCyclePage />
-          </Route>
-          <Route path="/open-studios">
-            <OpenStudiosPage />
-          </Route>
-          <Route exact path="/my-map">
-            <MyMapPage />
-          </Route>
-          <Route path="/events">
-            <EventsPage />
-          </Route>
-          <Route path="/news">
-            <NewsPage />
-          </Route>
-          <Route path="/contact">
-            <ContactPage />
-          </Route>
-          <Route path="/about">
-            <AboutPage />
-          </Route>
-          {/* Dynamic pages */}
-          <Route exact path="/studio/:id">
-            <StudioEntryPage />
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/home" />
-          </Route>
-        </IonRouterOutlet>
-        <IonTabBar slot="bottom" color="primary">
-          <IonTabButton tab="home" href="/home">
-            <IonIcon icon={home} />
-            <IonLabel>Home</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="artcycle" href="/art-cycle">
-            <IonIcon icon={bicycle} />
-            <IonLabel>ArtCycle</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="open-studios" href="/open-studios">
-            <IonIcon icon={people} />
-            <IonLabel>Open Studios</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="mymap" href="/my-map">
-            <IonIcon icon={heart} />
-            <IonLabel>My Map</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
-      <SideMenu />
-    </IonReactRouter>
-  </IonApp>
-);
+const App: React.FC = () => {
+  return (
+    <IonApp>
+      <AppContextProvider>
+        <IonReactRouter>
+          <IonTabs>
+            <IonRouterOutlet id="main">
+              <Route exact path="/home">
+                <HomePage />
+              </Route>
+              <Route path="/art-cycle">
+                <ArtCyclePage />
+              </Route>
+              <Route path="/open-studios">
+                <OpenStudiosPage />
+              </Route>
+              <Route exact path="/my-map">
+                <MyMapPage />
+              </Route>
+              <Route path="/events">
+                <EventsPage />
+              </Route>
+              <Route path="/news">
+                <NewsPage />
+              </Route>
+              <Route path="/contact">
+                <ContactPage />
+              </Route>
+              <Route path="/about">
+                <AboutPage />
+              </Route>
+              {/* Dynamic pages */}
+              <Route exact path="/studio/:id">
+                <StudioEntryPage />
+              </Route>
+              <Route exact path="/event/:id">
+                <ArtCycleEntryPage />
+              </Route>
+              <Route exact path="/">
+                <Redirect to="/home" />
+              </Route>
+            </IonRouterOutlet>
+            <IonTabBar slot="bottom" color="primary">
+              <IonTabButton tab="home" href="/home">
+                <IonIcon icon={home} />
+                <IonLabel>Home</IonLabel>
+              </IonTabButton>
+              <IonTabButton tab="artcycle" href="/art-cycle">
+                <IonIcon icon={bicycle} />
+                <IonLabel>ArtCycle</IonLabel>
+              </IonTabButton>
+              <IonTabButton tab="open-studios" href="/open-studios">
+                <IonIcon icon={people} />
+                <IonLabel>Open Studios</IonLabel>
+              </IonTabButton>
+              <IonTabButton tab="mymap" href="/my-map">
+                <IonIcon icon={heart} />
+                <IonLabel>My Map</IonLabel>
+                <FavouritesCount />
+              </IonTabButton>
+            </IonTabBar>
+          </IonTabs>
+          <SideMenu />
+        </IonReactRouter>
+      </AppContextProvider>
+    </IonApp>
+  );
+};
 
 export default App;
