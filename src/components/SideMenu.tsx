@@ -22,6 +22,7 @@ const SideMenu: React.FC = () => {
         style={{
           background: "#00b0ef",
           color: "#fff",
+          paddingTop: "75px",
         }}
       >
         <strong>Menu</strong>

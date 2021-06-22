@@ -21,7 +21,7 @@ const ListItemStudio: React.FC<ContainerProps> = (props) => {
       routerLink={props.mini ? undefined : `/studio/${props.studioNumber}`}
       key={props.studioNumber}
       lines={props.mini ? "none" : "inset"}
-      className={props.mini ? "ion-no-padding ion-align-items-start" : ""}
+      className={props.mini ? "ion-align-items-start" : ""}
       detail={!props.mini}
     >
       {props.studioNumber && !props.mini && (

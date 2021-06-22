@@ -1,5 +1,5 @@
 import { IonButton, IonIcon } from "@ionic/react";
-import React, { useEffect } from "react";
+import React from "react";
 import { SocialSharing } from "@ionic-native/social-sharing";
 import { shareOutline as shareIcon } from "ionicons/icons";
 
@@ -7,7 +7,6 @@ const Share: React.FC<{
   shareText?: string;
   shareImage?: string;
   shareUrl?: string;
-  triggerShare?: boolean;
 }> = (props) => {
   const text = props.shareText || "";
   const image = props.shareImage || "";
@@ -27,12 +26,6 @@ const Share: React.FC<{
         console.log("Sharing failed with message: " + msg);
       });
   };
-
-  useEffect(() => {
-    if (props.triggerShare) {
-      share();
-    }
-  }, [props.triggerShare]);
 
   return (
     <>

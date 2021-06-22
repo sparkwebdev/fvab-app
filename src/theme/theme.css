@@ -35,6 +35,10 @@ ion-avatar ion-chip {
   justify-content: center;
 }
 
+img {
+  height: auto;
+}
+
 .ion-avatar--large {
   width: 60px;
   height: 60px;
@@ -46,6 +50,12 @@ ion-avatar ion-chip {
 
 .studio-number--small {
   transform: scale(0.75);
+}
+
+.separator {
+  border-top: solid 1px #ddd;
+  padding-top: 40px;
+  margin-top: 50px;
 }
 
 .constrain {
