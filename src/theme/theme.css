@@ -58,6 +58,12 @@ img {
   margin-top: 50px;
 }
 
+.loading-spinner {
+  margin: 35vh auto;
+  transform: scale(2);
+  display: flex;
+}
+
 .constrain {
   margin-left: auto;
   margin-right: auto;

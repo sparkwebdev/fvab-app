@@ -21,6 +21,7 @@ import EventsPage from "./pages/EventsPage";
 import StudioEntryPage from "./pages/StudioEntryPage";
 import ArtCycleEntryPage from "./pages/ArtCycleEntryPage";
 import AppContextProvider from "./data/AppContextProvider";
+import NewsEntryPage from "./pages/NewsEntryPage";
 
 import SideMenu from "./components/SideMenu";
 
@@ -83,6 +84,9 @@ const App: React.FC = () => {
               </Route>
               <Route exact path="/event/:id">
                 <ArtCycleEntryPage />
+              </Route>
+              <Route exact path="/entry/:id">
+                <NewsEntryPage />
               </Route>
               <Route exact path="/">
                 <Redirect to="/home" />
