@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">fvab-2021</string>
+    <string name="title_activity_main">fvab-2021</string>
+    <string name="package_name">com.forthvalleyopenstudios.app</string>
+    <string name="custom_url_scheme">com.forthvalleyopenstudios.app</string>
+</resources>
