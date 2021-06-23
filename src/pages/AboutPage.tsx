@@ -41,6 +41,11 @@ const AboutPage: React.FC = () => {
           the Forth Valley to help build the event going forward.
         </p>
         <p>
+          ’The ArtCycle Project is curated by Rosy Naylor and funded by Smarter
+          Choices, Smarter Places Fund (Paths for All) and National Lottery
+          Community Fund.
+        </p>
+        <p>
           Read more — 
           <br />
           <a

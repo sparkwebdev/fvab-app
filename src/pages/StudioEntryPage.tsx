@@ -109,15 +109,19 @@ const StudioEntryPage: React.FC = () => {
                     <IonCol size="3">
                       <IonGrid className="ion-no-padding ">
                         <IonRow className="ion-align-items-center">
-                          {/* {isPlatform("mobile") && (
+                          {isPlatform("mobile") && (
                             <IonCol className="ion-text-center">
                               <Share
                                 shareText={`@FVAB_ I\'ve just visited the '${studio.name}' studio...`}
-                                shareImage={studio.img ? studio.img : ""}
+                                shareImage={
+                                  studio.img
+                                    ? `assets/img/studios/${studio.img}`
+                                    : ""
+                                }
                                 shareUrl={`https://forthvalleyartbeat.com/routes/fvab-2021/?id=${studio.st}`}
                               />
                             </IonCol>
-                          )} */}
+                          )}
                           <IonCol className="ion-text-end">
                             <IonButton
                               className="ion-no-padding ion-no-margin"

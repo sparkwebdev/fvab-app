@@ -22,7 +22,7 @@ export const artCycles = [
     location: "NCN 765 & 76 Cycle routes",
     description: "‘The Allan Blikvangers‘ are a series of Blikvanger-styled artworks installed at six different locations along the NCN 765 & 76 cycle routes between Stirling and Bridge of Allan. \r\n Inspired by the artists’ own experience living in the Netherlands, the cycling capital of the world, the Blikvanger (bike path nets) comprising of large catching nets will collect cyclists’ rubbish as they pass. \r\n Beautiful, sculptural forms in the own right, using recycled fishing nets they will be individually handmade, brightly coloured forms that add to the enjoyment of cycling.\r\n We suggest you start the route near Stirling, or south of Dunblane, to cycle along the NCN routes to view the other Blikvanger artworks.",
     url: "https://forthvalleyartbeat.com/natalie-mcilroy/",
-    mapImage: "https://forthvalleyartbeat.com/wp-content/uploads/2021/06/Natalie.png",
+    mapImage: "Natalie.png",
     locations: [{
       description: "Starting from Stirling",
       lat: 56.117663,
@@ -54,8 +54,8 @@ export const artCycles = [
     title: "the grass is getting greener",
     image: "holger1.jpeg",
     location: "Cycling events, River Forth, nr Stirling",
-    description: "‘the grass is getting long‘ is an artist devised cycle route that draws upon the unique knowledge of local nature, the way we interact with landscape and the ephemeral experience of cycling. \r\n The artist-led route follows the River Forth taking in some of the local architecture and social history. The journey will go along existing paths and at times will also go off the beaten track, with each of the two events taking the route in an opposite direction. (unsuitable for e-bikes). The cycle rides take place on Sun 11th July & Sat 21st August 2pm starting from Stirling Railway Station. Please book from below.",
-    url: "sdf",
+    description: "‘the grass is getting long‘ is an artist devised cycle route that draws upon the unique knowledge of local nature, the way we interact with landscape and the ephemeral experience of cycling. \r\n The artist-led route follows the River Forth taking in some of the local architecture and social history. The journey will go along existing paths and at times will also go off the beaten track, with each of the two events taking the route in an opposite direction. (unsuitable for e-bikes). The cycle rides take place on Sun 11th July & Sat 21st August 2pm starting from Stirling Railway Station. Please book from 'Further information' link below.",
+    url: "https://forthvalleyartbeat.com/holger-mohaupt-the-grass-is-getting-long/",
     mapImage: "Stirling-2021-holger.png",
   },
 

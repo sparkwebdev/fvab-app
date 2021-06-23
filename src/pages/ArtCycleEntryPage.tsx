@@ -97,9 +97,22 @@ const ArtCycleEntryPage: React.FC = () => {
                 </p>
               </>
             )}
+            {artCycle.url && (
+              <>
+                <h2>Further information:</h2>
+
+                <p>
+                  More information on this event can be{" "}
+                  <a href={artCycle.url} target="_blank" rel="noreferrer">
+                    <strong>found here</strong>
+                  </a>
+                  .
+                </p>
+              </>
+            )}
           </>
         )}
-
+        <hr />
         <IonCard color="light" className="ion-no-margin">
           <IonCardContent>
             <p>

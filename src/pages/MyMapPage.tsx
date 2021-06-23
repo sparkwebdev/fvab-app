@@ -24,7 +24,7 @@ const MyMapPage: React.FC = () => {
 
   useEffect(() => {
     const studiosFiltered: any = studios.filter((studio: any) => {
-      return appCtx.favourites.includes(studio.id.toString());
+      return appCtx.favourites.includes(studio.st.toString());
     });
     setFavouriteStudios(studiosFiltered);
   }, [appCtx.favourites]);
