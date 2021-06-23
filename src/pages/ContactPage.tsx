@@ -43,7 +43,7 @@ const ContactPage: React.FC = () => {
                 </IonCol>
                 <IonCol size="3">
                   <a
-                    href="https://twitter.com/fvab_"
+                    href="https://twitter.com/@FVAB_"
                     target="_blank"
                     rel="noreferrer"
                   >
