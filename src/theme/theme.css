@@ -63,6 +63,9 @@ img {
   transform: scale(2);
   display: flex;
 }
+.loading-wrapper.ion-overlay-wrapper {
+  max-height: 6em;
+}
 
 .constrain {
   margin-left: auto;
