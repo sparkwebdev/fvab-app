@@ -9,6 +9,11 @@
   bottom: 0;
   margin: 10px;
 }
+
+.swiper-pagination-bullet,
+.swiper-pagination-bullet-active {
+  background: var(--ion-color-primary);
+}
 .studio-images__image {
   max-height: 32vh !important;
 }
