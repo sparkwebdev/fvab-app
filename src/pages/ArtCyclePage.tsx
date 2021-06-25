@@ -4,13 +4,32 @@ import {
   IonCard,
   IonCardContent,
   IonList,
+  IonSpinner,
 } from "@ionic/react";
 import "./ArtCyclePage.css";
 import PageHeader from "../components/PageHeader";
 import { artCycles } from "../data/art-cycles";
 import ListItemArtCycle from "../components/ListItemArtCycle";
+import { useEffect, useState } from "react";
 
 const ArtCyclePage: React.FC = () => {
+  const [gallery, setGallery] = useState<any>({});
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    fetch("https://forthvalleyartbeat.com/wp-json/wp/v2/pages/6256")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setGallery(data);
+        setLoading(false);
+      })
+      .catch((e) => {
+        console.log("Error getting news", e);
+        setLoading(false);
+      });
+  }, []);
+
   return (
     <IonPage>
       <PageHeader title="Art Cycle" />
@@ -57,6 +76,26 @@ const ArtCyclePage: React.FC = () => {
             </p>
           </IonCardContent>
         </IonCard>
+
+        {loading ? (
+          <IonSpinner
+            color="secondary"
+            className="loading-spinner"
+            name="dots"
+          />
+        ) : (
+          <div className="ion-padding">
+            <h2>Latest 'ArtCycle' photos</h2>
+            {gallery.content && (
+              <div
+                className="gallery"
+                dangerouslySetInnerHTML={{
+                  __html: gallery.content.rendered,
+                }}
+              ></div>
+            )}
+          </div>
+        )}
       </IonContent>
     </IonPage>
   );

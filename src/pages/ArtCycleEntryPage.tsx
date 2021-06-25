@@ -65,7 +65,12 @@ const ArtCycleEntryPage: React.FC = () => {
                 />
               </p>
             )}
-            {artCycle.description}
+
+            <div
+              dangerouslySetInnerHTML={{
+                __html: artCycle.description,
+              }}
+            ></div>
             {artCycle.mapImage && (
               <p>
                 <img
@@ -102,7 +107,7 @@ const ArtCycleEntryPage: React.FC = () => {
                 <h2>Further information:</h2>
 
                 <p>
-                  More information on this event can be{" "}
+                  More information on this commission can be{" "}
                   <a href={artCycle.url} target="_blank" rel="noreferrer">
                     <strong>found here</strong>
                   </a>
