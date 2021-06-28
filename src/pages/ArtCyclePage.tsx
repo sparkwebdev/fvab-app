@@ -81,6 +81,21 @@ const ArtCyclePage: React.FC = () => {
             )}
           </div>
         )}
+        <IonCard color="light">
+          <IonCardContent>
+            <p>
+              Also check out the various{" "}
+              <a
+                href="https://forthvalleyartbeat.com/cycling-walking-events/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <strong>cycling &amp; walking events</strong>
+              </a>
+              .
+            </p>
+          </IonCardContent>
+        </IonCard>
       </IonContent>
     </IonPage>
   );
