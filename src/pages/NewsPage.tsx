@@ -13,24 +13,42 @@ import {
 import "./NewsPage.css";
 import PageHeader from "../components/PageHeader";
 import { useEffect, useState } from "react";
+import { HTTP } from "@ionic-native/http";
+import { isPlatform } from "@ionic/react";
 
 const NewsPage: React.FC = () => {
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(
-      "https://forthvalleyartbeat.com/wp-json/wp/v2/posts/?orderby=date&order=desc&after=2020-03-01T00:00:00"
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setNews(data);
-        setLoading(false);
-      })
-      .catch((e) => {
-        console.log("Error getting news", e);
-        setLoading(false);
-      });
+    if (isPlatform("ios")) {
+      HTTP.get(
+        "https://forthvalleyartbeat.com/wp-json/wp/v2/posts/?orderby=date&order=desc&after=2020-03-01T00:00:00",
+        {},
+        {}
+      )
+        .then((data) => {
+          setNews(JSON.parse(data.data));
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log("Error getting news", error.error);
+          setLoading(false);
+        });
+    } else {
+      fetch(
+        "https://forthvalleyartbeat.com/wp-json/wp/v2/posts/?orderby=date&order=desc&after=2020-03-01T00:00:00"
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setNews(data);
+          setLoading(false);
+        })
+        .catch((e) => {
+          console.log("Error getting news", e);
+          setLoading(false);
+        });
+    }
   }, []);
 
   return (

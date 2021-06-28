@@ -11,23 +11,41 @@ import PageHeader from "../components/PageHeader";
 import { artCycles } from "../data/art-cycles";
 import ListItemArtCycle from "../components/ListItemArtCycle";
 import { useEffect, useState } from "react";
+import { HTTP } from "@ionic-native/http";
+import { isPlatform } from "@ionic/react";
 
 const ArtCyclePage: React.FC = () => {
   const [gallery, setGallery] = useState<any>({});
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetch("https://forthvalleyartbeat.com/wp-json/wp/v2/pages/6256")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setGallery(data);
-        setLoading(false);
-      })
-      .catch((e) => {
-        console.log("Error getting news", e);
-        setLoading(false);
-      });
+    if (isPlatform("ios")) {
+      HTTP.get(
+        "https://forthvalleyartbeat.com/wp-json/wp/v2/pages/6256",
+        {},
+        {}
+      )
+        .then((data) => {
+          setGallery(JSON.parse(data.data));
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log("Error getting news", error.error);
+          setLoading(false);
+        });
+    } else {
+      fetch("https://forthvalleyartbeat.com/wp-json/wp/v2/pages/6256")
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setGallery(data);
+          setLoading(false);
+        })
+        .catch((e) => {
+          console.log("Error getting news", e);
+          setLoading(false);
+        });
+    }
   }, []);
 
   return (
@@ -61,6 +79,26 @@ const ArtCyclePage: React.FC = () => {
             })}
           </IonList>
         )}
+
+        {loading ? (
+          <IonSpinner
+            color="secondary"
+            className="loading-spinner"
+            name="dots"
+          />
+        ) : (
+          <div className="ion-padding">
+            <h2>View latest ArtCycle project photos</h2>
+            {gallery.content && (
+              <div
+                className="gallery"
+                dangerouslySetInnerHTML={{
+                  __html: gallery.content.rendered,
+                }}
+              ></div>
+            )}
+          </div>
+        )}
         <IonCard color="light">
           <IonCardContent>
             <p>
@@ -76,26 +114,6 @@ const ArtCyclePage: React.FC = () => {
             </p>
           </IonCardContent>
         </IonCard>
-
-        {loading ? (
-          <IonSpinner
-            color="secondary"
-            className="loading-spinner"
-            name="dots"
-          />
-        ) : (
-          <div className="ion-padding">
-            <h2>Latest 'ArtCycle' photos</h2>
-            {gallery.content && (
-              <div
-                className="gallery"
-                dangerouslySetInnerHTML={{
-                  __html: gallery.content.rendered,
-                }}
-              ></div>
-            )}
-          </div>
-        )}
       </IonContent>
     </IonPage>
   );
