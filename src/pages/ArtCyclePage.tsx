@@ -61,21 +61,6 @@ const ArtCyclePage: React.FC = () => {
             })}
           </IonList>
         )}
-        <IonCard color="light">
-          <IonCardContent>
-            <p>
-              Also check out the various{" "}
-              <a
-                href="https://forthvalleyartbeat.com/cycling-walking-events/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <strong>cycling &amp; walking events</strong>
-              </a>
-              .
-            </p>
-          </IonCardContent>
-        </IonCard>
 
         {loading ? (
           <IonSpinner
@@ -85,7 +70,7 @@ const ArtCyclePage: React.FC = () => {
           />
         ) : (
           <div className="ion-padding">
-            <h2>Latest 'ArtCycle' photos</h2>
+            <h2>View latest ArtCycle project photos</h2>
             {gallery.content && (
               <div
                 className="gallery"
