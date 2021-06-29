@@ -35,6 +35,21 @@ ion-avatar ion-chip {
   justify-content: center;
 }
 
+.gallery a {
+  pointer-events: none;
+}
+.gallery figure {
+  margin: 1px auto 0 auto;
+}
+.gallery figcaption {
+  margin: 10px 0 20px;
+}
+.gallery figure img {
+  display: block;
+  max-width: 640px;
+  width: 100%;
+}
+
 img {
   height: auto;
 }

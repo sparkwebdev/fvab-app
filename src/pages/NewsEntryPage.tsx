@@ -1,15 +1,9 @@
 import React, { useEffect, useState } from "react";
-import {
-  IonContent,
-  IonPage,
-  IonSpinner,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardContent,
-} from "@ionic/react";
+import { IonContent, IonPage, IonSpinner } from "@ionic/react";
 import { useParams } from "react-router";
 import PageHeader from "../components/PageHeader";
+import { HTTP } from "@ionic-native/http";
+import { isPlatform } from "@ionic/react";
 
 interface RouteParams {
   id: string;
@@ -21,16 +15,32 @@ const NewsEntryPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`https://forthvalleyartbeat.com/wp-json/wp/v2/posts?include=${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setNewsItem(data[0]);
-        setLoading(false);
-      })
-      .catch((e) => {
-        console.log("Error getting news item", e);
-        setLoading(false);
-      });
+    if (isPlatform("ios")) {
+      HTTP.get(
+        `https://forthvalleyartbeat.com/wp-json/wp/v2/posts?include=${id}`,
+        {},
+        {}
+      )
+        .then((data) => {
+          setNewsItem(JSON.parse(data.data)[0]);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log("Error getting news", error.error);
+          setLoading(false);
+        });
+    } else {
+      fetch(`https://forthvalleyartbeat.com/wp-json/wp/v2/posts?include=${id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setNewsItem(data[0]);
+          setLoading(false);
+        })
+        .catch((e) => {
+          console.log("Error getting news item", e);
+          setLoading(false);
+        });
+    }
   }, []);
 
   return (
