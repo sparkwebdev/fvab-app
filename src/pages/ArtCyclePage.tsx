@@ -19,7 +19,7 @@ const ArtCyclePage: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (isPlatform("ios")) {
+    if (isPlatform("ios") || isPlatform("android")) {
       HTTP.get(
         "https://forthvalleyartbeat.com/wp-json/wp/v2/pages/6256",
         {},

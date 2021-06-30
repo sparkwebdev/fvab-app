@@ -15,7 +15,7 @@ const NewsEntryPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (isPlatform("ios")) {
+    if (isPlatform("ios") || isPlatform("android")) {
       HTTP.get(
         `https://forthvalleyartbeat.com/wp-json/wp/v2/posts?include=${id}`,
         {},
