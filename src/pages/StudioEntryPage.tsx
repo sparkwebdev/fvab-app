@@ -60,11 +60,11 @@ const StudioEntryPage: React.FC = () => {
   };
 
   const getDirectionsHandler = () => {
-    // if (isPlatform("android")) {
-    //   window.open(`geo:0,0?q=${studio.lat}+${studio.lon}_system`);
-    // } else {
-    window.open(`maps://?q=${studio.add}`);
-    // }
+    if (isPlatform("android")) {
+      window.open(`geo:0,0?q=${studio.add}_system`);
+    } else {
+      window.open(`maps://?q=${studio.add}`);
+    }
   };
 
   const setFavouriteHandler = () => {
