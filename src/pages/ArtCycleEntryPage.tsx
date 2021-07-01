@@ -10,6 +10,7 @@ import {
 import { useParams } from "react-router";
 import PageHeader from "../components/PageHeader";
 import { artCycles } from "../data/art-cycles";
+import { isPlatform } from "@ionic/react";
 interface RouteParams {
   id: string;
 }
@@ -20,11 +21,11 @@ const ArtCycleEntryPage: React.FC = () => {
   const { id } = useParams<RouteParams>();
 
   const getDirectionsHandler = (location: string) => {
-    // if (isPlatform("android")) {
-    //   window.open(`geo:0,0?q=${studio.lat}+${studio.lon}_system`);
-    // } else {
-    window.open(`maps://?q=${location}`);
-    // }
+    if (isPlatform("android")) {
+      window.open(`geo:0,0?q=${location}_system`);
+    } else {
+      window.open(`maps://?q=${location}`);
+    }
   };
 
   useEffect(() => {
@@ -65,7 +66,6 @@ const ArtCycleEntryPage: React.FC = () => {
                 />
               </p>
             )}
-
             <div
               dangerouslySetInnerHTML={{
                 __html: artCycle.description,

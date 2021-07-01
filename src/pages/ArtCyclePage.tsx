@@ -19,7 +19,7 @@ const ArtCyclePage: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (isPlatform("ios")) {
+    if (isPlatform("ios") || isPlatform("android")) {
       HTTP.get(
         "https://forthvalleyartbeat.com/wp-json/wp/v2/pages/6256",
         {},
@@ -59,7 +59,7 @@ const ArtCyclePage: React.FC = () => {
               artists have been commissioned to create new site responsive works
               exploring outdoor local habitats and environments across the Forth
               Valley which encourage cycling across the region. Open from 3 July
-              to 31 Aug.
+              to 31 Aug. View details of each of the commissions from below:
             </p>
           </IonCardContent>
         </IonCard>
@@ -88,7 +88,7 @@ const ArtCyclePage: React.FC = () => {
           />
         ) : (
           <div className="ion-padding">
-            <h2>View latest ArtCycle project photos</h2>
+            <p>View latest ArtCycle project photos</p>
             {gallery.content && (
               <div
                 className="gallery"
