@@ -59,7 +59,7 @@ const ArtCyclePage: React.FC = () => {
               artists have been commissioned to create new site responsive works
               exploring outdoor local habitats and environments across the Forth
               Valley which encourage cycling across the region. Open from 3 July
-              to 31 Aug.
+              to 31 Aug. View details of each of the commissions from below:
             </p>
           </IonCardContent>
         </IonCard>

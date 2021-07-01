@@ -66,11 +66,6 @@ const ArtCycleEntryPage: React.FC = () => {
                 />
               </p>
             )}
-            <p>
-              <strong>
-                View details of each of the commissions from below:
-              </strong>
-            </p>
             <div
               dangerouslySetInnerHTML={{
                 __html: artCycle.description,
