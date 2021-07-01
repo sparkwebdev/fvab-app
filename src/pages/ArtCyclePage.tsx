@@ -88,7 +88,7 @@ const ArtCyclePage: React.FC = () => {
           />
         ) : (
           <div className="ion-padding">
-            <h2>View latest ArtCycle project photos</h2>
+            <p>View latest ArtCycle project photos</p>
             {gallery.content && (
               <div
                 className="gallery"
