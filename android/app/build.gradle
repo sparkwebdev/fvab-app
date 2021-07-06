@@ -6,8 +6,8 @@ android {
         applicationId "com.forthvalleyopenstudios2015.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 806
-        versionName "8.0.6"
+        versionCode 807
+        versionName "8.0.7"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
