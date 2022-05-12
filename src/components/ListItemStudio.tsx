@@ -2,9 +2,7 @@ import {
   IonAvatar,
   IonChip,
   IonImg,
-  IonItem,
-  IonText,
-  IonLabel,
+  IonItem, IonLabel, IonText
 } from "@ionic/react";
 
 interface ContainerProps {
@@ -16,6 +14,7 @@ interface ContainerProps {
 }
 
 const ListItemStudio: React.FC<ContainerProps> = (props) => {
+  const brand = parseInt(props.studioNumber) < 30 ? "primary" : "secondary";
   return (
     <IonItem
       routerLink={props.mini ? undefined : `/studio/${props.studioNumber}`}
@@ -29,7 +28,7 @@ const ListItemStudio: React.FC<ContainerProps> = (props) => {
           slot="start"
           className="ion-text-center ion-justify-content-center"
         >
-          <IonChip color="primary">
+          <IonChip color={brand}>
             <IonLabel>
               <strong>{props.studioNumber}</strong>
             </IonLabel>
@@ -50,7 +49,7 @@ const ListItemStudio: React.FC<ContainerProps> = (props) => {
         </>
       )}
       <IonLabel className={props.mini ? "ion-text-wrap" : ""}>
-        <IonText color="primary">
+        <IonText color={brand}>
           <strong>{props.name}</strong>
         </IonText>
         {props.dis && (

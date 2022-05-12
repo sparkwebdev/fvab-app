@@ -1,18 +1,15 @@
 import {
-  IonContent,
-  IonIcon,
-  IonItem,
-  IonList,
-  IonMenu,
-  IonText,
-  IonMenuToggle,
+    IonContent,
+    IonIcon,
+    IonItem,
+    IonList,
+    IonMenu, IonMenuToggle, IonText
 } from "@ionic/react";
-import React from "react";
 import {
-  newspaperOutline as newsIcon,
-  chatbubblesOutline as contactIcon,
-  informationCircleOutline as aboutIcon,
+    chatbubblesOutline as contactIcon,
+    informationCircleOutline as aboutIcon, newspaperOutline as newsIcon
 } from "ionicons/icons";
+import React from "react";
 
 const SideMenu: React.FC = () => {
   return (
@@ -20,7 +17,7 @@ const SideMenu: React.FC = () => {
       <IonText
         className="ion-padding"
         style={{
-          background: "#00b0ef",
+          background: "#00b1f0",
           color: "#fff",
           paddingTop: "75px",
         }}

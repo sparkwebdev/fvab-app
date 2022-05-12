@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
 import {
-  IonCard,
+  IonButton, IonCard,
   IonCardHeader,
   IonCardSubtitle,
   IonCardTitle,
@@ -9,30 +8,23 @@ import {
   IonContent,
   IonGrid,
   IonIcon,
-  IonLabel,
-  IonPage,
-  IonRow,
-  IonSlides,
-  IonSlide,
-  IonButton,
-  IonModal,
-  IonText,
+  IonLabel, IonModal, IonPage,
+  IonRow, IonSlide, IonSlides, IonText, isPlatform
 } from "@ionic/react";
-import { useParams } from "react-router";
 import {
-  location,
-  logoFacebook,
-  logoTwitter,
   heart,
-  heartOutline,
+  heartOutline, location,
+  logoFacebook,
+  logoTwitter
 } from "ionicons/icons";
-import PageHeader from "../components/PageHeader";
-import "./StudioEntryPage.css";
+import React, { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router";
 import MapWithMarkers from "../components/MapWithMarkers";
-import { isPlatform } from "@ionic/react";
-import { studios } from "../data/studios";
+import PageHeader from "../components/PageHeader";
 import Share from "../components/Share";
 import AppContext from "../data/app-context";
+import { studios } from "../data/studios";
+import "./StudioEntryPage.css";
 
 interface RouteParams {
   id: string;
@@ -96,7 +88,7 @@ const StudioEntryPage: React.FC = () => {
                     <IonCol size="9">
                       {studio.st && (
                         <IonChip
-                          color="primary"
+                          color={parseInt(studio.studioNumber) < 30 ? "primary" : "secondary"}
                           className="studio-number studio-number--large"
                         >
                           <IonLabel>
@@ -142,7 +134,7 @@ const StudioEntryPage: React.FC = () => {
                 </IonGrid>
                 {studio.name && (
                   <IonCardTitle>
-                    <IonText color="primary" style={{ fontSize: "1rem" }}>
+                    <IonText color={parseInt(studio.studioNumber) < 30 ? "primary" : "secondary"} style={{ fontSize: "1rem" }}>
                       <strong>{studio.name}</strong>
                     </IonText>
                   </IonCardTitle>

@@ -1,24 +1,16 @@
 import {
-  IonContent,
-  IonPage,
-  IonList,
   IonCard,
-  IonCardContent,
-  IonToolbar,
-  IonSegment,
-  IonSegmentButton,
-  IonLabel,
-  IonIcon,
-  IonChip,
+  IonCardContent, IonChip, IonContent, IonIcon, IonItemDivider, IonLabel, IonList, IonPage, IonSegment,
+  IonSegmentButton, IonToolbar
 } from "@ionic/react";
-import "./OpenStudiosPage.css";
 import { mapOutline as mapIcon } from "ionicons/icons";
-
-import { studios, studiosAdditional } from "../data/studios";
-import ListItemStudio from "../components/ListItemStudio";
-import PageHeader from "../components/PageHeader";
-import MapWithMarkers from "../components/MapWithMarkers";
 import { useEffect, useState } from "react";
+import ListItemStudio from "../components/ListItemStudio";
+import MapWithMarkers from "../components/MapWithMarkers";
+import PageHeader from "../components/PageHeader";
+import { studios, studiosAdditional } from "../data/studios";
+import "./OpenStudiosPage.css";
+
 
 const OpenStudiosPage: React.FC = () => {
   const [view, setView] = useState<string>("studios");
@@ -52,11 +44,11 @@ const OpenStudiosPage: React.FC = () => {
           >
             <IonCardContent>
               <p>
-                Welcome to the 2021 Artist Open Studios with a newly styled
+                Welcome to the 2022 Artist Open Studios with a newly styled
                 event this year focussed around sustainable travel and the
                 outdoors. Visit the 46 artist studios across the Forth Valley
                 participating in this year’s event, opening up their studios and
-                gardens to the public, during 10th and 11th July, all open from
+                gardens to the public, during 11th and 19th July, all open from
                 10am to 5pm.
               </p>
               {/* <IonButton
@@ -100,19 +92,43 @@ const OpenStudiosPage: React.FC = () => {
             <>
               {view === "studios" && (
                 <IonList>
-                  {studios.map((studio) => {
-                    if (studio.st) {
-                      return (
-                        <ListItemStudio
-                          studioNumber={studio.st}
-                          image={studio.img}
-                          name={studio.name}
-                          dis={studio.dis}
-                          key={studio.st}
-                        />
-                      );
-                    }
-                  })}
+                <IonItemDivider color="primary" className="ion-padding-top ion-padding-bottom" sticky={true} mode="ios">
+                  <IonLabel>
+                    Route 1
+                  </IonLabel>
+                </IonItemDivider>
+
+                {studios.map((studio) => {
+                  if (studio.st && parseInt(studio.st) < 30) {
+                    return (
+                      <ListItemStudio
+                        studioNumber={studio.st}
+                        image={studio.img}
+                        name={studio.name}
+                        dis={studio.dis}
+                        key={studio.st}
+                      />
+                    );
+                  }
+                })}
+                <IonItemDivider color="secondary" className="ion-padding-top ion-padding-bottom" sticky={true} mode="ios">
+                  <IonLabel>
+                    Route 2
+                  </IonLabel>
+                </IonItemDivider>
+                {studios.map((studio) => {
+                  if (studio.st && parseInt(studio.st) >= 30) {
+                    return (
+                      <ListItemStudio
+                        studioNumber={studio.st}
+                        image={studio.img}
+                        name={studio.name}
+                        dis={studio.dis}
+                        key={studio.st}
+                      />
+                    );
+                  }
+                })}
                 </IonList>
               )}
               {view === "a-to-z" && (

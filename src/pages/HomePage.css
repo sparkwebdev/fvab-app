@@ -14,7 +14,7 @@
 }
 .home-content__block--header {
   flex: 3 0 auto;
-  background: url("/src/theme/img/bg-stripe-01.png") right 5vw bottom 1vh
+  background: url("/src/theme/img/bg-stripe-01b.png") right 5vw bottom 1vh
     no-repeat;
   background-size: 200vh auto;
 }
@@ -32,7 +32,7 @@
 }
 .home-content__block--footer {
   flex: 4 0 auto;
-  background: url("/src/theme/img/bg-stripe-02.png") right 5vw top 0 no-repeat;
+  background: url("/src/theme/img/bg-stripe-02b.png") right 5vw top 0 no-repeat;
   background-size: 200vh auto;
 }
 .home-content__block-content {
