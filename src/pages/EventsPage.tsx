@@ -27,7 +27,7 @@ const EventsPage: React.FC = () => {
       fetch("https://forthvalleyartbeat.com/wp-json/wp/v2/pages/6816")
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          setData(JSON.parse(data.data));
           setLoading(false);
         })
         .catch((e) => {
