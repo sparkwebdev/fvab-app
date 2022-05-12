@@ -1,4 +1,3 @@
-import { Redirect, Route } from "react-router-dom";
 import {
   IonApp,
   IonIcon,
@@ -6,46 +5,47 @@ import {
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
-  IonTabs,
+  IonTabs
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { home, bicycle, heart, people } from "ionicons/icons";
-import HomePage from "./pages/HomePage";
-import ArtCyclePage from "./pages/ArtCyclePage";
-import MyMapPage from "./pages/MyMapPage";
-import OpenStudiosPage from "./pages/OpenStudiosPage";
-import NewsPage from "./pages/NewsPage";
-import ContactPage from "./pages/ContactPage";
-import AboutPage from "./pages/AboutPage";
-import EventsPage from "./pages/EventsPage";
-import StudioEntryPage from "./pages/StudioEntryPage";
-import ArtCycleEntryPage from "./pages/ArtCycleEntryPage";
-import AppContextProvider from "./data/AppContextProvider";
-import NewsEntryPage from "./pages/NewsEntryPage";
-
-import SideMenu from "./components/SideMenu";
-
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
-
+import "@ionic/react/css/display.css";
+import "@ionic/react/css/flex-utils.css";
+import "@ionic/react/css/float-elements.css";
 /* Basic CSS for apps built with Ionic */
 import "@ionic/react/css/normalize.css";
-import "@ionic/react/css/structure.css";
-import "@ionic/react/css/typography.css";
-
 /* Optional CSS utils that can be commented out */
 import "@ionic/react/css/padding.css";
-import "@ionic/react/css/float-elements.css";
+import "@ionic/react/css/structure.css";
 import "@ionic/react/css/text-alignment.css";
 import "@ionic/react/css/text-transformation.css";
-import "@ionic/react/css/flex-utils.css";
-import "@ionic/react/css/display.css";
-
-/* Theme variables */
-import "./theme/variables.css";
+import "@ionic/react/css/typography.css";
+import { heart, home, people } from "ionicons/icons";
+import { Redirect, Route } from "react-router-dom";
+import FavouritesCount from "./components/FavouritesCount";
+import SideMenu from "./components/SideMenu";
+import AppContextProvider from "./data/AppContextProvider";
+import AboutPage from "./pages/AboutPage";
+import ArtCycleEntryPage from "./pages/ArtCycleEntryPage";
+import ArtCyclePage from "./pages/ArtCyclePage";
+import ContactPage from "./pages/ContactPage";
+import EventsPage from "./pages/EventsPage";
+import HomePage from "./pages/HomePage";
+import MyMapPage from "./pages/MyMapPage";
+import NewsEntryPage from "./pages/NewsEntryPage";
+import NewsPage from "./pages/NewsPage";
+import OpenStudiosPage from "./pages/OpenStudiosPage";
+import StudioEntryPage from "./pages/StudioEntryPage";
 import "./theme/custom-variables.css";
 import "./theme/theme.css";
-import FavouritesCount from "./components/FavouritesCount";
+/* Theme variables */
+import "./theme/variables.css";
+
+
+
+
+
 
 const App: React.FC = () => {
   return (
@@ -97,13 +97,9 @@ const App: React.FC = () => {
                 <IonIcon icon={home} />
                 <IonLabel>Home</IonLabel>
               </IonTabButton>
-              <IonTabButton tab="artcycle" href="/art-cycle">
-                <IonIcon icon={bicycle} />
-                <IonLabel>ArtCycle</IonLabel>
-              </IonTabButton>
               <IonTabButton tab="open-studios" href="/open-studios">
                 <IonIcon icon={people} />
-                <IonLabel>Open Studios</IonLabel>
+                <IonLabel>Browse Studios</IonLabel>
               </IonTabButton>
               <IonTabButton tab="mymap" href="/my-map">
                 <IonIcon icon={heart} />

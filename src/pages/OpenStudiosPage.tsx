@@ -44,12 +44,7 @@ const OpenStudiosPage: React.FC = () => {
           >
             <IonCardContent>
               <p>
-                Welcome to the 2022 Artist Open Studios with a newly styled
-                event this year focussed around sustainable travel and the
-                outdoors. Visit the 46 artist studios across the Forth Valley
-                participating in this year’s event, opening up their studios and
-                gardens to the public, during 11th and 19th July, all open from
-                10am to 5pm.
+              We’re delighted to announce this year we return to a 9-day event (11 to 19 June) with many studios open by appointment during the week. Details of all artists participating in this year's event, as well as hosted artist-run workshops, is now available to view at this website. An exciting programme of participatory arts and cycling as part of the Art Beat is also announced, including an event at Callendar Park Falkirk on Sat 4th June, open to all.
               </p>
               {/* <IonButton
               className="ion-margin-top"
