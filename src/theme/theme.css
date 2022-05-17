@@ -123,3 +123,10 @@ img {
 	width: 1px !important;
 	white-space: nowrap !important;            /* 3 */
 }
+
+.loading-spinner::after {
+  content: "Loading";
+  display: block;
+  font-size: 0.475em;
+  margin-top: 3em;
+}

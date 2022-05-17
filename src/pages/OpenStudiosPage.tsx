@@ -1,6 +1,6 @@
 import {
   IonCard,
-  IonCardContent, IonChip, IonContent, IonIcon, IonItemDivider, IonLabel, IonList, IonPage, IonSegment,
+  IonCardContent, IonChip, IonContent, IonIcon, IonItemDivider, IonLabel, IonList, IonPage, IonRouterLink, IonSegment,
   IonSegmentButton, IonToolbar
 } from "@ionic/react";
 import { mapOutline as mapIcon } from "ionicons/icons";
@@ -44,16 +44,8 @@ const OpenStudiosPage: React.FC = () => {
           >
             <IonCardContent>
               <p>
-              We’re delighted to announce this year we return to a 9-day event (11 to 19 June) with many studios open by appointment during the week. Details of all artists participating in this year's event, as well as hosted artist-run workshops, is now available to view at this website. An exciting programme of participatory arts and cycling as part of the Art Beat is also announced, including an event at Callendar Park Falkirk on Sat 4th June, open to all.
+              We’re delighted to announce this year we return to a 9-day event (11 to 19 June) with many studios open by appointment during the week. Please check each entry for individual opening times. Use the Add to Map facility on the App to plan your visit. We hope you can join in too with some of the <IonRouterLink href="/events"><strong>events, workshops, and talks</strong></IonRouterLink> that the artists are running, as well as a number of led <IonRouterLink href="/eco-arts"><strong>cycle rides</strong></IonRouterLink>. An exciting programme of participatory arts is also planned with an event at Callendar Park Falkirk on Sat 4th June, open to all, with many family friendly activities. We hope you can join us!
               </p>
-              {/* <IonButton
-              className="ion-margin-top"
-              size="small"
-              color="secondary"
-              fill="outline"
-            >
-              Dismiss
-            </IonButton> */}
             </IonCardContent>
           </IonCard>
           <IonToolbar className="ion-margin-top studios-container__tabs">

@@ -17,3 +17,20 @@
 .studio-images__image {
   max-height: 32vh !important;
 }
+
+.opening-times {
+  width: 100%;
+}
+.opening-times th {
+  background: var(--ion-color-primary);
+  color: #fff;
+}
+.opening-times th,
+.opening-times td {
+  padding: 5px 8px;
+  text-align: center;
+  border: solid 1px #fff;
+}
+.opening-times td {
+  background: #ccc;
+}

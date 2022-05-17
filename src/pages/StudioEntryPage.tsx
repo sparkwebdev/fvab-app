@@ -12,10 +12,18 @@ import {
   IonRow, IonSlide, IonSlides, IonText, isPlatform
 } from "@ionic/react";
 import {
+  calendar,
+  calendarOutline,
+  chatbubbleOutline,
+  chatbubblesOutline,
   heart,
   heartOutline, location,
   logoFacebook,
-  logoTwitter
+  logoTwitter,
+  navigateCircleOutline,
+  shareSocialOutline,
+  time,
+  timeOutline
 } from "ionicons/icons";
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
@@ -217,15 +225,34 @@ const StudioEntryPage: React.FC = () => {
             <div className="ion-padding">
               {studio?.desc && <p>{studio?.desc}</p>}
               {studio?.desc2 && <p>{studio?.desc2}</p>}
-              {studio?.desc2 && (
-                <>
-                  <h3>Directions</h3>
+              {studio?.time && (
+                <><hr />
+                  <h3><IonIcon icon={timeOutline} /> Opening Times</h3>
+                  <table className="opening-times">
+                    <tr><th>Sat</th><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thur</th><th>Fri</th><th>Sat</th><th>Sun</th></tr>
+                    <tr>
+                    {[...studio?.time].map(day => {
+                      return <td>{day}</td>;
+                    })}
+                    </tr>
+                  </table>
+                </>
+              )}
+              {studio?.desc3 && (
+                <><hr />
+                  <h3><IonIcon icon={calendarOutline} /> Additional Events</h3>
+                  <p>{studio?.desc3}</p>
+                </>
+              )}
+              {studio?.dir && (
+                <><hr />
+                  <h3><IonIcon icon={navigateCircleOutline} /> Directions</h3>
                   <p>{studio?.dir}</p>
                 </>
               )}
               {(studio?.mb || studio?.em || studio?.wb) && (
-                <>
-                  <h3>Contact Details</h3>
+                <><hr />
+                  <h3><IonIcon icon={chatbubblesOutline} /> Contact Details</h3>
                   <IonGrid className="ion-no-padding">
                     {studio?.mb && (
                       <IonRow>
@@ -280,7 +307,7 @@ const StudioEntryPage: React.FC = () => {
               )}
               {(studio?.fb || studio?.tw) && (
                 <>
-                  <h3>Social Links</h3>
+                  <h3><IonIcon icon={shareSocialOutline} /> Social Links</h3>
                   <IonGrid className="ion-no-padding">
                     <IonRow className="ion-justify-content-start">
                       {studio?.fb && (

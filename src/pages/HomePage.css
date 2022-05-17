@@ -20,7 +20,12 @@
 }
 .home-content__logo {
   max-height: 12vh;
-  max-width: 70%;
+  width: 85%;
+  max-width: 540px;
+}
+.home-content__logo--open-studios {
+  width: 82%;
+  max-width: 480px;
 }
 .home-content__block--main {
   flex: 12 1 auto;
@@ -38,7 +43,7 @@
 .home-content__block-content {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   position: absolute;
   top: 0;
@@ -53,4 +58,8 @@
 .home-content__fvab {
   max-height: 9vh;
   max-width: 70%;
+}
+
+.icon-x-large {
+  font-size: 1.8em;
 }

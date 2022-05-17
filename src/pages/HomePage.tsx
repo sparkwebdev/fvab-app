@@ -21,14 +21,17 @@ const HomePage: React.FC = () => {
                     src="assets/img/logo-fvab-2022.png"
                     alt=""
                   />
-                  <IonText color="dark" className="ion-margin-top">
-                    <h2><strong>11-19&nbsp;June&nbsp;2022</strong></h2>
-                  </IonText>
-
-                  <IonText color="dark" className="ion-padding">
-                    <h3>Artists &amp; organisations across Central Scotland host a variety of events in open studios, installations, popup shows, and exhibitions in galleries and community spaces.</h3>
-                  </IonText>
-                  
+                  <div>
+                    <h2 className="sr-only">Open Studios Exhibitions and Events</h2>
+                    <img
+                      className="home-content__logo home-content__logo--open-studios"
+                      src="assets/img/open-studios-logo.png"
+                      alt=""
+                    />
+                    <IonText color="dark">
+                      <h3 className="ion-no-margin"><strong>11-19&nbsp;June&nbsp;2022</strong></h3>
+                    </IonText>
+                  </div>
                 </div>
               </IonRouterLink>
             </div>
@@ -37,9 +40,9 @@ const HomePage: React.FC = () => {
             <IonRouterLink href="/events">
               <div className="home-content__block-content">
                 <strong>
-                  <IonText color="secondary">
-                    <h4><IonIcon icon={bicycle} size="large" /><br /><strong>Eco-arts &amp;<br />
-                  Cycling Events...</strong></h4>
+                  <IonText color="primary">
+                    <h2><IonIcon icon={bicycle} className="icon-x-large" color="secondary" /><br /><strong>Eco-arts &amp;<br />
+                  Cycling Events...</strong></h2>
                   </IonText>
                 </strong>
               </div>
