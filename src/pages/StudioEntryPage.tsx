@@ -77,7 +77,7 @@ const StudioEntryPage: React.FC = () => {
 
   useEffect(() => {
     setIsFavourite(appCtx.favourites.includes(id));
-  }, [appCtx.favourites]);
+  }, [id, appCtx.favourites]);
 
   return (
     <IonPage>
@@ -340,7 +340,7 @@ const StudioEntryPage: React.FC = () => {
                     <li>{studio?.fac[4] == "y" ? <img src="assets/img/artist-facilities-museum-2.gif" alt="Gallery/commercial" /> : null}</li>
                     <li>{studio?.fac[5] == "y" ? <img src="assets/img/artist-facilities-outdoor.png" alt="Outdoor artwork" /> : null}</li>
                     <li>{studio?.fac[6] == "y" ? <img src="assets/img/artist-facilities-additional-events.jpg" alt="Additional Event" /> : null}</li>
-                    <li>{studio?.fac[7] == "y" ? <img src="assets/img/artist-facilities-clock.png" alt="Appointment Only" /> : null}</li>
+                    {/* <li>{studio?.fac[7] == "y" ? <img src="assets/img/artist-facilities-clock.png" alt="Appointment Only" /> : null}</li> */}
                   </ul>
                   <img className="studio__facilities-key" src="assets/img/Symbols2022.png" alt="Key to symbols" />
                 </>
