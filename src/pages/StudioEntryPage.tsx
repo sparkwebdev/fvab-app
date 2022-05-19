@@ -17,7 +17,7 @@ import {
   chatbubbleOutline,
   chatbubblesOutline,
   heart,
-  heartOutline, location,
+  heartOutline, helpCircleOutline, location,
   logoFacebook,
   logoTwitter,
   navigateCircleOutline,
@@ -250,7 +250,7 @@ const StudioEntryPage: React.FC = () => {
                   <p>{studio?.dir}</p>
                 </>
               )}
-              {(studio?.mb || studio?.em || studio?.wb) && (
+              {(studio?.mb || studio?.em || studio?.wb || studio?.fb || studio?.tw) && (
                 <><hr />
                   <h3><IonIcon icon={chatbubblesOutline} /> Contact Details</h3>
                   <IonGrid className="ion-no-padding">
@@ -302,38 +302,51 @@ const StudioEntryPage: React.FC = () => {
                         </IonCol>
                       </IonRow>
                     )}
+
+                    {(studio?.fb || studio?.tw) && (
+                      <IonRow>
+                        <IonCol size="2">
+                          <div className="ion-margin-bottom">Social Links:</div>
+                        </IonCol>
+                        <IonCol>
+                          {studio?.fb && (
+                              <a href={studio?.fb} target="_blank" rel="noreferrer">
+                                <IonIcon
+                                  icon={logoFacebook}
+                                  color="secondary"
+                                  size="large"
+                                />
+                              </a>
+                          )}
+                          {studio?.tw && (
+                              <a href={studio?.tw} target="_blank" rel="noreferrer">
+                                <IonIcon
+                                  icon={logoTwitter}
+                                  color="secondary"
+                                  size="large"
+                                />
+                              </a>
+                          )}
+                        </IonCol>
+                      </IonRow>
+                    )}
                   </IonGrid>
                 </>
               )}
-              {(studio?.fb || studio?.tw) && (
-                <>
-                  <h3><IonIcon icon={shareSocialOutline} /> Social Links</h3>
-                  <IonGrid className="ion-no-padding">
-                    <IonRow className="ion-justify-content-start">
-                      {studio?.fb && (
-                        <IonCol size="2">
-                          <a href={studio?.fb} target="_blank" rel="noreferrer">
-                            <IonIcon
-                              icon={logoFacebook}
-                              color="secondary"
-                              size="large"
-                            />
-                          </a>
-                        </IonCol>
-                      )}
-                      {studio?.tw && (
-                        <IonCol size="2">
-                          <a href={studio?.tw} target="_blank" rel="noreferrer">
-                            <IonIcon
-                              icon={logoTwitter}
-                              color="secondary"
-                              size="large"
-                            />
-                          </a>
-                        </IonCol>
-                      )}
-                    </IonRow>
-                  </IonGrid>
+              {studio?.fac && studio?.fac != "nnnnnnnn" && (
+                <><hr />
+                  <h3><IonIcon icon={helpCircleOutline} /> Facilities / Info <small>(see key below)</small></h3>
+                  <ul className="studio__facilities">
+                    <li>{studio?.fac[0] == "y" ? <img src="assets/img/artist-facilities-parking-2.gif" alt="Off Street Parking" /> : null}</li>
+                    <li>{studio?.fac[1] == "y" ? <img src="assets/img/artist-facilities-access-2.gif" alt="Disabled Access" /> : null}</li>
+                    <li>{studio?.fac[2] == "y" ? <img src="assets/img/artist-facilities-allyear-2.gif" alt="Working Studio" /> : null}</li>
+                    <li>{studio?.fac[3] == "y" ? <img src="assets/img/artist-facilities-popup-2.gif" alt="Popup Exhibition" /> : null}</li>
+                    <li>{studio?.fac[4] == "y" ? <img src="assets/img/artist-facilities-museum-2.gif" alt="Gallery/commercial" /> : null}</li>
+                    <li>{studio?.fac[5] == "y" ? <img src="assets/img/artist-facilities-outdoor.png" alt="Outdoor artwork" /> : null}</li>
+                    <li>{studio?.fac[6] == "y" ? <img src="assets/img/artist-facilities-additional-events.jpg" alt="Additional Event" /> : null}</li>
+                    <li>{studio?.fac[7] == "y" ? <img src="assets/img/artist-facilities-clock.png" alt="Appointment Only" /> : null}</li>
+                  </ul>
+                  <img className="studio__facilities-key" src="assets/img/Symbols2022.png" alt="Key to symbols" />
                 </>
               )}
             </div>

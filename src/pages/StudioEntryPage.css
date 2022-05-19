@@ -34,3 +34,18 @@
 .opening-times td {
   background: #ccc;
 }
+
+.studio__facilities {
+  list-style: none;
+  padding: 0;
+  display: flex;
+}
+.studio__facilities img {
+  max-width: 56px;
+}
+.studio__facilities-key {
+  max-width: 500px;
+  border: solid 1px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
