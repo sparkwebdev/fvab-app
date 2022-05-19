@@ -12,17 +12,13 @@ import {
   IonRow, IonSlide, IonSlides, IonText, isPlatform
 } from "@ionic/react";
 import {
-  calendar,
   calendarOutline,
-  chatbubbleOutline,
   chatbubblesOutline,
   heart,
   heartOutline, helpCircleOutline, location,
   logoFacebook,
   logoTwitter,
   navigateCircleOutline,
-  shareSocialOutline,
-  time,
   timeOutline
 } from "ionicons/icons";
 import React, { useContext, useEffect, useState } from "react";
@@ -229,12 +225,12 @@ const StudioEntryPage: React.FC = () => {
                 <><hr />
                   <h3><IonIcon icon={timeOutline} /> Opening Times</h3>
                   <table className="opening-times">
-                    <tr><th>Sat</th><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thur</th><th>Fri</th><th>Sat</th><th>Sun</th></tr>
-                    <tr>
-                    {[...studio?.time].map(day => {
-                      return <td>{day}</td>;
+                    <thead><tr><th>Sat</th><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thur</th><th>Fri</th><th>Sat</th><th>Sun</th></tr></thead>
+                    <tbody><tr>
+                    {[...studio?.time].map((day: string, key: any) => {
+                      return <td key={key}>{day}</td>;
                     })}
-                    </tr>
+                    </tr></tbody>
                   </table>
                 </>
               )}

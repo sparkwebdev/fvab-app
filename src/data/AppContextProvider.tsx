@@ -8,7 +8,7 @@ const AppContextProvider: React.FC = (props) => {
   const [favourites, setFavourites] = useState<string[]>([]);
 
   const getFavourites = async () => {
-    const favouritesData = await Storage.get({ key: "favourites" })
+    const favouritesData = await Storage.get({ key: "favourites22" })
       .then((data) => {
         return data.value !== "undefined" && data.value
           ? JSON.parse(data.value)
@@ -36,7 +36,7 @@ const AppContextProvider: React.FC = (props) => {
   useEffect(() => {
     if (favourites) {
       Storage.set({
-        key: "favourites",
+        key: "favourites22",
         value: JSON.stringify(favourites),
       });
     }
@@ -44,7 +44,7 @@ const AppContextProvider: React.FC = (props) => {
 
   const updateFavourites = (studioId: string, add: boolean) => {
     setFavourites((currentFavourites) => {
-      if (add) {
+      if (add && !currentFavourites.includes(studioId)) {
         return [...currentFavourites, studioId];
       } else {
         return currentFavourites.filter((id) => studioId !== id);

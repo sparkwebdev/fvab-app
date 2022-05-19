@@ -1,0 +1,9 @@
+.studio-number {
+  position: relative;
+}
+
+.studio-number__favourited {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
