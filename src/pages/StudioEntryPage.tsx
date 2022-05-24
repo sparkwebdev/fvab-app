@@ -228,7 +228,7 @@ const StudioEntryPage: React.FC = () => {
                     <thead><tr><th>Sat</th><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thur</th><th>Fri</th><th>Sat</th><th>Sun</th></tr></thead>
                     <tbody><tr>
                     {[...studio?.time].map((day: string, key: any) => {
-                      return <td key={key}>{day ? day : null}{!day && studio?.fac[7] == "y" ? <img className="icon-clock" src="assets/img/artist-facilities-clock.png" alt="Appointment Only" /> : null }</td>;
+                      return <td key={key}>{day ? day : null}{!day && studio?.fac[7] == "y" && ![0, 1, 7,8].includes(key) ? <img className="icon-clock" src="assets/img/artist-facilities-clock.png" alt="Appointment Only" /> : null }</td>;
                     })}
                     </tr></tbody>
                   </table>
