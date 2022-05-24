@@ -34,6 +34,11 @@
 .opening-times td {
   background: #ccc;
 }
+.icon-clock {
+  max-width: 32px;
+  mix-blend-mode: darken;
+
+}
 
 .studio__facilities {
   list-style: none;
