@@ -29,7 +29,7 @@ const ListItemStudio: React.FC<ContainerProps> = (props) => {
 
   return (
     <IonItem
-      routerLink={props.mini ? undefined : `/studio/${props.studioNumber}`}
+      routerLink={`/studio/${props.studioNumber}`}
       key={props.studioNumber}
       lines={props.mini ? "none" : "inset"}
       className={props.mini ? "ion-align-items-start" : ""}

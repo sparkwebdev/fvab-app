@@ -20,6 +20,7 @@
 
 .opening-times {
   width: 100%;
+  font-size: 0.8rem;
 }
 .opening-times th {
   background: var(--ion-color-primary);
@@ -27,13 +28,20 @@
 }
 .opening-times th,
 .opening-times td {
-  padding: 5px 8px;
+  padding: 5px 3px;
   text-align: center;
   border: solid 1px #fff;
 }
 .opening-times td {
   background: #ccc;
 }
+
+@media screen and (min-width: 480px) {
+  .opening-times {
+    font-size: 1rem;
+  }
+}
+
 .icon-clock {
   max-width: 32px;
   mix-blend-mode: darken;
@@ -49,7 +57,8 @@
   max-width: 56px;
 }
 .studio__facilities-key {
-  max-width: 500px;
+  width: 500px;
+  max-width: 100%;
   border: solid 1px;
   padding: 5px 10px;
   border-radius: 5px;

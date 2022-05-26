@@ -61,5 +61,10 @@
 }
 
 .icon-x-large {
-  font-size: 1.8em;
+  font-size: 1.5em;
+}
+@media screen and (min-width: 360px) {
+  .icon-x-large {
+    font-size: 1.8em;
+  }
 }
