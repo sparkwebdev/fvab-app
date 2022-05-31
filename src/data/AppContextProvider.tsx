@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
 
-import { Plugins } from "@capacitor/core";
 import AppContext from "./app-context";
-const { Storage } = Plugins;
+import { Storage } from '@capacitor/storage';
 
 const AppContextProvider: React.FC = (props) => {
   const [favourites, setFavourites] = useState<string[]>([]);
 
   const getFavourites = async () => {
     const favouritesData = await Storage.get({ key: "favourites22" })
-      .then((data) => {
+      .then((data: any) => {
         return data.value !== "undefined" && data.value
           ? JSON.parse(data.value)
           : null;
       })
-      .catch((e) => {
+      .catch((e: any) => {
         console.log("No favourites data", e);
         return null;
       });
