@@ -1,11 +1,14 @@
 import {
   IonAvatar,
   IonChip,
+  IonIcon,
   IonImg,
-  IonItem,
-  IonText,
-  IonLabel,
+  IonItem, IonLabel, IonText
 } from "@ionic/react";
+import { heart } from "ionicons/icons";
+import { useContext, useEffect, useState } from "react";
+import AppContext from "../data/app-context";
+import "./ListItemStudio.css";
 
 interface ContainerProps {
   studioNumber: string;
@@ -16,9 +19,17 @@ interface ContainerProps {
 }
 
 const ListItemStudio: React.FC<ContainerProps> = (props) => {
+  const appCtx = useContext(AppContext);
+  const brand = parseInt(props.studioNumber) < 30 ? "primary" : "secondary";
+  const [isFavourite, setIsFavourite] = useState<boolean | undefined>();
+
+  useEffect(() => {
+    setIsFavourite(appCtx.favourites.includes(props.studioNumber));
+  }, [appCtx.favourites]);
+
   return (
     <IonItem
-      routerLink={props.mini ? undefined : `/studio/${props.studioNumber}`}
+      routerLink={`/studio/${props.studioNumber}`}
       key={props.studioNumber}
       lines={props.mini ? "none" : "inset"}
       className={props.mini ? "ion-align-items-start" : ""}
@@ -27,13 +38,14 @@ const ListItemStudio: React.FC<ContainerProps> = (props) => {
       {props.studioNumber && !props.mini && (
         <IonAvatar
           slot="start"
-          className="ion-text-center ion-justify-content-center"
+          className="studio-number ion-text-center ion-justify-content-center"
         >
-          <IonChip color="primary">
+          <IonChip color={brand}>
             <IonLabel>
               <strong>{props.studioNumber}</strong>
             </IonLabel>
           </IonChip>
+          {isFavourite && (<IonIcon icon={heart} color="danger" className="studio-number__favourited" />)}
         </IonAvatar>
       )}
       {props.image && !props.mini ? (
@@ -50,7 +62,7 @@ const ListItemStudio: React.FC<ContainerProps> = (props) => {
         </>
       )}
       <IonLabel className={props.mini ? "ion-text-wrap" : ""}>
-        <IonText color="primary">
+        <IonText color={brand}>
           <strong>{props.name}</strong>
         </IonText>
         {props.dis && (

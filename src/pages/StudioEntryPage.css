@@ -17,3 +17,49 @@
 .studio-images__image {
   max-height: 32vh !important;
 }
+
+.opening-times {
+  width: 100%;
+  font-size: 0.8rem;
+}
+.opening-times th {
+  background: var(--ion-color-primary);
+  color: #fff;
+}
+.opening-times th,
+.opening-times td {
+  padding: 5px 3px;
+  text-align: center;
+  border: solid 1px #fff;
+}
+.opening-times td {
+  background: #ccc;
+}
+
+@media screen and (min-width: 480px) {
+  .opening-times {
+    font-size: 1rem;
+  }
+}
+
+.icon-clock {
+  max-width: 32px;
+  mix-blend-mode: darken;
+
+}
+
+.studio__facilities {
+  list-style: none;
+  padding: 0;
+  display: flex;
+}
+.studio__facilities img {
+  max-width: 56px;
+}
+.studio__facilities-key {
+  width: 500px;
+  max-width: 100%;
+  border: solid 1px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}

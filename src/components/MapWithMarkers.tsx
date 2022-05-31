@@ -1,11 +1,8 @@
-import React, { useCallback, useState, useRef, useEffect } from "react";
-import { IonLoading, IonButton } from "@ionic/react";
+import { IonButton, IonLoading } from "@ionic/react";
 import {
-  GoogleMap,
-  useLoadScript,
-  Marker,
-  InfoWindow,
+  GoogleMap, InfoWindow, Marker, useLoadScript
 } from "@react-google-maps/api";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import mapStyles from "../theme/mapStyles";
 import ListItemStudio from "./ListItemStudio";
 
@@ -114,7 +111,7 @@ const MapWithMarkers: React.FC<{
               }}
               label={studio.st}
               icon={{
-                url: "./assets/icon/map_marker.svg",
+                url: `./assets/icon/map_marker_route_${parseInt(studio.st) < 30 ? "1" : "2"}.svg`,
                 scaledSize: new window.google.maps.Size(40, 40),
                 origin: new window.google.maps.Point(0, 0),
                 // anchor: new window.google.maps.Point(15, 30),

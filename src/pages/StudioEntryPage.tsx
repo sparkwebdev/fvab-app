@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
 import {
-  IonCard,
+  IonButton, IonCard,
   IonCardHeader,
   IonCardSubtitle,
   IonCardTitle,
@@ -9,30 +8,27 @@ import {
   IonContent,
   IonGrid,
   IonIcon,
-  IonLabel,
-  IonPage,
-  IonRow,
-  IonSlides,
-  IonSlide,
-  IonButton,
-  IonModal,
-  IonText,
+  IonLabel, IonModal, IonPage,
+  IonRow, IonSlide, IonSlides, IonText, isPlatform
 } from "@ionic/react";
-import { useParams } from "react-router";
 import {
-  location,
+  calendarOutline,
+  chatbubblesOutline,
+  heart,
+  heartOutline, helpCircleOutline, location,
   logoFacebook,
   logoTwitter,
-  heart,
-  heartOutline,
+  navigateCircleOutline,
+  timeOutline
 } from "ionicons/icons";
-import PageHeader from "../components/PageHeader";
-import "./StudioEntryPage.css";
+import React, { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router";
 import MapWithMarkers from "../components/MapWithMarkers";
-import { isPlatform } from "@ionic/react";
-import { studios } from "../data/studios";
+import PageHeader from "../components/PageHeader";
 import Share from "../components/Share";
 import AppContext from "../data/app-context";
+import { studios } from "../data/studios";
+import "./StudioEntryPage.css";
 
 interface RouteParams {
   id: string;
@@ -81,7 +77,7 @@ const StudioEntryPage: React.FC = () => {
 
   useEffect(() => {
     setIsFavourite(appCtx.favourites.includes(id));
-  }, [appCtx.favourites]);
+  }, [id, appCtx.favourites]);
 
   return (
     <IonPage>
@@ -96,7 +92,7 @@ const StudioEntryPage: React.FC = () => {
                     <IonCol size="9">
                       {studio.st && (
                         <IonChip
-                          color="primary"
+                          color={parseInt(studio.studioNumber) < 30 ? "primary" : "secondary"}
                           className="studio-number studio-number--large"
                         >
                           <IonLabel>
@@ -142,7 +138,7 @@ const StudioEntryPage: React.FC = () => {
                 </IonGrid>
                 {studio.name && (
                   <IonCardTitle>
-                    <IonText color="primary" style={{ fontSize: "1rem" }}>
+                    <IonText color={parseInt(studio.studioNumber) < 30 ? "primary" : "secondary"} style={{ fontSize: "1rem" }}>
                       <strong>{studio.name}</strong>
                     </IonText>
                   </IonCardTitle>
@@ -225,15 +221,34 @@ const StudioEntryPage: React.FC = () => {
             <div className="ion-padding">
               {studio?.desc && <p>{studio?.desc}</p>}
               {studio?.desc2 && <p>{studio?.desc2}</p>}
-              {studio?.desc2 && (
-                <>
-                  <h3>Directions</h3>
+              {studio?.time && (
+                <><hr />
+                  <h3><IonIcon icon={timeOutline} /> Opening Times</h3>
+                  <table className="opening-times">
+                    <thead><tr><th>Sat</th><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thur</th><th>Fri</th><th>Sat</th><th>Sun</th></tr></thead>
+                    <tbody><tr>
+                    {[...studio?.time].map((day: string, key: any) => {
+                      return <td key={key}>{day ? day : "-"}</td>;
+                    })}
+                    </tr></tbody>
+                  </table>
+                </>
+              )}
+              {studio?.desc3 && (
+                <><hr />
+                  <h3><IonIcon icon={calendarOutline} /> Additional Events</h3>
+                  <p>{studio?.desc3}</p>
+                </>
+              )}
+              {studio?.dir && (
+                <><hr />
+                  <h3><IonIcon icon={navigateCircleOutline} /> Directions</h3>
                   <p>{studio?.dir}</p>
                 </>
               )}
-              {(studio?.mb || studio?.em || studio?.wb) && (
-                <>
-                  <h3>Contact Details</h3>
+              {(studio?.mb || studio?.em || studio?.wb || studio?.fb || studio?.tw) && (
+                <><hr />
+                  <h3><IonIcon icon={chatbubblesOutline} /> Contact Details</h3>
                   <IonGrid className="ion-no-padding">
                     {studio?.mb && (
                       <IonRow>
@@ -283,38 +298,51 @@ const StudioEntryPage: React.FC = () => {
                         </IonCol>
                       </IonRow>
                     )}
+
+                    {(studio?.fb || studio?.tw) && (
+                      <IonRow>
+                        <IonCol size="2">
+                          <div className="ion-margin-bottom">Social Links:</div>
+                        </IonCol>
+                        <IonCol>
+                          {studio?.fb && (
+                              <a href={studio?.fb} target="_blank" rel="noreferrer">
+                                <IonIcon
+                                  icon={logoFacebook}
+                                  color="secondary"
+                                  size="large"
+                                />
+                              </a>
+                          )}
+                          {studio?.tw && (
+                              <a href={studio?.tw} target="_blank" rel="noreferrer">
+                                <IonIcon
+                                  icon={logoTwitter}
+                                  color="secondary"
+                                  size="large"
+                                />
+                              </a>
+                          )}
+                        </IonCol>
+                      </IonRow>
+                    )}
                   </IonGrid>
                 </>
               )}
-              {(studio?.fb || studio?.tw) && (
-                <>
-                  <h3>Social Links</h3>
-                  <IonGrid className="ion-no-padding">
-                    <IonRow className="ion-justify-content-start">
-                      {studio?.fb && (
-                        <IonCol size="2">
-                          <a href={studio?.fb} target="_blank" rel="noreferrer">
-                            <IonIcon
-                              icon={logoFacebook}
-                              color="secondary"
-                              size="large"
-                            />
-                          </a>
-                        </IonCol>
-                      )}
-                      {studio?.tw && (
-                        <IonCol size="2">
-                          <a href={studio?.tw} target="_blank" rel="noreferrer">
-                            <IonIcon
-                              icon={logoTwitter}
-                              color="secondary"
-                              size="large"
-                            />
-                          </a>
-                        </IonCol>
-                      )}
-                    </IonRow>
-                  </IonGrid>
+              {studio?.fac && studio?.fac != "nnnnnnnn" && (
+                <><hr />
+                  <h3><IonIcon icon={helpCircleOutline} /> Facilities / Info <small>(see key below)</small></h3>
+                  <ul className="studio__facilities">
+                    <li>{studio?.fac[0] == "y" ? <img src="assets/img/artist-facilities-parking-2.gif" alt="Off Street Parking" /> : null}</li>
+                    <li>{studio?.fac[1] == "y" ? <img src="assets/img/artist-facilities-access-2.gif" alt="Disabled Access" /> : null}</li>
+                    <li>{studio?.fac[2] == "y" ? <img src="assets/img/artist-facilities-allyear-2.gif" alt="Working Studio" /> : null}</li>
+                    <li>{studio?.fac[3] == "y" ? <img src="assets/img/artist-facilities-popup-2.gif" alt="Popup Exhibition" /> : null}</li>
+                    <li>{studio?.fac[4] == "y" ? <img src="assets/img/artist-facilities-museum-2.gif" alt="Gallery/commercial" /> : null}</li>
+                    <li>{studio?.fac[5] == "y" ? <img src="assets/img/artist-facilities-outdoor.png" alt="Outdoor artwork" /> : null}</li>
+                    <li>{studio?.fac[6] == "y" ? <img src="assets/img/artist-facilities-additional-events.jpg" alt="Additional Event" /> : null}</li>
+                    {/* <li>{studio?.fac[7] == "y" ? <img src="assets/img/artist-facilities-clock.png" alt="Appointment Only" /> : null}</li> */}
+                  </ul>
+                  <img className="studio__facilities-key" src="assets/img/symbols2022b.png" alt="Key to symbols" />
                 </>
               )}
             </div>

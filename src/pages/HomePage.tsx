@@ -1,6 +1,7 @@
-import { IonContent, IonPage, IonRouterLink, IonText } from "@ionic/react";
-import "./HomePage.css";
+import { IonContent, IonIcon, IonPage, IonRouterLink, IonText } from "@ionic/react";
+import { bicycle } from "ionicons/icons";
 import PageHeader from "../components/PageHeader";
+import "./HomePage.css";
 
 const HomePage: React.FC = () => {
   return (
@@ -9,38 +10,28 @@ const HomePage: React.FC = () => {
       <IonContent fullscreen>
         <div className="home-content">
           <div className="home-content__block home-content__block--header">
-            <img
-              className="home-content__logo ion-margin-bottom"
-              src="assets/img/logo-fvab-2021.png"
-              alt=""
-            />
           </div>
           <div className="home-content__block home-content__block--main">
-            <div className="home-content__block-inner ion-padding-top">
-              <IonRouterLink href="/art-cycle">
-                <div className="home-content__block-content">
-                  <img
-                    className="home-content__art-cycle ion-margin-bottom"
-                    src="assets/img/logo-art-cycle.png"
-                    alt=""
-                  />
-                  <IonText color="dark">
-                    <strong>3 July-31 Aug 2021</strong>
-                  </IonText>
-                </div>
-              </IonRouterLink>
-            </div>
             <div className="home-content__block-inner ion-padding-bottom">
               <IonRouterLink href="/open-studios">
                 <div className="home-content__block-content">
+                  <h1 className="sr-only">Forth Valley Art Beat</h1>
                   <img
-                    className="home-content__fvab ion-margin-bottom"
-                    src="assets/img/logo-fvab-weekend.png"
+                    className="home-content__logo ion-margin-bottom"
+                    src="assets/img/logo-fvab-2022.png"
                     alt=""
                   />
-                  <IonText color="dark">
-                    <strong>10-11&nbsp;July&nbsp;2021</strong>
-                  </IonText>
+                  <div>
+                    <h2 className="sr-only">Open Studios Exhibitions and Events</h2>
+                    <img
+                      className="home-content__logo home-content__logo--open-studios"
+                      src="assets/img/open-studios-logo.png"
+                      alt=""
+                    />
+                    <IonText color="dark">
+                      <h3 className="ion-no-margin"><strong>11-19&nbsp;June&nbsp;2022</strong></h3>
+                    </IonText>
+                  </div>
                 </div>
               </IonRouterLink>
             </div>
@@ -50,8 +41,8 @@ const HomePage: React.FC = () => {
               <div className="home-content__block-content">
                 <strong>
                   <IonText color="primary">
-                    Cycling and <br />
-                    Walking Events...
+                    <h2><IonIcon icon={bicycle} className="icon-x-large" color="secondary" /><br /><strong>Eco-arts &amp;<br />
+                  Cycling Events...</strong></h2>
                   </IonText>
                 </strong>
               </div>
