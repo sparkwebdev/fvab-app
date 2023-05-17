@@ -1,6 +1,6 @@
 {
   "appId": "com.forthvalleyopenstudios.app",
-  "appName": "fvab-2022",
+  "appName": "fvab-2023",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "build",
