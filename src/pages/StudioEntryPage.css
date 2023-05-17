@@ -23,7 +23,7 @@
   font-size: 0.8rem;
 }
 .opening-times th {
-  background: var(--ion-color-primary);
+  background: var(--ion-color-dark);
   color: #fff;
 }
 .opening-times th,
@@ -41,13 +41,10 @@
     font-size: 1rem;
   }
 }
-
 .icon-clock {
   max-width: 32px;
   mix-blend-mode: darken;
-
 }
-
 .studio__facilities {
   list-style: none;
   padding: 0;
@@ -62,4 +59,9 @@
   border: solid 1px;
   padding: 5px 10px;
   border-radius: 5px;
+}
+.studio-symbols {
+  border: solid;
+  padding: 10px;
+  max-width: 300px;
 }

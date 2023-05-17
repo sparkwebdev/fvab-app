@@ -1,5 +1,6 @@
 import {
-  IonButton, IonCard,
+  IonButton,
+  IonCard,
   IonCardHeader,
   IonCardSubtitle,
   IonCardTitle,
@@ -8,18 +9,22 @@ import {
   IonContent,
   IonGrid,
   IonIcon,
-  IonLabel, IonModal, IonPage,
-  IonRow, IonSlide, IonSlides, IonText, isPlatform
+  IonLabel,
+  IonModal,
+  IonPage,
+  IonRow,
+  IonSlide,
+  IonSlides,
+  IonText,
+  isPlatform,
 } from "@ionic/react";
 import {
-  calendarOutline,
-  chatbubblesOutline,
   heart,
-  heartOutline, helpCircleOutline, location,
+  heartOutline,
+  location,
   logoFacebook,
+  logoInstagram,
   logoTwitter,
-  navigateCircleOutline,
-  timeOutline
 } from "ionicons/icons";
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
@@ -92,10 +97,14 @@ const StudioEntryPage: React.FC = () => {
                     <IonCol size="9">
                       {studio.st && (
                         <IonChip
-                          color={parseInt(studio.studioNumber) < 30 ? "primary" : "secondary"}
+                          color="dark"
                           className="studio-number studio-number--large"
                         >
-                          <IonLabel>
+                          <IonLabel color={
+                            parseInt(studio.studioNumber) <= 34
+                              ? "primary"
+                              : "secondary"
+                          }>
                             <strong>{studio.st}</strong>
                           </IonLabel>
                         </IonChip>
@@ -114,7 +123,7 @@ const StudioEntryPage: React.FC = () => {
                                     ? `assets/img/studios/${studio.img}`
                                     : ""
                                 }
-                                shareUrl={`https://forthvalleyartbeat.com/routes/fvab-2021/?id=${studio.st}`}
+                                shareUrl={`https://forthvalleyartbeat.com/routes/route-${studio.rt}/?id=${studio.st}`}
                               />
                             </IonCol>
                           )}
@@ -138,7 +147,14 @@ const StudioEntryPage: React.FC = () => {
                 </IonGrid>
                 {studio.name && (
                   <IonCardTitle>
-                    <IonText color={parseInt(studio.studioNumber) < 30 ? "primary" : "secondary"} style={{ fontSize: "1rem" }}>
+                    <IonText
+                      color={
+                        parseInt(studio.studioNumber) <= 34
+                          ? "primary"
+                          : "secondary"
+                      }
+                      style={{ fontSize: "1rem" }}
+                    >
                       <strong>{studio.name}</strong>
                     </IonText>
                   </IonCardTitle>
@@ -156,196 +172,324 @@ const StudioEntryPage: React.FC = () => {
                       // ref={slides}
                       // onIonSlideReachEnd={(event: any) => setOnLastSlide(true)}
                     >
-                      {studio.imgs
-                        .split(",")
-                        .map((image: string, index: number) => {
-                          return (
-                            <IonSlide key={index}>
-                              <img
-                                className="studio-images__image"
-                                src={`assets/img/studios/${image}`}
-                                alt=""
-                              />
-                            </IonSlide>
-                          );
-                        })}
+                      {studio.imgs.map((image: string, index: number) => {
+                        return (
+                          <IonSlide key={index}>
+                            <img
+                              className="studio-images__image"
+                              src={`assets/img/studios/${image}`}
+                              alt=""
+                            />
+                          </IonSlide>
+                        );
+                      })}
                     </IonSlides>
                   </div>
                 )}
                 {studio.add && (
                   <IonGrid>
-                    <IonRow>
-                      <IonCol size="2">
+                  <IonRow>
+                    <IonCol size="12">
+                      <div style={{ display: "flex", alignItems: "center" }}>
                         <IonIcon
                           icon={location}
                           color="secondary"
                           size="large"
-                        />
-                      </IonCol>
-                      <IonCol>
-                        <p
-                          style={{
-                            marginTop: 0,
-                          }}
-                        >
-                          {studio.add}
-                        </p>
-                      </IonCol>
-                    </IonRow>
-                    <IonRow>
-                      <IonCol size="6">
-                        <IonButton
-                          size="small"
-                          color="primary"
-                          fill="solid"
-                          onClick={viewMapHandler}
-                        >
-                          View on map
-                        </IonButton>
-                      </IonCol>
-                      <IonCol size="6">
-                        <IonButton
-                          size="small"
-                          color="secondary"
-                          fill="outline"
-                          onClick={getDirectionsHandler}
-                        >
-                          Get Directions
-                        </IonButton>
-                      </IonCol>
-                    </IonRow>
+                          style={{ verticalAlign: "middle" }}
+                        />{" "}
+                        {studio.add}
+                      </div>
+                    </IonCol>
+                  </IonRow>
+
+                <IonRow>
+                <IonCol size="12">
+                  <IonButton
+                    color="primary"
+                    fill="solid"
+                    onClick={viewMapHandler}
+                  >
+                    View on map
+                  </IonButton>
+                  <IonButton
+                    color="secondary"
+                    fill="outline"
+                    onClick={getDirectionsHandler}
+                  >
+                    Get Directions
+                  </IonButton>
+                </IonCol>
+              </IonRow>
                   </IonGrid>
                 )}
               </IonCardHeader>
             </IonCard>
-            <div className="ion-padding">
-              {studio?.desc && <p>{studio?.desc}</p>}
-              {studio?.desc2 && <p>{studio?.desc2}</p>}
-              {studio?.time && (
-                <><hr />
-                  <h3><IonIcon icon={timeOutline} /> Opening Times</h3>
-                  <table className="opening-times">
-                    <thead><tr><th>Sat</th><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thur</th><th>Fri</th><th>Sat</th><th>Sun</th></tr></thead>
-                    <tbody><tr>
-                    {[...studio?.time].map((day: string, key: any) => {
-                      return <td key={key}>{day ? day : "-"}</td>;
-                    })}
-                    </tr></tbody>
-                  </table>
-                </>
-              )}
-              {studio?.desc3 && (
-                <><hr />
-                  <h3><IonIcon icon={calendarOutline} /> Additional Events</h3>
-                  <p>{studio?.desc3}</p>
-                </>
-              )}
-              {studio?.dir && (
-                <><hr />
-                  <h3><IonIcon icon={navigateCircleOutline} /> Directions</h3>
-                  <p>{studio?.dir}</p>
-                </>
-              )}
-              {(studio?.mb || studio?.em || studio?.wb || studio?.fb || studio?.tw) && (
-                <><hr />
-                  <h3><IonIcon icon={chatbubblesOutline} /> Contact Details</h3>
-                  <IonGrid className="ion-no-padding">
-                    {studio?.mb && (
-                      <IonRow>
-                        <IonCol size="2">
-                          <div className="ion-margin-bottom">Mob:</div>
-                        </IonCol>
-                        <IonCol>
-                          <div className="ion-margin-bottom">
-                            <a href={`tel:${studio?.mb}`}>{studio?.mb}</a>
-                          </div>
-                        </IonCol>
-                      </IonRow>
-                    )}
-                    {studio?.em && (
-                      <IonRow>
-                        <IonCol size="2">
-                          <div className="ion-margin-bottom">Email:</div>
-                        </IonCol>
-                        <IonCol>
-                          <div className="ion-margin-bottom">
-                            <a
-                              href={`mailto:${studio?.tw}`}
-                              target="_blank"
-                              rel="noreferrer"
-                            >
-                              {studio?.em}
-                            </a>
-                          </div>
-                        </IonCol>
-                      </IonRow>
-                    )}
-                    {studio?.wb && (
-                      <IonRow>
-                        <IonCol size="2">
-                          <div className="ion-margin-bottom">Web:</div>
-                        </IonCol>
-                        <IonCol>
-                          <div className="ion-margin-bottom">
-                            <a
-                              href={studio?.wb}
-                              target="_blank"
-                              rel="noreferrer"
-                            >
-                              Visit site
-                            </a>
-                          </div>
-                        </IonCol>
-                      </IonRow>
-                    )}
 
-                    {(studio?.fb || studio?.tw) && (
-                      <IonRow>
-                        <IonCol size="2">
-                          <div className="ion-margin-bottom">Social Links:</div>
-                        </IonCol>
-                        <IonCol>
+            <IonGrid>
+              <IonRow>
+                <IonCol size="12">
+                  {studio?.desc && (
+                    <div
+                      dangerouslySetInnerHTML={{ __html: studio?.desc }}
+                    ></div>
+                  )}
+                  {studio?.desc2 && (
+                    <div
+                      dangerouslySetInnerHTML={{ __html: studio?.desc2 }}
+                    ></div>
+                  )}
+                  {studio?.time && (
+                    <>
+                      <hr />
+                      <h3>Opening Times</h3>
+                      <table className="opening-times">
+                        <thead>
+                          <tr>
+                            <th>Sat</th>
+                            <th>Sun</th>
+                            <th>Mon</th>
+                            <th>Tue</th>
+                            <th>Wed</th>
+                            <th>Thur</th>
+                            <th>Fri</th>
+                            <th>Sat</th>
+                            <th>Sun</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            {[...studio?.time].map((day: string, key: any) => {
+                              if (day === "Appointment only") {
+                                return (
+                                  <td key={key} className="studio-closed">
+                                    <img
+                                      src={`assets/icon/appointment.png`}
+                                      title="Open by appointment only"
+                                      alt="Open by appointment only"
+                                      width={26}
+                                      height={26}
+                                    />
+                                  </td>
+                                );
+                              } else {
+                                return <td key={key}>{day ? day : "-"}</td>;
+                              }
+                            })}
+                          </tr>
+                        </tbody>
+                      </table>
+                    </>
+                  )}
+                  {studio?.dir && (
+                    <>
+                      <hr />
+                      <h3>Directions</h3>
+                      <p>{studio?.dir}</p>
+                    </>
+                  )}
+                  {studio?.fac && (
+                    <>
+                      <h3>
+                        Facilities <small>(See key below)</small>
+                      </h3>
+                      <IonGrid className="ion-no-padding">
+                        <IonRow className="ion-justify-content-start">
+                          {studio?.fac.parking === "Yes" && (
+                            <img
+                              src={`assets/icon/parking.png`}
+                              alt="Parking available"
+                              title="Parking available"
+                              width={40}
+                              height={40}
+                            />
+                          )}
+                          {studio?.fac.disabledAccess === "Yes" && (
+                            <img
+                              src={`assets/icon/disabledAccess.png`}
+                              alt="Disabled access available"
+                              title="Disabled access available"
+                              width={40}
+                              height={40}
+                            />
+                          )}
+                          {studio?.fac.additionalEvents === "Yes" && (
+                            <img
+                              src={`assets/icon/additionalEvents.png`}
+                              alt="Additional events available"
+                              title="Additional events available"
+                              width={40}
+                              height={40}
+                            />
+                          )}
+                        </IonRow>
+                      </IonGrid>
+                    </>
+                  )}
+                  {studio?.event && studio?.event.title && (
+                    <>
+                      <h3>Additional Events</h3>
+
+                      {studio?.event.title && (
+                        <p>
+                          <strong>{studio?.event.title}</strong>
+                        </p>
+                      )}
+                      {studio?.event.dates && <p>{studio?.event.dates}</p>}
+                      {studio?.event.eventDetails && (
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: studio?.event.eventDetails,
+                          }}
+                        ></div>
+                      )}
+                      {studio?.event.image && (
+                        <img
+                          src={`assets/img/studios_events/${studio?.event.image}`}
+                          alt=""
+                        />
+                      )}
+                    </>
+                  )}
+
+                  {(studio?.ph || studio?.mb || studio?.em || studio?.wb) && (
+                    <>
+                      <h3>Contact Details</h3>
+                      <IonGrid className="ion-no-padding">
+                        {studio?.ph && (
+                          <IonRow>
+                            <IonCol size="2">
+                              <div className="ion-margin-bottom">Tel:</div>
+                            </IonCol>
+                            <IonCol>
+                              <div className="ion-margin-bottom">
+                                <a href={`tel:${studio?.ph}`}>{studio?.ph}</a>
+                              </div>
+                            </IonCol>
+                          </IonRow>
+                        )}
+                        {studio?.mb && (
+                          <IonRow>
+                            <IonCol size="2">
+                              <div className="ion-margin-bottom">Mob:</div>
+                            </IonCol>
+                            <IonCol>
+                              <div className="ion-margin-bottom">
+                                <a href={`tel:${studio?.mb}`}>{studio?.mb}</a>
+                              </div>
+                            </IonCol>
+                          </IonRow>
+                        )}
+                        {studio?.em && (
+                          <IonRow>
+                            <IonCol size="2">
+                              <div className="ion-margin-bottom">Email:</div>
+                            </IonCol>
+                            <IonCol>
+                              <div className="ion-margin-bottom">
+                                <a
+                                  href={`mailto:${studio?.em}`}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                >
+                                  {studio?.em}
+                                </a>
+                              </div>
+                            </IonCol>
+                          </IonRow>
+                        )}
+                        {studio?.wb && (
+                          <IonRow>
+                            <IonCol size="2">
+                              <div className="ion-margin-bottom">Web:</div>
+                            </IonCol>
+                            <IonCol>
+                              <div className="ion-margin-bottom">
+                                <a
+                                  href={studio?.wb}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                >
+                                  Visit site
+                                </a>
+                              </div>
+                            </IonCol>
+                          </IonRow>
+                        )}
+                      </IonGrid>
+                    </>
+                  )}
+
+                  {(studio?.fb || studio?.tw || studio?.in) && (
+                    <>
+                      <h3>Social Links</h3>
+                      <IonGrid className="ion-no-padding">
+                        <IonRow className="ion-justify-content-start">
                           {studio?.fb && (
-                              <a href={studio?.fb} target="_blank" rel="noreferrer">
+                            <IonCol size="2">
+                              <a
+                                href={studio?.fb}
+                                target="_blank"
+                                rel="noreferrer"
+                              >
                                 <IonIcon
                                   icon={logoFacebook}
                                   color="secondary"
                                   size="large"
                                 />
                               </a>
+                            </IonCol>
                           )}
                           {studio?.tw && (
-                              <a href={studio?.tw} target="_blank" rel="noreferrer">
+                            <IonCol size="2">
+                              <a
+                                href={studio?.tw}
+                                target="_blank"
+                                rel="noreferrer"
+                              >
                                 <IonIcon
                                   icon={logoTwitter}
                                   color="secondary"
                                   size="large"
                                 />
                               </a>
+                            </IonCol>
                           )}
-                        </IonCol>
-                      </IonRow>
-                    )}
-                  </IonGrid>
-                </>
-              )}
-              {studio?.fac && studio?.fac != "nnnnnnnn" && (
-                <><hr />
-                  <h3><IonIcon icon={helpCircleOutline} /> Facilities / Info <small>(see key below)</small></h3>
-                  <ul className="studio__facilities">
-                    <li>{studio?.fac[0] == "y" ? <img src="assets/img/artist-facilities-parking-2.gif" alt="Off Street Parking" /> : null}</li>
-                    <li>{studio?.fac[1] == "y" ? <img src="assets/img/artist-facilities-access-2.gif" alt="Disabled Access" /> : null}</li>
-                    <li>{studio?.fac[2] == "y" ? <img src="assets/img/artist-facilities-allyear-2.gif" alt="Working Studio" /> : null}</li>
-                    <li>{studio?.fac[3] == "y" ? <img src="assets/img/artist-facilities-popup-2.gif" alt="Popup Exhibition" /> : null}</li>
-                    <li>{studio?.fac[4] == "y" ? <img src="assets/img/artist-facilities-museum-2.gif" alt="Gallery/commercial" /> : null}</li>
-                    <li>{studio?.fac[5] == "y" ? <img src="assets/img/artist-facilities-outdoor.png" alt="Outdoor artwork" /> : null}</li>
-                    <li>{studio?.fac[6] == "y" ? <img src="assets/img/artist-facilities-additional-events.jpg" alt="Additional Event" /> : null}</li>
-                    {/* <li>{studio?.fac[7] == "y" ? <img src="assets/img/artist-facilities-clock.png" alt="Appointment Only" /> : null}</li> */}
-                  </ul>
-                  <img className="studio__facilities-key" src="assets/img/symbols2022b.png" alt="Key to symbols" />
-                </>
-              )}
-            </div>
+                          {studio?.in && (
+                            <IonCol size="2">
+                              <a
+                                href={studio?.in}
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                <IonIcon
+                                  icon={logoInstagram}
+                                  color="secondary"
+                                  size="large"
+                                />
+                              </a>
+                            </IonCol>
+                          )}
+                        </IonRow>
+                      </IonGrid>
+                    </>
+                  )}
+                  {studio?.fac && (
+                    <>
+                      <h3>Facilities Key</h3>
+                      <IonGrid className="ion-no-padding">
+                        <IonRow className="ion-justify-content-start">
+                          <img
+                            className="studio-symbols"
+                            src={`assets/img/symbols.png`}
+                            alt=""
+                          />
+                        </IonRow>
+                      </IonGrid>
+                    </>
+                  )}
+                </IonCol>
+              </IonRow>
+            </IonGrid>
           </>
         )}
       </IonContent>

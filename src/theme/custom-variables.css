@@ -5,3 +5,18 @@ http://ionicframework.com/docs/theming/ */
 ion-avatar {
   --border-radius: 0;
 }
+ion-item-divider {
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+  font-size: inherit;
+}
+ion-item-divider + .list-md {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+ion-button {
+  --border-radius: 0;
+}
+/* ion-grid {
+  width: 100%;
+} */
