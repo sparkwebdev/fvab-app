@@ -18,24 +18,26 @@ const OpenStudiosPage: React.FC = () => {
 
   useEffect(() => {
     const additionalStudios = [...studios];
-    // let isDuplicate: any = undefined;
+    let duplicates: string[] = [];
     studios.forEach((studio, index) => {
       studio.additionalArtists.forEach((artist: any) => {
         const additionalArtist = {...studio};
         additionalArtist.name = artist.name;
         additionalArtist.srt = artist.sortBy;
         additionalArtist.dis = artist.dis;
-        // if (studio.name.indexOf(artist.name) > -1) {
-        //   isDuplicate = true;
-        // }
+        if (studio.name.indexOf(artist.name) > -1) {
+          if(duplicates.indexOf(studio.name) === -1) {
+            duplicates.push(studio.name);
+          }
+        }
         additionalStudios.push(additionalArtist);
       });
-      // if (isDuplicate) {
-      //   additionalStudios.splice(index, 1);
-      // }
+    });
+    const additionalStudiosFiltered = [...additionalStudios].filter((studio: any) => {
+      return duplicates.indexOf(studio.name) === -1;
     });
 
-    additionalStudios.sort((a, b) => {
+    const additionalStudiosFilteredSorted = [...additionalStudiosFiltered].sort((a, b) => {
       const nameA = a.srt;
       const nameB = b.srt;
       if (nameA < nameB) {
@@ -47,20 +49,9 @@ const OpenStudiosPage: React.FC = () => {
       return 0;
     });
     
-    setAdditionalStudios(additionalStudios);
+    setAdditionalStudios(additionalStudiosFilteredSorted);
   }, [studios]);
 
-  // useEffect(() => {
-  //   const studiosAdditionalMapped = studiosAdditional.map((studio: any) => {
-  //     return {
-  //       st: studio[2],
-  //       img: studio[5],
-  //       name: studio[1],
-  //       dis: studio[3],
-  //     };
-  //   });
-  //   setAdditionalStudios(studiosAdditionalMapped);
-  // }, [studiosAdditional]);
   return (
     <IonPage>
       <PageHeader title="Open Studios" />
