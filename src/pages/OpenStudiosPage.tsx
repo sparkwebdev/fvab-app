@@ -111,7 +111,9 @@ const OpenStudiosPage: React.FC = () => {
                 <IonLabel>View A to Z</IonLabel>
               </IonSegmentButton>
               <IonSegmentButton value="map">
-                <IonIcon icon={mapIcon} /> <br />
+                <IonChip color="primary">
+                  <IonIcon icon={mapIcon} style={{ marginLeft: 0, marginRight: 0 }} />
+                </IonChip>
                 <IonLabel>View Map</IonLabel>
               </IonSegmentButton>
             </IonSegment>

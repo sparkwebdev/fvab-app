@@ -61,13 +61,12 @@ const ListItemStudio: React.FC<ContainerProps> = (props) => {
           )}
         </>
       )}
-      <IonLabel className={props.mini ? "ion-text-wrap" : ""}>
+      <IonLabel className={props.mini ? "ion-text-wrap" : ""} style={{minHeight: "2.625em", display: "flex", flexDirection: "column", justifyContent: "space-evenly"}}>
         <IonText color={brand}>
           <strong>{props.name}</strong>
         </IonText>
         {props.dis && (
           <>
-            <br />
             <small>{props.dis}</small>
           </>
         )}

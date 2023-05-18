@@ -153,9 +153,8 @@ const StudioEntryPage: React.FC = () => {
                           ? "primary"
                           : "secondary"
                       }
-                      style={{ fontSize: "1rem" }}
                     >
-                      <strong>{studio.name}</strong>
+                      <h2 style={{ fontSize: "1.4rem", lineHeight: "1.25" }}>{studio.name}</h2>
                     </IonText>
                   </IonCardTitle>
                 )}
@@ -190,7 +189,7 @@ const StudioEntryPage: React.FC = () => {
                   <IonGrid>
                   <IonRow>
                     <IonCol size="12">
-                      <div style={{ display: "flex", alignItems: "center" }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
                         <IonIcon
                           icon={location}
                           color="secondary"

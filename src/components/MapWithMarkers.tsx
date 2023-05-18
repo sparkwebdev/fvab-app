@@ -5,6 +5,7 @@ import {
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import mapStyles from "../theme/mapStyles";
 import ListItemStudio from "./ListItemStudio";
+import { environment } from "../environments/environements";
 
 declare const window: any;
 
@@ -19,7 +20,7 @@ const MapWithMarkers: React.FC<{
   onDismiss?: () => void;
 }> = (props) => {
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "AIzaSyB2do_Zm1jyT-IugUTa9HfLo8a6EplMMY8",
+    googleMapsApiKey: environment.googleMapsApiKey,
   });
 
   const mapContainerStyle = {
@@ -130,7 +131,7 @@ const MapWithMarkers: React.FC<{
         {selected ? (
           <InfoWindow
             options={{
-              pixelOffset: new window.google.maps.Size(0, -10),
+              pixelOffset: new window.google.maps.Size(0, -30),
 
               position: {
                 lat: selected!.lat,

@@ -21,6 +21,20 @@ const EventsPage: React.FC = () => {
     <IonPage>
       <PageHeader title="Events" />
       <IonContent fullscreen>
+
+      <IonCard
+            color="light"
+            className="studios-container__intro ion-no-margin"
+          >
+            <IonCardContent>
+              <p>
+                Many of the artists are also
+                hosting events in their studios, please take a look to join in
+                with some of the wonderful workshops, demonstrations and events
+                taking place.
+              </p>
+            </IonCardContent>
+          </IonCard>
         {studios
           .filter((studio) => studio.event)
           .map((studio: any) => {
