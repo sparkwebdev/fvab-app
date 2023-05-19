@@ -1,50 +1,43 @@
 import {
   IonCard,
-  IonCardContent,
-  IonChip,
-  IonContent,
-  IonIcon,
-  IonItemDivider,
-  IonLabel,
-  IonList,
-  IonPage,
+  IonCardContent, IonChip, IonContent, IonIcon, IonItemDivider, IonLabel, IonList, IonPage,
   IonSegment,
-  IonSegmentButton,
-  IonToolbar,
+  IonSegmentButton, IonToolbar
 } from "@ionic/react";
 import { mapOutline as mapIcon } from "ionicons/icons";
-import "./OpenStudiosPage.css";
-
 import { useEffect, useState } from "react";
 import ListItemStudio from "../components/ListItemStudio";
 import MapWithMarkers from "../components/MapWithMarkers";
 import PageHeader from "../components/PageHeader";
 import { studios } from "../data/studios";
+import "./OpenStudiosPage.css";
 
 const OpenStudiosPage: React.FC = () => {
   const [view, setView] = useState<string>("studios");
-  const [studiosAtoZ, setStudiosAtoZ] = useState<any[]>([]);
+  const [additionalStudios, setAdditionalStudios] = useState<any>();
 
   useEffect(() => {
-    const studiosAtoZ = [...studios];
-    // let isDuplicate: any = undefined;
+    const additionalStudios = [...studios];
+    let duplicates: string[] = [];
     studios.forEach((studio, index) => {
       studio.additionalArtists.forEach((artist: any) => {
         const additionalArtist = {...studio};
         additionalArtist.name = artist.name;
         additionalArtist.srt = artist.sortBy;
         additionalArtist.dis = artist.dis;
-        // if (studio.name.indexOf(artist.name) > -1) {
-        //   isDuplicate = true;
-        // }
-        studiosAtoZ.push(additionalArtist);
+        if (studio.name.indexOf(artist.name) > -1) {
+          if(duplicates.indexOf(studio.name) === -1) {
+            duplicates.push(studio.name);
+          }
+        }
+        additionalStudios.push(additionalArtist);
       });
-      // if (isDuplicate) {
-      //   studiosAtoZ.splice(index, 1);
-      // }
+    });
+    const additionalStudiosFiltered = [...additionalStudios].filter((studio: any) => {
+      return duplicates.indexOf(studio.name) === -1;
     });
 
-    studiosAtoZ.sort((a, b) => {
+    const additionalStudiosFilteredSorted = [...additionalStudiosFiltered].sort((a, b) => {
       const nameA = a.srt;
       const nameB = b.srt;
       if (nameA < nameB) {
@@ -56,8 +49,8 @@ const OpenStudiosPage: React.FC = () => {
       return 0;
     });
     
-    setStudiosAtoZ(studiosAtoZ);
-  }, []);
+    setAdditionalStudios(additionalStudiosFilteredSorted);
+  }, [studios]);
 
   return (
     <IonPage>
@@ -88,7 +81,7 @@ const OpenStudiosPage: React.FC = () => {
               </p>
             </IonCardContent>
           </IonCard>
-          <IonToolbar className="studios-container__tabs">
+          <IonToolbar className="ion-margin-top studios-container__tabs">
             <IonSegment
               color="secondary"
               onIonChange={(e) => {
@@ -104,63 +97,65 @@ const OpenStudiosPage: React.FC = () => {
               </IonSegmentButton>
               <IonSegmentButton value="a-to-z">
                 <IonChip color="primary">
-                  <strong>{studiosAtoZ.length}</strong>
+                  <strong>{additionalStudios?.length}</strong>
                 </IonChip>
                 <IonLabel>View A to Z</IonLabel>
               </IonSegmentButton>
               <IonSegmentButton value="map">
                 <IonChip color="primary">
-                  <IonIcon icon={mapIcon} className="ion-no-margin" />
+                  <IonIcon icon={mapIcon} style={{ marginLeft: 0, marginRight: 0 }} />
                 </IonChip>
                 <IonLabel>View Map</IonLabel>
               </IonSegmentButton>
             </IonSegment>
           </IonToolbar>
+
           {studios && studios.length > 0 && (
             <>
               {view === "studios" && (
-                <>
-                  <IonItemDivider className="ion-no-padding" color="primary" sticky>
-                    <IonSegment>Route 1</IonSegment>
-                  </IonItemDivider>
-                  <IonList>
-                    {studios.slice(0, 34).map((studio) => {
-                      if (studio.st) {
-                        return (
-                          <ListItemStudio
-                            studioNumber={studio.st}
-                            image={studio.img}
-                            name={studio.name}
-                            dis={studio.dis}
-                            key={studio.st}
-                          />
-                        );
-                      }
-                    })}
-                  </IonList>
-                  <IonItemDivider className="ion-no-padding" color="secondary" sticky>
-                    <IonSegment>Route 2</IonSegment>
-                  </IonItemDivider>
-                  <IonList>
-                    {studios.slice(34, 999).map((studio) => {
-                      if (studio.st) {
-                        return (
-                          <ListItemStudio
-                            studioNumber={studio.st}
-                            image={studio.img}
-                            name={studio.name}
-                            dis={studio.dis}
-                            key={studio.st}
-                          />
-                        );
-                      }
-                    })}
-                  </IonList>
-                </>
+                <IonList>
+                <IonItemDivider color="primary" className="ion-padding-top ion-padding-bottom" sticky={true} mode="ios">
+                  <IonLabel>
+                    Route 1
+                  </IonLabel>
+                </IonItemDivider>
+
+                {studios.map((studio) => {
+                  if (studio.st && parseInt(studio.st) <= 34) {
+                    return (
+                      <ListItemStudio
+                        studioNumber={studio.st}
+                        image={studio.img}
+                        name={studio.name}
+                        dis={studio.dis}
+                        key={studio.st}
+                      />
+                    );
+                  }
+                })}
+                <IonItemDivider color="secondary" className="ion-padding-top ion-padding-bottom" sticky={true} mode="ios">
+                  <IonLabel>
+                    Route 2
+                  </IonLabel>
+                </IonItemDivider>
+                {studios.map((studio) => {
+                  if (studio.st && parseInt(studio.st) >= 35) {
+                    return (
+                      <ListItemStudio
+                        studioNumber={studio.st}
+                        image={studio.img}
+                        name={studio.name}
+                        dis={studio.dis}
+                        key={studio.st}
+                      />
+                    );
+                  }
+                })}
+                </IonList>
               )}
               {view === "a-to-z" && (
                 <IonList>
-                  {studiosAtoZ.map((studio: any, key: any) => {
+                  {additionalStudios.map((studio: any, key: any) => {
                     return (
                       <ListItemStudio
                         studioNumber={studio.st}

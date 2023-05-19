@@ -1,0 +1,13 @@
+{
+  "appId": "com.forthvalleyopenstudios.app",
+  "appName": "fvab-2023",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "build",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}

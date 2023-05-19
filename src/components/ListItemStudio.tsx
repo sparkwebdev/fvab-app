@@ -1,11 +1,14 @@
 import {
   IonAvatar,
   IonChip,
+  IonIcon,
   IonImg,
-  IonItem,
-  IonLabel,
-  IonText,
+  IonItem, IonLabel, IonText
 } from "@ionic/react";
+import { heart } from "ionicons/icons";
+import { useContext, useEffect, useState } from "react";
+import AppContext from "../data/app-context";
+import "./ListItemStudio.css";
 
 interface ContainerProps {
   studioNumber: string;
@@ -16,9 +19,17 @@ interface ContainerProps {
 }
 
 const ListItemStudio: React.FC<ContainerProps> = (props) => {
+  const appCtx = useContext(AppContext);
+  const brand = parseInt(props.studioNumber) <= 34 ? "primary" : "secondary";
+  const [isFavourite, setIsFavourite] = useState<boolean | undefined>();
+
+  useEffect(() => {
+    setIsFavourite(appCtx.favourites.includes(props.studioNumber));
+  }, [appCtx.favourites]);
+
   return (
     <IonItem
-      routerLink={props.mini ? undefined : `/studio/${props.studioNumber}`}
+      routerLink={`/studio/${props.studioNumber}`}
       key={props.studioNumber}
       lines={props.mini ? "none" : "inset"}
       className={props.mini ? "ion-align-items-start" : ""}
@@ -27,18 +38,19 @@ const ListItemStudio: React.FC<ContainerProps> = (props) => {
       {props.studioNumber && !props.mini && (
         <IonAvatar
           slot="start"
-          className="ion-text-center ion-justify-content-center"
+          className="studio-number ion-text-center ion-justify-content-center"
         >
-          <IonChip color="medium">
-            <IonLabel color={Number(props.studioNumber) <= 34 ? "primary" : "secondary"}>
+          <IonChip color="dark">
+            <IonLabel color={brand}>
               <strong>{props.studioNumber}</strong>
             </IonLabel>
           </IonChip>
+          {isFavourite && (<IonIcon icon={heart} color="danger" className="studio-number__favourited" />)}
         </IonAvatar>
       )}
       {props.image && !props.mini ? (
-        <IonAvatar slot="start" color={Number(props.studioNumber) <= 34 ? "primary" : "secondary"}>
-          <IonImg src={`assets/img/studios_sm/${props.image}`} alt=""  color={Number(props.studioNumber) <= 34 ? "primary" : "secondary"} />
+        <IonAvatar slot="start">
+          <IonImg src={`assets/img/studios_sm/${props.image}`} alt="" />
         </IonAvatar>
       ) : (
         <>
@@ -49,13 +61,12 @@ const ListItemStudio: React.FC<ContainerProps> = (props) => {
           )}
         </>
       )}
-      <IonLabel className={props.mini ? "ion-text-wrap" : ""}>
-        <IonText color={Number(props.studioNumber) <= 34 ? "primary" : "secondary"}>
+      <IonLabel className={props.mini ? "ion-text-wrap" : ""} style={{minHeight: "2.625em", display: "flex", flexDirection: "column", justifyContent: "space-evenly"}}>
+        <IonText color={brand}>
           <strong>{props.name}</strong>
         </IonText>
         {props.dis && (
           <>
-            <br />
             <small>{props.dis}</small>
           </>
         )}

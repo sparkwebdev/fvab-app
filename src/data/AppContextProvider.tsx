@@ -1,33 +1,32 @@
 import React, { useEffect, useState } from "react";
 
+import { Plugins } from "@capacitor/core";
 import AppContext from "./app-context";
+const { Storage } = Plugins;
 
-// const store = new Storage();
-// await store.create();
-
-const AppContextProvider: React.FC = (props:any) => {
+const AppContextProvider: React.FC = (props) => {
   const [favourites, setFavourites] = useState<string[]>([]);
 
   const getFavourites = async () => {
-    // const favouritesData = await store.get("favourites")
-    //   .then((data: any) => {
-    //     return data.value !== "undefined" && data.value
-    //       ? JSON.parse(data.value)
-    //       : null;
-    //   })
-    //   .catch((e: Error) => {
-    //     console.log("No favourites data", e);
-    //     return null;
-    //   });
-    // return favouritesData;
+    const favouritesData = await Storage.get({ key: "favourites23" })
+      .then((data) => {
+        return data.value !== "undefined" && data.value
+          ? JSON.parse(data.value)
+          : null;
+      })
+      .catch((e) => {
+        console.log("No favourites data", e);
+        return null;
+      });
+    return favouritesData;
   };
 
   const initContext = async () => {
-    // await getFavourites().then((favourites) => {
-    //   if (favourites) {
-    //     setFavourites(favourites);
-    //   }
-    // });
+    await getFavourites().then((favourites) => {
+      if (favourites) {
+        setFavourites(favourites);
+      }
+    });
   };
 
   useEffect(() => {
@@ -36,13 +35,16 @@ const AppContextProvider: React.FC = (props:any) => {
 
   useEffect(() => {
     if (favourites) {
-      // store.set("favourites", JSON.stringify(favourites));
+      Storage.set({
+        key: "favourites23",
+        value: JSON.stringify(favourites),
+      });
     }
   }, [favourites]);
 
   const updateFavourites = (studioId: string, add: boolean) => {
     setFavourites((currentFavourites) => {
-      if (add) {
+      if (add && !currentFavourites.includes(studioId)) {
         return [...currentFavourites, studioId];
       } else {
         return currentFavourites.filter((id) => studioId !== id);

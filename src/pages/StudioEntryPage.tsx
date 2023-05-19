@@ -1,6 +1,7 @@
 import {
   IonButton,
   IonCard,
+  IonCardHeader,
   IonCardSubtitle,
   IonCardTitle,
   IonChip,
@@ -12,6 +13,8 @@ import {
   IonModal,
   IonPage,
   IonRow,
+  IonSlide,
+  IonSlides,
   IonText,
   isPlatform,
 } from "@ionic/react";
@@ -25,19 +28,12 @@ import {
 } from "ionicons/icons";
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
+import MapWithMarkers from "../components/MapWithMarkers";
 import PageHeader from "../components/PageHeader";
 import Share from "../components/Share";
 import AppContext from "../data/app-context";
 import { studios } from "../data/studios";
 import "./StudioEntryPage.css";
-// Import Swiper styles
-import { A11y, Pagination, Scrollbar } from "swiper";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import MapWithMarkers from "../components/MapWithMarkers";
 
 interface RouteParams {
   id: string;
@@ -51,6 +47,14 @@ const StudioEntryPage: React.FC = () => {
   const [isFavourite, setIsFavourite] = useState<boolean | undefined>();
 
   const { id } = useParams<RouteParams>();
+
+  const slideOpts = {
+    initialSlide: 0,
+    slidesPerView: 1,
+    speed: 400,
+    spaceBetween: 10,
+    centeredSlides: true,
+  };
 
   const viewMapHandler = () => {
     setShowMap(true);
@@ -78,7 +82,7 @@ const StudioEntryPage: React.FC = () => {
 
   useEffect(() => {
     setIsFavourite(appCtx.favourites.includes(id));
-  }, [appCtx.favourites]);
+  }, [id, appCtx.favourites]);
 
   return (
     <IonPage>
@@ -87,145 +91,137 @@ const StudioEntryPage: React.FC = () => {
         {studio && (
           <>
             <IonCard className="ion-no-margin" color="light">
-              <IonGrid style={{ paddingBottom: "0", marginBottom: "0" }}>
-                <IonRow style={{ paddingBottom: "0", marginBottom: "0" }}>
-                  <IonCol size="9">
-                    {studio.st && (
-                      <IonChip
-                        color="dark"
-                        className="studio-number studio-number--large"
-                      >
-                        <IonLabel
-                          color={
-                            Number(studio?.st) <= 34 ? "primary" : "secondary"
-                          }
+              <IonCardHeader>
+                <IonGrid className="ion-no-padding">
+                  <IonRow>
+                    <IonCol size="9">
+                      {studio.st && (
+                        <IonChip
+                          color="dark"
+                          className="studio-number studio-number--large"
                         >
-                          <strong>{studio?.st}</strong>
-                        </IonLabel>
-                      </IonChip>
-                    )}
-                  </IonCol>
-                  <IonCol size="3">
-                    <IonGrid className="ion-no-padding ">
-                      <IonRow className="ion-align-items-center">
-                        {isPlatform("mobile") && (
-                          <IonCol className="ion-text-center">
-                            <Share
-                              shareText={`@FVAB_ I\'ve just visited the '${studio.name}' studio...`}
-                              shareImage={
-                                studio.img
-                                  ? `assets/img/studios/${studio.img}`
-                                  : ""
-                              }
-                              shareUrl={`https://forthvalleyartbeat.com/routes/route-${studio.rt}/?id=${studio.st}`}
-                            />
-                          </IonCol>
-                        )}
-                        <IonCol className="ion-text-end">
-                          <IonButton
-                            className="ion-no-padding ion-no-margin"
-                            fill="clear"
-                            onClick={setFavouriteHandler}
-                          >
-                            <IonIcon
-                              icon={isFavourite ? heart : heartOutline}
-                              color={isFavourite ? "danger" : "secondary"}
-                              size="large"
-                            />
-                          </IonButton>
-                        </IonCol>
-                      </IonRow>
-                    </IonGrid>
-                  </IonCol>
-                </IonRow>
-              </IonGrid>
-              <IonGrid style={{ paddingTop: "0", marginTop: "0" }}>
-                <IonRow style={{ paddingTop: "0", marginTop: "0" }}>
-                  <IonCol size="12" style={{ paddingTop: "0", marginTop: "0" }}>
-                    {studio.name && (
-                      <IonCardTitle style={{ paddingTop: "0", marginTop: "0" }}>
-                        <IonText
-                          color={
-                            Number(studio?.rt) == 1 ? "primary" : "secondary"
-                          }
-                          style={{ fontSize: "1.2rem" }}
-                        >
-                          <strong>{studio.name}</strong>
-                        </IonText>
-                      </IonCardTitle>
-                    )}
-                    {studio.dis && (
-                      <IonCardSubtitle className="ion-text-capitalize">
-                        {studio.dis}
-                      </IonCardSubtitle>
-                    )}
-                  </IonCol>
-                </IonRow>
-                <IonRow>
-                  <IonCol size="12">
-                  {studio.imgs && (
-                  <div className="studio-images ion-margin-top ion-margin-bottom">
-                    <Swiper
-                      initialSlide={0}
-                      spaceBetween={10}
-                      centeredSlides={true}
-                      centeredSlidesBounds={true}
-                      speed={400}
-                      slidesPerView={1}
-                      pagination={{ clickable: true }}
-                      scrollbar={{ draggable: true }}
-                      modules={[ Pagination, Scrollbar, A11y]}
-                    >
-                      {studio.imgs
-                        // .split(",")
-                        .map((image: string, index: number) => {
-                          return (
-                            <SwiperSlide key={index}>
-                              <img
-                                className="studio-images__image"
-                                src={`assets/img/studios/${image}`}
-                                alt=""
+                          <IonLabel color={
+                            parseInt(studio.studioNumber) <= 34
+                              ? "primary"
+                              : "secondary"
+                          }>
+                            <strong>{studio.st}</strong>
+                          </IonLabel>
+                        </IonChip>
+                      )}
+                    </IonCol>
+
+                    <IonCol size="3">
+                      <IonGrid className="ion-no-padding ">
+                        <IonRow className="ion-align-items-center">
+                          {isPlatform("mobile") && (
+                            <IonCol className="ion-text-center">
+                              <Share
+                                shareText={`@FVAB_ I\'ve just visited the '${studio.name}' studio...`}
+                                shareImage={
+                                  studio.img
+                                    ? `assets/img/studios/${studio.img}`
+                                    : ""
+                                }
+                                shareUrl={`https://forthvalleyartbeat.com/routes/route-${studio.rt}/?id=${studio.st}`}
                               />
-                            </SwiperSlide>
-                          );
-                        })}
-                    </Swiper>
+                            </IonCol>
+                          )}
+                          <IonCol className="ion-text-end">
+                            <IonButton
+                              className="ion-no-padding ion-no-margin"
+                              fill="clear"
+                              onClick={setFavouriteHandler}
+                            >
+                              <IonIcon
+                                icon={isFavourite ? heart : heartOutline}
+                                color={isFavourite ? "danger" : "secondary"}
+                                size="large"
+                              />
+                            </IonButton>
+                          </IonCol>
+                        </IonRow>
+                      </IonGrid>
+                    </IonCol>
+                  </IonRow>
+                </IonGrid>
+                {studio.name && (
+                  <IonCardTitle>
+                    <IonText
+                      color={
+                        parseInt(studio.studioNumber) <= 34
+                          ? "primary"
+                          : "secondary"
+                      }
+                    >
+                      <h2 style={{ fontSize: "1.4rem", lineHeight: "1.25" }}>{studio.name}</h2>
+                    </IonText>
+                  </IonCardTitle>
+                )}
+                {studio.dis && (
+                  <IonCardSubtitle className="ion-text-capitalize">
+                    {studio.dis}
+                  </IonCardSubtitle>
+                )}
+                {studio.imgs && (
+                  <div className="studio-images ion-margin-top ion-margin-bottom">
+                    <IonSlides
+                      pager={true}
+                      options={slideOpts}
+                      // ref={slides}
+                      // onIonSlideReachEnd={(event: any) => setOnLastSlide(true)}
+                    >
+                      {studio.imgs.map((image: string, index: number) => {
+                        return (
+                          <IonSlide key={index}>
+                            <img
+                              className="studio-images__image"
+                              src={`assets/img/studios/${image}`}
+                              alt=""
+                            />
+                          </IonSlide>
+                        );
+                      })}
+                    </IonSlides>
                   </div>
-                )} 
-                  </IonCol>
-                </IonRow>
+                )}
+                {studio.add && (
+                  <IonGrid>
+                  <IonRow>
+                    <IonCol size="12">
+                      <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+                        <IonIcon
+                          icon={location}
+                          color="secondary"
+                          size="large"
+                          style={{ verticalAlign: "middle" }}
+                        />{" "}
+                        {studio.add}
+                      </div>
+                    </IonCol>
+                  </IonRow>
+
                 <IonRow>
-                  <IonCol size="12">
-                    <div style={{ display: "flex" }}>
-                      <IonIcon
-                        icon={location}
-                        color="secondary"
-                        size="large"
-                        style={{ verticalAlign: "middle" }}
-                      />{" "}
-                      {studio.add}
-                    </div>
-                  </IonCol>
-                </IonRow>
-                <IonRow>
-                  <IonCol size="12">
-                    <IonButton
-                      color="primary"
-                      fill="solid"
-                      onClick={viewMapHandler}
-                    >
-                      View on map
-                    </IonButton>
-                    <IonButton
-                      color="secondary"
-                      fill="outline"
-                      onClick={getDirectionsHandler}
-                    >
-                      Get Directions
-                    </IonButton>
-                  </IonCol>
-                </IonRow>
-              </IonGrid>
+                <IonCol size="12">
+                  <IonButton
+                    color="primary"
+                    fill="solid"
+                    onClick={viewMapHandler}
+                  >
+                    View on map
+                  </IonButton>
+                  <IonButton
+                    color="secondary"
+                    fill="outline"
+                    onClick={getDirectionsHandler}
+                  >
+                    Get Directions
+                  </IonButton>
+                </IonCol>
+              </IonRow>
+                  </IonGrid>
+                )}
+              </IonCardHeader>
             </IonCard>
 
             <IonGrid>
@@ -241,10 +237,11 @@ const StudioEntryPage: React.FC = () => {
                       dangerouslySetInnerHTML={{ __html: studio?.desc2 }}
                     ></div>
                   )}
-                  {studio.time && (
+                  {studio?.time && (
                     <>
+                      <hr />
                       <h3>Opening Times</h3>
-                      <table className="studio-times">
+                      <table className="opening-times">
                         <thead>
                           <tr>
                             <th>Sat</th>
@@ -260,22 +257,22 @@ const StudioEntryPage: React.FC = () => {
                         </thead>
                         <tbody>
                           <tr>
-                            {studio.time.map((time: string, index: number) => {
-                              return (
-                                <td key={index}>
-                                  {time === "Appointment only" ? (
+                            {[...studio?.time].map((day: string, key: any) => {
+                              if (day === "Appointment only") {
+                                return (
+                                  <td key={key} className="studio-closed">
                                     <img
                                       src={`assets/icon/appointment.png`}
                                       title="Open by appointment only"
                                       alt="Open by appointment only"
-                                      width={20}
-                                      height={20}
+                                      width={26}
+                                      height={26}
                                     />
-                                  ) : (
-                                    time
-                                  )}
-                                </td>
-                              );
+                                  </td>
+                                );
+                              } else {
+                                return <td key={key}>{day ? day : "-"}</td>;
+                              }
                             })}
                           </tr>
                         </tbody>
@@ -284,6 +281,7 @@ const StudioEntryPage: React.FC = () => {
                   )}
                   {studio?.dir && (
                     <>
+                      <hr />
                       <h3>Directions</h3>
                       <p>{studio?.dir}</p>
                     </>
@@ -299,6 +297,7 @@ const StudioEntryPage: React.FC = () => {
                             <img
                               src={`assets/icon/parking.png`}
                               alt="Parking available"
+                              title="Parking available"
                               width={40}
                               height={40}
                             />
@@ -307,6 +306,7 @@ const StudioEntryPage: React.FC = () => {
                             <img
                               src={`assets/icon/disabledAccess.png`}
                               alt="Disabled access available"
+                              title="Disabled access available"
                               width={40}
                               height={40}
                             />
@@ -315,6 +315,7 @@ const StudioEntryPage: React.FC = () => {
                             <img
                               src={`assets/icon/additionalEvents.png`}
                               alt="Additional events available"
+                              title="Additional events available"
                               width={40}
                               height={40}
                             />
@@ -348,6 +349,7 @@ const StudioEntryPage: React.FC = () => {
                       )}
                     </>
                   )}
+
                   {(studio?.ph || studio?.mb || studio?.em || studio?.wb) && (
                     <>
                       <h3>Contact Details</h3>
@@ -487,11 +489,6 @@ const StudioEntryPage: React.FC = () => {
                 </IonCol>
               </IonRow>
             </IonGrid>
-            {/*
-              <IonCardHeader>
-                
-              </IonCardHeader>
-            </IonCard> */}
           </>
         )}
       </IonContent>
