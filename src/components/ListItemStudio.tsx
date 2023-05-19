@@ -20,7 +20,7 @@ interface ContainerProps {
 
 const ListItemStudio: React.FC<ContainerProps> = (props) => {
   const appCtx = useContext(AppContext);
-  const brand = parseInt(props.studioNumber) < 30 ? "primary" : "secondary";
+  const brand = parseInt(props.studioNumber) <= 34 ? "primary" : "secondary";
   const [isFavourite, setIsFavourite] = useState<boolean | undefined>();
 
   useEffect(() => {
@@ -40,8 +40,8 @@ const ListItemStudio: React.FC<ContainerProps> = (props) => {
           slot="start"
           className="studio-number ion-text-center ion-justify-content-center"
         >
-          <IonChip color={brand}>
-            <IonLabel>
+          <IonChip color="dark">
+            <IonLabel color={brand}>
               <strong>{props.studioNumber}</strong>
             </IonLabel>
           </IonChip>
@@ -61,13 +61,12 @@ const ListItemStudio: React.FC<ContainerProps> = (props) => {
           )}
         </>
       )}
-      <IonLabel className={props.mini ? "ion-text-wrap" : ""}>
+      <IonLabel className={props.mini ? "ion-text-wrap" : ""} style={{minHeight: "2.625em", display: "flex", flexDirection: "column", justifyContent: "space-evenly"}}>
         <IonText color={brand}>
           <strong>{props.name}</strong>
         </IonText>
         {props.dis && (
           <>
-            <br />
             <small>{props.dis}</small>
           </>
         )}

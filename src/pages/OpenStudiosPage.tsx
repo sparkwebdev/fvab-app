@@ -1,6 +1,7 @@
 import {
   IonCard,
-  IonCardContent, IonChip, IonContent, IonIcon, IonItemDivider, IonLabel, IonList, IonPage, IonRouterLink, IonSegment,
+  IonCardContent, IonChip, IonContent, IonIcon, IonItemDivider, IonLabel, IonList, IonPage,
+  IonSegment,
   IonSegmentButton, IonToolbar
 } from "@ionic/react";
 import { mapOutline as mapIcon } from "ionicons/icons";
@@ -8,25 +9,49 @@ import { useEffect, useState } from "react";
 import ListItemStudio from "../components/ListItemStudio";
 import MapWithMarkers from "../components/MapWithMarkers";
 import PageHeader from "../components/PageHeader";
-import { studios, studiosAdditional } from "../data/studios";
+import { studios } from "../data/studios";
 import "./OpenStudiosPage.css";
-
 
 const OpenStudiosPage: React.FC = () => {
   const [view, setView] = useState<string>("studios");
   const [additionalStudios, setAdditionalStudios] = useState<any>();
 
   useEffect(() => {
-    const studiosAdditionalMapped = studiosAdditional.map((studio: any) => {
-      return {
-        st: studio[2],
-        img: studio[5],
-        name: studio[1],
-        dis: studio[3],
-      };
+    const additionalStudios = [...studios];
+    let duplicates: string[] = [];
+    studios.forEach((studio, index) => {
+      studio.additionalArtists.forEach((artist: any) => {
+        const additionalArtist = {...studio};
+        additionalArtist.name = artist.name;
+        additionalArtist.srt = artist.sortBy;
+        additionalArtist.dis = artist.dis;
+        if (studio.name.indexOf(artist.name) > -1) {
+          if(duplicates.indexOf(studio.name) === -1) {
+            duplicates.push(studio.name);
+          }
+        }
+        additionalStudios.push(additionalArtist);
+      });
     });
-    setAdditionalStudios(studiosAdditionalMapped);
-  }, [studiosAdditional]);
+    const additionalStudiosFiltered = [...additionalStudios].filter((studio: any) => {
+      return duplicates.indexOf(studio.name) === -1;
+    });
+
+    const additionalStudiosFilteredSorted = [...additionalStudiosFiltered].sort((a, b) => {
+      const nameA = a.srt;
+      const nameB = b.srt;
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+    
+    setAdditionalStudios(additionalStudiosFilteredSorted);
+  }, [studios]);
+
   return (
     <IonPage>
       <PageHeader title="Open Studios" />
@@ -44,7 +69,15 @@ const OpenStudiosPage: React.FC = () => {
           >
             <IonCardContent>
               <p>
-              We’re delighted to announce this year we return to a 9-day event (11 to 19 June) with many studios open by appointment during the week. Please check each entry for individual opening times. Use the Add to Map facility on the App to plan your visit. We hope you can join in too with some of the <IonRouterLink href="/events"><strong>events, workshops, and talks</strong></IonRouterLink> that the artists are running, as well as a number of led <IonRouterLink href="/eco-arts"><strong>cycle rides</strong></IonRouterLink>. An exciting programme of participatory arts is also planned with an event at Callendar Park Falkirk on Sat 4th June, open to all, with many family friendly activities. We hope you can join us!
+                We look forward to welcoming you to the 2023 Forth Valley Art
+                Beat event taking place from 10 to 18 June. This year 58 studios
+                and venues are open across two routes around the Forth Valley.
+                Please check each entry for full information on each artist
+                together with individual opening times. Use the My Map facility
+                on the App to help plan your visit. Many of the artists are also
+                hosting events in their studios, please take a look to join in
+                with some of the wonderful workshops, demonstrations and events
+                taking place.
               </p>
             </IonCardContent>
           </IonCard>
@@ -64,12 +97,14 @@ const OpenStudiosPage: React.FC = () => {
               </IonSegmentButton>
               <IonSegmentButton value="a-to-z">
                 <IonChip color="primary">
-                  <strong>{studiosAdditional.length}</strong>
+                  <strong>{additionalStudios?.length}</strong>
                 </IonChip>
                 <IonLabel>View A to Z</IonLabel>
               </IonSegmentButton>
               <IonSegmentButton value="map">
-                <IonIcon icon={mapIcon} /> <br />
+                <IonChip color="primary">
+                  <IonIcon icon={mapIcon} style={{ marginLeft: 0, marginRight: 0 }} />
+                </IonChip>
                 <IonLabel>View Map</IonLabel>
               </IonSegmentButton>
             </IonSegment>
@@ -86,7 +121,7 @@ const OpenStudiosPage: React.FC = () => {
                 </IonItemDivider>
 
                 {studios.map((studio) => {
-                  if (studio.st && parseInt(studio.st) < 30) {
+                  if (studio.st && parseInt(studio.st) <= 34) {
                     return (
                       <ListItemStudio
                         studioNumber={studio.st}
@@ -104,7 +139,7 @@ const OpenStudiosPage: React.FC = () => {
                   </IonLabel>
                 </IonItemDivider>
                 {studios.map((studio) => {
-                  if (studio.st && parseInt(studio.st) >= 30) {
+                  if (studio.st && parseInt(studio.st) >= 35) {
                     return (
                       <ListItemStudio
                         studioNumber={studio.st}

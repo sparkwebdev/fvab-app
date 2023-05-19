@@ -1,7 +1,7 @@
-import { IonButton, IonIcon } from "@ionic/react";
-import React from "react";
 import { SocialSharing } from "@ionic-native/social-sharing";
+import { IonButton, IonIcon } from "@ionic/react";
 import { shareOutline as shareIcon } from "ionicons/icons";
+import React from "react";
 
 const Share: React.FC<{
   shareText?: string;

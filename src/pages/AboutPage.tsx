@@ -20,25 +20,25 @@ const AboutPage: React.FC = () => {
         <p>
           <strong>Avril Nicol</strong> is a founding member of Forth Valley Art
           Beat and has been building and developing the project as Project
-          Co-ordinator since its outset. As well as being event organiser Avril
+          Coordinator since its outset. As well as being event organiser Avril
           initially participated as an artist from her studio in Larbert, she
-          later opened &Collective Art Gallery in Bridge of Allan before
+          later opened &amp;Collective Art Gallery in Bridge of Allan before
           relocating the gallery to Dundas Street, Edinburgh and launching as
-          &Gallery. From 2021 Avril will have a less active role in the
+          &amp;Gallery. From 2021 Avril will have a less active role in the
           day-to-day running of the event, though still being very much involved
           in her new role as Creative Director.
         </p>
         <p>
           <strong>Rosy Naylor</strong> is responsible for overall project
-          organisational work. She has been designer for FVAB since its
+          organisational work. She has been designer for FAB since its
           inception, working closely with Avril on the developing of the event
-          each year. Now as Programme Producer/Curator she guides its future
+          each year. Now as Programme Producer/ Curator she guides its future
           creative development and planning of the event working alongside Avril
           and other members of the group, with plans for a series of additional
           projects enhancing the main open studios event going forward, the
-          first of which was the ‘ArtCycle’ programme introduced in 2021. She
+          first of which was the 'ArtCycle' programme introduced in 2021. She
           continues to work as designer, whilst being the main point of contact
-          in all aspects of organising the event. Rosy’s own background founding
+          in all aspects of organising the event. Rosy's own background founding
           the Art Walk Porty festival (Edinburgh) brings a wealth of experience
           to organising events which builds communities around local creativity,
           and particularly outdoor spaces.
@@ -49,10 +49,6 @@ const AboutPage: React.FC = () => {
           Valley to help strengthen the event going forward.
         </p>
         <p>
-          The 2022 eco-arts & cycling programme is supported by funding from
-          Paths for All COP26 Legacy Fund and Falkirk Council.
-        </p>
-        <p>
           <small>
             DISCLAIMER
             <br />
@@ -61,7 +57,7 @@ const AboutPage: React.FC = () => {
             supervision of any children in their care. Those involved in this
             app or the website cannot accept liability for any loss, damage or
             injury sustained by any of the public during their visits to the
-            studios. Artists’ studios and makers’ workshops are working
+            studios. Artists' studios and makers' workshops are working
             environments and may contain hazardous tools, machinery and
             materials, so care must be taken when visiting them.
           </small>

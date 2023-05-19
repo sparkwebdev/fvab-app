@@ -7,13 +7,13 @@ const AppContextProvider: React.FC = (props) => {
   const [favourites, setFavourites] = useState<string[]>([]);
 
   const getFavourites = async () => {
-    const favouritesData = await Storage.get({ key: "favourites22" })
-      .then((data: any) => {
+    const favouritesData = await Storage.get({ key: "favourites23" })
+      .then((data) => {
         return data.value !== "undefined" && data.value
           ? JSON.parse(data.value)
           : null;
       })
-      .catch((e: any) => {
+      .catch((e) => {
         console.log("No favourites data", e);
         return null;
       });
@@ -35,7 +35,7 @@ const AppContextProvider: React.FC = (props) => {
   useEffect(() => {
     if (favourites) {
       Storage.set({
-        key: "favourites22",
+        key: "favourites23",
         value: JSON.stringify(favourites),
       });
     }

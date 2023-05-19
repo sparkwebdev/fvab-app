@@ -1,22 +1,22 @@
 import {
-  IonContent,
-  IonPage,
-  IonList,
   IonCard,
   IonCardContent,
   IonCardHeader,
   IonCardTitle,
+  IonContent,
   IonIcon,
+  IonList,
+  IonPage,
 } from "@ionic/react";
-import "./MyMapPage.css";
 import PageHeader from "../components/PageHeader";
+import "./MyMapPage.css";
 
-import { studios } from "../data/studios";
+import { heartOutline } from "ionicons/icons";
+import { useContext, useEffect, useState } from "react";
 import ListItemStudio from "../components/ListItemStudio";
 import MapWithMarkers from "../components/MapWithMarkers";
-import { useContext, useEffect, useState } from "react";
 import AppContext from "../data/app-context";
-import { heartOutline } from "ionicons/icons";
+import { studios } from "../data/studios";
 
 const MyMapPage: React.FC = () => {
   const appCtx = useContext(AppContext);

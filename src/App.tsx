@@ -21,21 +21,20 @@ import "@ionic/react/css/structure.css";
 import "@ionic/react/css/text-alignment.css";
 import "@ionic/react/css/text-transformation.css";
 import "@ionic/react/css/typography.css";
-import { bicycle, calendar, heart, home, people, school } from "ionicons/icons";
+import { calendar, heart, home, people } from "ionicons/icons";
 import { Redirect, Route } from "react-router-dom";
 import FavouritesCount from "./components/FavouritesCount";
 import SideMenu from "./components/SideMenu";
 import AppContextProvider from "./data/AppContextProvider";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
-import EcoArtsPage from "./pages/EcoArtsPage";
+import EventsPage from "./pages/EventsPage";
 import HomePage from "./pages/HomePage";
 import MyMapPage from "./pages/MyMapPage";
 import NewsEntryPage from "./pages/NewsEntryPage";
 import NewsPage from "./pages/NewsPage";
 import OpenStudiosPage from "./pages/OpenStudiosPage";
 import StudioEntryPage from "./pages/StudioEntryPage";
-import EventsPage from "./pages/EventsPage";
 import "./theme/custom-variables.css";
 import "./theme/theme.css";
 /* Theme variables */
@@ -51,17 +50,14 @@ const App: React.FC = () => {
               <Route exact path="/home">
                 <HomePage />
               </Route>
-              <Route path="/eco-arts">
-                <EcoArtsPage />
-              </Route>
               <Route path="/open-studios">
                 <OpenStudiosPage />
               </Route>
-              <Route exact path="/my-map">
-                <MyMapPage />
-              </Route>
               <Route path="/events">
                 <EventsPage />
+              </Route>
+              <Route exact path="/my-map">
+                <MyMapPage />
               </Route>
               <Route path="/news">
                 <NewsPage />
@@ -83,7 +79,7 @@ const App: React.FC = () => {
                 <Redirect to="/home" />
               </Route>
             </IonRouterOutlet>
-            <IonTabBar slot="bottom" color="primary">
+            <IonTabBar slot="bottom" color="tertiary">
               <IonTabButton tab="home" href="/home">
                 <IonIcon icon={home} />
                 <IonLabel>Home</IonLabel>
@@ -95,10 +91,6 @@ const App: React.FC = () => {
               <IonTabButton tab="events" href="/events">
                 <IonIcon icon={calendar} />
                 <IonLabel>Events</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="eco-arts" href="/eco-arts">
-                <IonIcon icon={bicycle} />
-                <IonLabel>Eco-Arts</IonLabel>
               </IonTabButton>
               <IonTabButton tab="mymap" href="/my-map">
                 <IonIcon icon={heart} />
