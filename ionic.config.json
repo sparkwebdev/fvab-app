@@ -1,7 +1,7 @@
 {
-  "name": "fvab-2021",
+  "name": "fvab",
   "integrations": {
     "capacitor": {}
   },
-  "type": "react"
+  "type": "react-vite"
 }

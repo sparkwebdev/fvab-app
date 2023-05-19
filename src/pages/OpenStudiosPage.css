@@ -18,3 +18,8 @@
 .studios-container__tabs ion-segment-button {
   max-width: none;
 }
+
+ion-item-divider ion-segment {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}

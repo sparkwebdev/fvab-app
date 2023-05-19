@@ -1,40 +1,64 @@
 import {
-  IonContent,
-  IonPage,
-  IonList,
   IonCard,
   IonCardContent,
-  IonToolbar,
+  IonChip,
+  IonContent,
+  IonIcon,
+  IonItemDivider,
+  IonLabel,
+  IonList,
+  IonPage,
   IonSegment,
   IonSegmentButton,
-  IonLabel,
-  IonIcon,
-  IonChip,
+  IonToolbar,
 } from "@ionic/react";
-import "./OpenStudiosPage.css";
 import { mapOutline as mapIcon } from "ionicons/icons";
+import "./OpenStudiosPage.css";
 
-import { studios, studiosAdditional } from "../data/studios";
-import ListItemStudio from "../components/ListItemStudio";
-import PageHeader from "../components/PageHeader";
-import MapWithMarkers from "../components/MapWithMarkers";
 import { useEffect, useState } from "react";
+import ListItemStudio from "../components/ListItemStudio";
+import MapWithMarkers from "../components/MapWithMarkers";
+import PageHeader from "../components/PageHeader";
+import { studios } from "../data/studios";
 
 const OpenStudiosPage: React.FC = () => {
   const [view, setView] = useState<string>("studios");
-  const [additionalStudios, setAdditionalStudios] = useState<any>();
+  const [studiosAtoZ, setStudiosAtoZ] = useState<any[]>([]);
 
   useEffect(() => {
-    const studiosAdditionalMapped = studiosAdditional.map((studio: any) => {
-      return {
-        st: studio[2],
-        img: studio[5],
-        name: studio[1],
-        dis: studio[3],
-      };
+    const studiosAtoZ = [...studios];
+    // let isDuplicate: any = undefined;
+    studios.forEach((studio, index) => {
+      studio.additionalArtists.forEach((artist: any) => {
+        const additionalArtist = {...studio};
+        additionalArtist.name = artist.name;
+        additionalArtist.srt = artist.sortBy;
+        additionalArtist.dis = artist.dis;
+        // if (studio.name.indexOf(artist.name) > -1) {
+        //   isDuplicate = true;
+        // }
+        studiosAtoZ.push(additionalArtist);
+      });
+      // if (isDuplicate) {
+      //   studiosAtoZ.splice(index, 1);
+      // }
     });
-    setAdditionalStudios(studiosAdditionalMapped);
-  }, [studiosAdditional]);
+
+    studiosAtoZ.sort((a, b) => {
+      const nameA = a.srt;
+      const nameB = b.srt;
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+    
+    setStudiosAtoZ(studiosAtoZ);
+  }, []);
+
   return (
     <IonPage>
       <PageHeader title="Open Studios" />
@@ -52,24 +76,19 @@ const OpenStudiosPage: React.FC = () => {
           >
             <IonCardContent>
               <p>
-                Welcome to the 2021 Artist Open Studios with a newly styled
-                event this year focussed around sustainable travel and the
-                outdoors. Visit the 46 artist studios across the Forth Valley
-                participating in this year’s event, opening up their studios and
-                gardens to the public, during 10th and 11th July, all open from
-                10am to 5pm.
+                We look forward to welcoming you to the 2023 Forth Valley Art
+                Beat event taking place from 10 to 18 June. This year 58 studios
+                and venues are open across two routes around the Forth Valley.
+                Please check each entry for full information on each artist
+                together with individual opening times. Use the My Map facility
+                on the App to help plan your visit. Many of the artists are also
+                hosting events in their studios, please take a look to join in
+                with some of the wonderful workshops, demonstrations and events
+                taking place.
               </p>
-              {/* <IonButton
-              className="ion-margin-top"
-              size="small"
-              color="secondary"
-              fill="outline"
-            >
-              Dismiss
-            </IonButton> */}
             </IonCardContent>
           </IonCard>
-          <IonToolbar className="ion-margin-top studios-container__tabs">
+          <IonToolbar className="studios-container__tabs">
             <IonSegment
               color="secondary"
               onIonChange={(e) => {
@@ -85,39 +104,63 @@ const OpenStudiosPage: React.FC = () => {
               </IonSegmentButton>
               <IonSegmentButton value="a-to-z">
                 <IonChip color="primary">
-                  <strong>{studiosAdditional.length}</strong>
+                  <strong>{studiosAtoZ.length}</strong>
                 </IonChip>
                 <IonLabel>View A to Z</IonLabel>
               </IonSegmentButton>
               <IonSegmentButton value="map">
-                <IonIcon icon={mapIcon} /> <br />
+                <IonChip color="primary">
+                  <IonIcon icon={mapIcon} className="ion-no-margin" />
+                </IonChip>
                 <IonLabel>View Map</IonLabel>
               </IonSegmentButton>
             </IonSegment>
           </IonToolbar>
-
           {studios && studios.length > 0 && (
             <>
               {view === "studios" && (
-                <IonList>
-                  {studios.map((studio) => {
-                    if (studio.st) {
-                      return (
-                        <ListItemStudio
-                          studioNumber={studio.st}
-                          image={studio.img}
-                          name={studio.name}
-                          dis={studio.dis}
-                          key={studio.st}
-                        />
-                      );
-                    }
-                  })}
-                </IonList>
+                <>
+                  <IonItemDivider className="ion-no-padding" color="primary" sticky>
+                    <IonSegment>Route 1</IonSegment>
+                  </IonItemDivider>
+                  <IonList>
+                    {studios.slice(0, 34).map((studio) => {
+                      if (studio.st) {
+                        return (
+                          <ListItemStudio
+                            studioNumber={studio.st}
+                            image={studio.img}
+                            name={studio.name}
+                            dis={studio.dis}
+                            key={studio.st}
+                          />
+                        );
+                      }
+                    })}
+                  </IonList>
+                  <IonItemDivider className="ion-no-padding" color="secondary" sticky>
+                    <IonSegment>Route 2</IonSegment>
+                  </IonItemDivider>
+                  <IonList>
+                    {studios.slice(34, 999).map((studio) => {
+                      if (studio.st) {
+                        return (
+                          <ListItemStudio
+                            studioNumber={studio.st}
+                            image={studio.img}
+                            name={studio.name}
+                            dis={studio.dis}
+                            key={studio.st}
+                          />
+                        );
+                      }
+                    })}
+                  </IonList>
+                </>
               )}
               {view === "a-to-z" && (
                 <IonList>
-                  {additionalStudios.map((studio: any, key: any) => {
+                  {studiosAtoZ.map((studio: any, key: any) => {
                     return (
                       <ListItemStudio
                         studioNumber={studio.st}

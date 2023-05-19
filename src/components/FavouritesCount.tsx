@@ -4,7 +4,7 @@ import AppContext from "../data/app-context";
 
 const FavouritesCount: React.FC = (props) => {
   const appCtx = useContext(AppContext);
-  return <IonBadge color="secondary">{appCtx.favourites.length}</IonBadge>;
+  return <IonBadge color="primary">{appCtx.favourites.length}</IonBadge>;
 };
 
 export default FavouritesCount;

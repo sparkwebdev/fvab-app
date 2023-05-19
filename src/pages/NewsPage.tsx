@@ -1,20 +1,20 @@
+import { HTTP } from "@ionic-native/http";
 import {
-  IonContent,
-  IonPage,
   IonCard,
+  IonCardContent,
   IonCardHeader,
   IonCardTitle,
-  IonCardContent,
-  IonList,
+  IonContent,
   IonItem,
   IonLabel,
+  IonList,
+  IonPage,
   IonSpinner,
+  isPlatform,
 } from "@ionic/react";
-import "./NewsPage.css";
-import PageHeader from "../components/PageHeader";
 import { useEffect, useState } from "react";
-import { HTTP } from "@ionic-native/http";
-import { isPlatform } from "@ionic/react";
+import PageHeader from "../components/PageHeader";
+import "./NewsPage.css";
 
 const NewsPage: React.FC = () => {
   const [news, setNews] = useState([]);

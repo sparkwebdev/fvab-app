@@ -13,13 +13,13 @@ ion-tab-button {
   font-weight: bold;
 }
 ion-tab-button.tab-selected ion-icon {
-  color: var(--ion-color-tertiary);
+  color: var(--ion-color-secondary);
 }
 ion-toolbar ion-title {
   text-align: center;
 }
 ion-img {
-  background: var(--ion-color-secondary-tint);
+  background: var(--ion-color-light);
 }
 ion-avatar {
   width: 46px;

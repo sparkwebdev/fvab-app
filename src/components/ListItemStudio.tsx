@@ -3,8 +3,8 @@ import {
   IonChip,
   IonImg,
   IonItem,
-  IonText,
   IonLabel,
+  IonText,
 } from "@ionic/react";
 
 interface ContainerProps {
@@ -29,16 +29,16 @@ const ListItemStudio: React.FC<ContainerProps> = (props) => {
           slot="start"
           className="ion-text-center ion-justify-content-center"
         >
-          <IonChip color="primary">
-            <IonLabel>
+          <IonChip color="medium">
+            <IonLabel color={Number(props.studioNumber) <= 34 ? "primary" : "secondary"}>
               <strong>{props.studioNumber}</strong>
             </IonLabel>
           </IonChip>
         </IonAvatar>
       )}
       {props.image && !props.mini ? (
-        <IonAvatar slot="start">
-          <IonImg src={`assets/img/studios_sm/${props.image}`} alt="" />
+        <IonAvatar slot="start" color={Number(props.studioNumber) <= 34 ? "primary" : "secondary"}>
+          <IonImg src={`assets/img/studios_sm/${props.image}`} alt=""  color={Number(props.studioNumber) <= 34 ? "primary" : "secondary"} />
         </IonAvatar>
       ) : (
         <>
@@ -50,7 +50,7 @@ const ListItemStudio: React.FC<ContainerProps> = (props) => {
         </>
       )}
       <IonLabel className={props.mini ? "ion-text-wrap" : ""}>
-        <IonText color="primary">
+        <IonText color={Number(props.studioNumber) <= 34 ? "primary" : "secondary"}>
           <strong>{props.name}</strong>
         </IonText>
         {props.dis && (

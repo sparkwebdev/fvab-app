@@ -1,32 +1,33 @@
 import React, { useEffect, useState } from "react";
 
-import { Plugins } from "@capacitor/core";
 import AppContext from "./app-context";
-const { Storage } = Plugins;
 
-const AppContextProvider: React.FC = (props) => {
+// const store = new Storage();
+// await store.create();
+
+const AppContextProvider: React.FC = (props:any) => {
   const [favourites, setFavourites] = useState<string[]>([]);
 
   const getFavourites = async () => {
-    const favouritesData = await Storage.get({ key: "favourites" })
-      .then((data) => {
-        return data.value !== "undefined" && data.value
-          ? JSON.parse(data.value)
-          : null;
-      })
-      .catch((e) => {
-        console.log("No favourites data", e);
-        return null;
-      });
-    return favouritesData;
+    // const favouritesData = await store.get("favourites")
+    //   .then((data: any) => {
+    //     return data.value !== "undefined" && data.value
+    //       ? JSON.parse(data.value)
+    //       : null;
+    //   })
+    //   .catch((e: Error) => {
+    //     console.log("No favourites data", e);
+    //     return null;
+    //   });
+    // return favouritesData;
   };
 
   const initContext = async () => {
-    await getFavourites().then((favourites) => {
-      if (favourites) {
-        setFavourites(favourites);
-      }
-    });
+    // await getFavourites().then((favourites) => {
+    //   if (favourites) {
+    //     setFavourites(favourites);
+    //   }
+    // });
   };
 
   useEffect(() => {
@@ -35,10 +36,7 @@ const AppContextProvider: React.FC = (props) => {
 
   useEffect(() => {
     if (favourites) {
-      Storage.set({
-        key: "favourites",
-        value: JSON.stringify(favourites),
-      });
+      // store.set("favourites", JSON.stringify(favourites));
     }
   }, [favourites]);
 

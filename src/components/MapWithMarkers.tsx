@@ -1,167 +1,148 @@
-import React, { useCallback, useState, useRef, useEffect } from "react";
-import { IonLoading, IonButton } from "@ionic/react";
-import {
-  GoogleMap,
-  useLoadScript,
-  Marker,
-  InfoWindow,
-} from "@react-google-maps/api";
+import { IonCol, IonContent, IonHeader, IonPage, IonRow, IonTitle, IonToolbar, useIonModal, useIonViewWillEnter } from '@ionic/react';
+import { useRef, useState } from 'react';
+import './MapWithMarkers.css';
+
+import { GoogleMap } from '@capacitor/google-maps';
+import { MarkerInfoWindow } from '../components/MarkerInfoWindow';
 import mapStyles from "../theme/mapStyles";
-import ListItemStudio from "./ListItemStudio";
-
-declare const window: any;
-
-const options = {
-  styles: mapStyles,
-  disableDefaultUI: true,
-};
 
 const MapWithMarkers: React.FC<{
   studios?: any;
   isSingle?: boolean;
   onDismiss?: () => void;
 }> = (props) => {
-  const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "AIzaSyB2do_Zm1jyT-IugUTa9HfLo8a6EplMMY8",
+
+  //  Remember to secure key using env files or requesting from server!
+  const key = "AIzaSyB2do_Zm1jyT-IugUTa9HfLo8a6EplMMY8";
+  let newMap: any;
+  const mapRef = useRef(null);
+
+  const markers = props.studios.map((studio: any) => {
+    return {
+      studio: studio.st, 
+      lat: studio.lat, 
+      lng: studio.lon, 
+      title: studio.name, 
+      description: studio.dis, 
+      address: studio.add, 
+      website: studio.wb, 
+      phone: studio.ph
+    };
+  });
+  
+  const [selectedMarker, setSelectedMarker] = useState({});
+
+  const [present, dismiss] = useIonModal(MarkerInfoWindow, {
+    marker: selectedMarker
   });
 
-  const mapContainerStyle = {
-    width: "100%",
-    height: "100%",
-    flex: "1 1 auto",
+  const mapConfig = {
+    zoom: 10,
+    center: {
+      lat: markers[0].lat,
+      lng: markers[0].lng
+    },
+    // disableDefaultUI: true,
+    streetViewControl: false,
+    mapTypeControl: false,
+    controls: {
+      // compass: true,
+      // myLocation: true,
+      // myLocationButton: true,
+      // mapToolbar: true,
+      // indoorPicker: true,
+      zoom: true,
+      mapType: false,
+      streetView: false
+
+
+    },
+    styles: mapStyles
+
   };
 
-  const [center, setCenter] = useState({
-    lat: 56,
-    lng: -4,
-  });
-
-  const [zoom, setZoom] = useState(9);
-
-  useEffect(() => {
-    if (mapRef.current && props.studios) {
-      fitBounds(mapRef.current);
-    } else {
-      return;
-    }
-  }, [props.studios]);
-
-  const mapRef = useRef(null);
-  const onMapLoad = useCallback(
-    (map) => {
-      mapRef.current = map;
-      if (props.isSingle) {
-        setCenter({
-          lat: props.studios[0]!.lat,
-          lng: props.studios[0]!.lon,
-        });
-        setZoom(16);
-      } else {
-        // fitBounds(map);
-      }
-    },
-    [props.studios]
-  );
-
-  const [selected, setSelected] = useState<any>();
-
-  const fitBounds = (map: any) => {
-    const bounds = new window.google.maps.LatLngBounds();
-    if (props.studios) {
-      props.studios.forEach((location: any) => {
-        var myLatLng = new window.google.maps.LatLng(
-          location!.lat,
-          location!.lon
-        );
-        bounds.extend(myLatLng);
+  const markerClick = (marker: any) => {
+    setSelectedMarker(markers.filter((m: any) => (m.lat === marker.latitude && m.lng === marker.longitude))[0]);
+    newMap.setCamera({
+      coordinate: {
+        lat: marker.latitude,
+        lng: marker.longitude
+      },
+      zoom: 15
+    });
+    if (!props.isSingle) {
+      present({
+        initialBreakpoint: 0.4,
+        breakpoints: [0, 0.4],
+        backdropBreakpoint: 0,
+        onDidDismiss: () => dismiss()
       });
     }
-    map.fitBounds(bounds);
-  };
+  }
 
-  if (loadError) return <div>Error loading maps.</div>;
-  if (!isLoaded)
-    return (
-      <div
-        style={{
-          background: "#eee",
-          justifyContent: "center",
-          alignItems: "center",
-          display: "flex",
-          height: "100%",
-        }}
-      >
-        <IonLoading isOpen={!isLoaded} message="Loading map..." />
-      </div>
-    );
+  const addMapMarker = async (marker: any) => {
+    await newMap.addMarker({
+      coordinate: {
+        lat: marker.lat,
+        lng: marker.lng
+      },
+      title: "hello",
+      snippet: "hello",
+      iconUrl: `https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=${marker.studio}|${Number(props.studioNumber) <= 34 ? "01AFEE" : "EF59A2"}|000000`
+    });
+  }
+
+  const addMapMarkers = () => markers.forEach((marker: any) => addMapMarker(marker));
+
+  const createMap = async () => {
+
+    if (!mapRef.current) return;
+
+    newMap = await GoogleMap.create({
+      id: "google-map",
+      element: mapRef.current,
+      apiKey: key,
+      config: mapConfig
+    });
+    newMap.setOnMarkerClickListener((marker: any) => markerClick(marker, newMap));
+
+
+// // Move the map programmatically
+// await newMap.setCamera({
+//   coordinate: {
+//     lat: 33.6,
+//     lng: -117.9
+//   }
+// });
+
+// Enable marker clustering
+await newMap.enableClustering();
+
+    addMapMarkers();
+  }
+
+  useIonViewWillEnter(() => createMap());
 
   return (
-    <>
-      <GoogleMap
-        mapContainerStyle={mapContainerStyle}
-        zoom={zoom}
-        center={center}
-        options={options}
-        onLoad={onMapLoad}
-      >
-        {props.studios.map((studio: any, index: number) => {
-          return (
-            <Marker
-              key={index}
-              position={{
-                lat: studio!.lat,
-                lng: studio!.lon,
-              }}
-              label={studio.st}
-              icon={{
-                url: "./assets/icon/map_marker.svg",
-                scaledSize: new window.google.maps.Size(40, 40),
-                origin: new window.google.maps.Point(0, 0),
-                // anchor: new window.google.maps.Point(15, 30),
-              }}
-              onClick={() => {
-                setCenter({
-                  lat: studio!.lat,
-                  lng: studio!.lon,
-                });
-                setSelected(studio);
-              }}
-            />
-          );
-        })}
-
-        {selected ? (
-          <InfoWindow
-            options={{
-              pixelOffset: new window.google.maps.Size(0, -10),
-
-              position: {
-                lat: selected!.lat,
-                lng: selected!.lon,
-              },
-            }}
-            onCloseClick={() => {
-              setSelected(null);
-            }}
-          >
-            <div className="infowindow">
-              <ListItemStudio
-                studioNumber={selected.st}
-                image={selected.img}
-                name={selected.name}
-                dis={selected.dis}
-                mini={true}
-              />
-            </div>
-          </InfoWindow>
-        ) : null}
-      </GoogleMap>
-      <div className="ion-padding">
-        {props.isSingle && (
-          <IonButton onClick={props.onDismiss}>Close</IonButton>
-        )}
-      </div>
-    </>
+    <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonTitle>Capacitor Google Map</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent fullscreen>
+        <IonHeader collapse="condense">
+          <IonToolbar>
+            <IonTitle size="large">Capacitor Google Map</IonTitle>
+          </IonToolbar>
+        </IonHeader>
+        <IonRow>
+          <IonCol size="12">
+            <capacitor-google-map ref={mapRef} id="map"></capacitor-google-map>
+          </IonCol>
+        </IonRow>
+      </IonContent>
+    </IonPage>
   );
 };
 
